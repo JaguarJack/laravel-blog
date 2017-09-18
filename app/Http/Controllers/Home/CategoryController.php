@@ -71,7 +71,7 @@ class CategoryController extends Controller
         
         $aid     = $request->input('aid');
         $reply_user = $request->input('reply_user');
-        $content= preg_replace('/^(@.*)\s+(.*)/', '<a href="/user/'.$reply_user.'">&nbsp;&nbsp;&nbsp;${1}</a>${2}', $content);
+        $content= preg_replace('/^(@.*)\s+(.*)/', '<a href="/user/'.$reply_user.'">${1}</a>&nbsp;&nbsp;${2}', $content);
 
         $user = $request->user('home');
         //dd($user);

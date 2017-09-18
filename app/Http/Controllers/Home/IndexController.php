@@ -20,28 +20,6 @@ class IndexController extends Controller
     }
     
     
-    /**
-     * @description:登录页面
-     * @author wuyanwen(2017年9月13日)
-     * @return \Illuminate\View\View|\Illuminate\Contracts\View\Factory
-     */
-    public function login()
-    {
-        return view('home.index.login');
-    }
-    
-    /**
-     * @description:注册页面
-     * @author wuyanwen(2017年9月13日)
-     * @return \Illuminate\View\View|\Illuminate\Contracts\View\Factory
-     */
-    public function register()
-    {
-        
-        return view('home.index.register');
-    }
-    
-    
     public function importUser()
     {
         $reuslt = (\DB::connection('mysql_old')->select('select * from old_user'));

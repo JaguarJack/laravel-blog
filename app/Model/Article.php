@@ -11,7 +11,7 @@ class Article extends BaseModel
     protected $table = 'articles';
     
     protected $fillable = [
-      'cid', 'fid','user_id','author','category','intro','title', 'thumb_img' , 'content','status',     
+      'cid', 'fid','user_id','author','category','intro','title', 'tags' , 'content','status',     
     ];
     //草稿状态
     const DRAFT_STATUS = 1;

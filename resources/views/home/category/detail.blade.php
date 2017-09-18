@@ -153,8 +153,11 @@ layui.use(['jquery','layer'], function(){
 			var content    = $('#edit').val();
 
 			$.post('/comment', {reply_user:reply_user, aid:aid, content:content},function(response){
-
-
+					if (response.status == 10000) {
+						window.location.reload();
+					} else {
+						layer.msg(response.msg);
+				    }
 			})
 
 		})

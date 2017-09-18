@@ -32,6 +32,15 @@ class RegisterController extends Controller
         $this->user = $user;
     }
     
+    /**
+     * @description:注册页面
+     * @author wuyanwen(2017年9月13日)
+     * @return \Illuminate\View\View|\Illuminate\Contracts\View\Factory
+     */
+    public function signup()
+    {
+        return view('home.index.register');
+    }
     
     /**
      * Handle a registration request for the application.
@@ -59,6 +68,11 @@ class RegisterController extends Controller
         ], $this->messages());
     }
     
+    /**
+     * @description:错误信息
+     * @author wuyanwen(2017年9月18日)
+     * @return string[]
+     */
     private function messages()
     {
         return [

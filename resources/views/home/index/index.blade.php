@@ -45,8 +45,8 @@ layui.use(['carousel','flow'], function(){
 		        	str += '<span style="font-size:24px;"><a href="/detail/'+item.aid+'">' +item.title+ '</a></span>'
 		        	str += '</div><hr>'
 		        	str += '<div class="content"><div class="image">'
-		            str +='<img lay-src="' + item.thumb_img + '"/>';
-					str +='</div><div class="intro">' + item.intro+ '</div></div><hr>'
+		            str +='<img lay-src="' + item.thumb_img + '"/></div>';
+					str +='<div class="intro">' + item.intro+ '</div></div><hr>'
 		        	str += '<div style="width:95%;margin:0 auto;"><span class="layui-btn layui-btn-warm info">'
 		        	str += '<span ><i class="fa fa-clock-o"></i>&nbsp;' +item.created_at+ '</span>'	
 		        	str += '<span ><i class="fa fa-user-o"></i>&nbsp;' +item.author+ '</span>'

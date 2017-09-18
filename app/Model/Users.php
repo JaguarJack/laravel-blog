@@ -4,6 +4,7 @@ namespace App\Model;
 
 use App\Model\Article;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use App\Model\ArticleRelate;
 
 class Users extends Authenticatable
 {
@@ -28,9 +29,16 @@ class Users extends Authenticatable
         return $this->hasMany(Article::class, 'uid')->limit(5);
     }
     
-    
-    public function hasManyA()
+    /**
+     * @description:关联文章
+     * @author wuyanwen(2017年9月18日)
+     * @return unknown
+     */
+    public function hasManyUserArticles()
     {
-        return $this->hasManyThrough(Article::class, 'App\Model\ArticleRelate', 'aid', 'uid')->select('article_option.*', 'article.*')->limit(5);
+        return $this->hasManyThrough(Article::class, ArticleRelate::class, 'aid', 'user_id')
+                    ->select('article_relate.*', 'articles.*')
+                    ->orderBy('articles.id', 'DESC')
+                    ->limit(5);
     }
 }

@@ -2,13 +2,13 @@
 
 namespace App\Service;
 
-use App\Repository\FrontMenuRepository;
+use App\Repository\CategoryRepository;
 
 class BuildMenuService
 {
     private $menu;
     
-    public function __construct(FrontMenuRepository $menuRepository)
+    public function __construct(CategoryRepository $menuRepository)
     {
         $this->menu = $menuRepository->getCates()->toArray();
     }

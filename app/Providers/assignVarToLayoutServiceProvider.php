@@ -21,7 +21,6 @@ class assignVarToLayoutServiceProvider extends ServiceProvider
     public function boot(BuildMenuService $menuService)
     {
         view()->composer('layouts/main', function ($view) use ($menuService) {
-            
             $menu = $menuService->sortMenu();
             $view->with('menus', $menu);
         });

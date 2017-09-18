@@ -100,21 +100,14 @@ class ArticleRepository
 
     }
     
-    
+    /**
+     * @description:保存文章记录
+     * @author wuyanwen(2017年9月18日)
+     * @param unknown $data
+     * @return unknown
+     */
     public function store($data)
     {
-        return self::$article::create([
-            'cid' => 1, 
-            'fid' => 0,
-            'user_id' =>2,
-            'author' => $data['name'],
-            'category' => 'php',
-            'intro'   => '试一试',
-            'title'   => '试一试', 
-            'thumb_img' => '' , 
-            'tags'      => 'dd',
-            'content'   => $data['content'],
-            'status' => 3,
-        ]);
+        return self::$article::create($data);
     }
 }

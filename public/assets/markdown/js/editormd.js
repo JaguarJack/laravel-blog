@@ -57,7 +57,7 @@
             "bold", "del", "italic", "quote", "ucwords", "uppercase", "lowercase", "|", 
             "h1", "h2", "h3", "h4", "h5", "h6", "|", 
             "list-ul", "list-ol", "hr", "|",
-            "link", "reference-link", "image", "code", "preformatted-text", "code-block", "table", "datetime", "emoji", "html-entities", "pagebreak", "|",
+            "link", "reference-link", "image", "code", "preformatted-text", "code-block", "table", "datetime", "html-entities", "pagebreak", "|",
             "goto-line", "watch", "preview", "fullscreen", "clear", "search", "|",
             "help", "info"
         ],
@@ -404,7 +404,7 @@
             
             var appendElements = [
                 (!settings.readOnly) ? "<a href=\"javascript:;\" class=\"fa fa-close " + classPrefix + "preview-close-btn\"></a>" : "",
-                ( (settings.saveHTMLToTextarea) ? "<textarea class=\"" + classNames.textarea.html + "\" name=\"" + id + "-html-code\"></textarea>" : "" ),
+                ( (settings.saveHTMLToTextarea) ? "<textarea class=\"" + classNames.textarea.html + "\" name=\"" + id + "\"></textarea>" : "" ),
                 "<div class=\"" + classPrefix + "preview\"><div class=\"markdown-body " + classPrefix + "preview-container\"></div></div>",
                 "<div class=\"" + classPrefix + "container-mask\" style=\"display:block;\"></div>",
                 "<div class=\"" + classPrefix + "mask\"></div>"

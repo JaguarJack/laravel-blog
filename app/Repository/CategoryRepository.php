@@ -4,7 +4,7 @@ namespace App\Repository;
 
 use App\Model\Category;
 
-class FrontMenuRepository
+class CategoryRepository
 {
     //
     protected static $category;
@@ -20,9 +20,9 @@ class FrontMenuRepository
      * @author wuyanwen(2017年9月7日)
      * @param
      */
-    public function getCates()
+    public function getCates($where = null)
     {
-        return self::$category->get();
+        return self::$category::where($where ? : [])->select('id','fid','name','code')->get();
     }
 
     /**

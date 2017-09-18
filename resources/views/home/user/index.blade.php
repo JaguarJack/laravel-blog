@@ -5,7 +5,7 @@
 @section('content')
 <div class="share">
 	<div class="title">分享发布</div>
-	<a href="javascript:;">
+	<a href="{{ url('write') }}">
 	<div class="btn"><i class="fa fa-pencil"></i> 分享所思所闻</div>
 	</a>
 </div>
@@ -13,11 +13,13 @@
 	<div class="title">最新发布</div>
 	<div>
 		<ul>
+		@foreach ($articles as $article) 
 			<li>
     			<span class="layui-badge-dot layui-bg-orange"></span>&nbsp;&nbsp;
-    			<a href="javascript:;">这是第一篇文章</a>&nbsp;&nbsp;
-    			<span class="info"><a href="javascript:;">php</a> · 点赞   0 · 收藏  0 · 评论  0 · 发表于 2017-09-26</span>
+    			<a href="{{ url('detail',['id' => $article->id])}}"> {{ $article->title }}</a>&nbsp;&nbsp;
+    			<span class="info"><a href="javascript:;">{{ $article->category }}</a> · 点赞   0 · 收藏  0 · 评论  0 · 发表于 2017-09-26</span>
     		</li>
+    	@endforeach
     	</ul>
 		<div class="no-article" style="display:none;">空空如也~</div>
 	</div>

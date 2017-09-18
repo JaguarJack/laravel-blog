@@ -96,6 +96,6 @@ class UsersRepository
 	 */
 	public function getArticles($id)
 	{
-	    return self::$users::where('id', '=', $id)->find($id)->hasManyA;
+	    return self::$users::where('id', '=', $id)->find($id)->hasManyUserArticles;
 	}
 }

@@ -39,8 +39,7 @@
 .register .reset a{color:#10a3a3}
 .register .reset{width:86%;margin:10px auto;text-align:center;font-size:14px;height:50px;color:#10a3a3;line-height:50px;background-color:#e9ffff;}
 /* detail */
-.blog_detail {width:80%;margin:10px auto;min-height:500px;}
-.blog_detail .{width:75%;min-height:500px;float:left;margin-top:10px;border-radius:5px;}
+.blog_detail {width:75%;margin:10px auto;min-height:500px;}
 .blog_detail  .content {width:100%;min-height:300px;background-color:#fff;}
 .blog_detail  .content .title{width:100%;min-height:50px;border-bottom:1px solid #e2e2e2;line-height:30px;padding-top:15px;text-indent:2em;}
 .blog_detail  .content .title span{font-size:22px;}
@@ -127,7 +126,10 @@
 .user-edit .user-edit-right .form .title {width:100%;height:40px;border-bottom:1px solid #e2e2e2;background-color:#fff;line-height:40px;font-size:18px;text-indent:1em;opacity:0.5;}
 .user-edit .user-edit-right .form .layui-form {width: 55%;padding-bottom: 10px;padding-top: 10px;}
 
-
+/* write */
+#layout {margin-top:20px;}
+#layout .layui-form{padding:15px 0}
+#layout .layui-form .layui-input-block{width:50%;}
 .footer {width:100%;height:200px;background:grey;margin-top:20px;}
 
 

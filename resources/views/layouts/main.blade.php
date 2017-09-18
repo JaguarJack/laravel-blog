@@ -1,3 +1,8 @@
+<!--
+  
+  
+   
+ -->
 <!DOCTYPE html>
 <html>
 
@@ -41,7 +46,7 @@
       <span>
       @if (Auth::guard('home')->check())
            <li class="layui-nav-item">
-            <a href="{{ url('user/2') }}">个人中心<span class="layui-badge">99+</span></a>
+            <a href="{{ url('user',['id' => Auth::guard('home')->user()->id ]) }}">个人中心<span class="layui-badge">99+</span></a>
           </li>
           <li class="layui-nav-item">
             <a href=""><img src="http://t.cn/RCzsdCq" class="layui-nav-img">{{ Auth::guard('home')->user()->user_name}}</a>

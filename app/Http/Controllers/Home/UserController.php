@@ -3,9 +3,10 @@
 namespace App\Http\Controllers\Home;
 
 use App\Http\Requests\Request;
+use App\Http\Requests\StoreArticleRequest;
 use App\Http\Controllers\Controller;
 use App\Repository\UsersRepository;
-use App\Repository\ArticleRepository;
+use App\Service\UsersService;
 
 class UserController extends Controller
 {
@@ -20,10 +21,7 @@ class UserController extends Controller
     }
     
     public function index($id)
-    {dd($this->user->getArticles(intval($id)));
-        if (!$id) {
-           
-        }
+    {
         return view('home.user.index',[
             'articles' => $this->user->getArticles(intval($id)),
         ]);
@@ -80,24 +78,21 @@ class UserController extends Controller
     }
     
     
-    public function write(Request $request, ArticleRepository $article)
+    public function write(UsersService $userService)
     {
-        if ($request->method() == 'POST') {
-            $user = $request->user('home');
-            
-            $data = [
-                'content' => $request->input('content'),
-                'user_id' => $user->user_id,
-                'name'  => $user->user_name,
-            ];
-            $article->store($data);
-        } else {
-            return view('home.user.write');
-        }
+
+        return view('home.user.write',[
+            'category' => $userService->getCategory(),
+        ]);
+    
        
     }
     
     
-    
+    public function publish(StoreArticleRequest $request, UsersService $userService)
+    {
+        return $userService->publish($request) ? $this->ajaxSuccess('发布成功') : $this->ajaxError('发布失败,请检查~');
+        
+    }
    
 }

@@ -22,6 +22,11 @@ class LoginController extends Controller
         $this->middleware('guest')->except('signout');
     }
     
+    public function signin()
+    {
+        return view('home.index.login');
+    }
+    
     public function doLogin(Request $request)
     {
         $this->login($request);
@@ -49,9 +54,9 @@ class LoginController extends Controller
      * @param@return unknown
      */
     public function redirectTo()
-    {   //dd();
+    {
         return url()->previous();
-     }
+    }
     
     /**
      * Get the guard to be used during authentication.

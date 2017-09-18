@@ -24,6 +24,12 @@ class RedirectIfAuthenticated
         return $next($request);
     }
     
+    /**
+     * @description:检查请求来源
+     * @author wuyanwen(2017年9月18日)
+     * @param unknown $request
+     * @return string|NULL
+     */
     public function check($request) 
     {
         return strpos($request->route()->action['namespace'], 'Home') ? 'home' : null;
