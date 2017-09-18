@@ -15,7 +15,7 @@ class StoreRepository
     
     /**
      *
-     * @description:是否点赞
+     * @description:是否收藏
      * @author wuyanwen(2017年9月16日)
      * @param
      */
@@ -31,7 +31,7 @@ class StoreRepository
     
     /**
      *
-     * @description:点赞
+     * @description:收藏
      * @author wuyanwen(2017年9月16日)
      * @param@param unknown $user_id
      * @param@param unknown $attend_user_id
@@ -46,7 +46,7 @@ class StoreRepository
     
     /**
      *
-     * @description:取消点赞
+     * @description:取消收藏
      * @author wuyanwen(2017年9月16日)
      * @param@param unknown $user_id
      * @param@param unknown $aid

@@ -4,6 +4,10 @@ namespace App\Service;
 
 use App\Repository\ArticleRepository;
 use App\Repository\CategoryRepository;
+use App\Repository\CommentRepository;
+use Illuminate\Support\Facades\DB;
+use App\Repository\ArticleRelateRepository;
+use App\Repository\NoticeRepository;
 
 class UsersService
 {
@@ -16,10 +20,27 @@ class UsersService
     
     protected $category;
     protected $article;
-    public function __construct(CategoryRepository $category, ArticleRepository $article)
+    protected $comment;
+    protected $article_relate;
+    protected $notice;
+    
+    /**
+     * 
+     * @description:初始化
+     * @author wuyanwen(2017年9月18日)
+     * @param@param CategoryRepository $category
+     * @param@param ArticleRepository $article
+     * @param@param CommentRepository $comment
+     */
+    public function __construct(CategoryRepository $category, 
+        ArticleRepository $article, CommentRepository $comment,
+        ArticleRelateRepository $article_relate,NoticeRepository $notice)
     {
         $this->category = $category;
         $this->article  = $article;
+        $this->comment  = $comment;
+        $this->article_relate = $article_relate;
+        $this->notice   = $notice;
     }
     
     /**
@@ -68,5 +89,54 @@ class UsersService
     public function getCategory()
     {
         return $this->category->getCates([['fid', '<>', 0]]);
+    }
+    
+    /**
+     * 
+     * @description:用户评论
+     * @author wuyanwen(2017年9月18日)
+     * @param
+     */
+    public function comment($request)
+    {       
+        $content = trim($request->input('content'));
+        
+        if (!$content) {
+            $this->ajaxError('请输入评论内容');
+        }
+        
+        $aid     = $request->input('aid');
+        $reply_user = $request->input('reply_user');
+        $content= preg_replace('/^(@.*)\s+(.*)/', '<a href="/user/'.$reply_user.'">${1}</a>&nbsp;&nbsp;${2}', $content);
+        
+        $user = $request->user('home');
+        
+        //评论数据
+        $data = [
+            'user_id'   => $user->id,
+            'user_name' => $user->user_name,
+            'aid'       => $aid,
+            'avatar'    => $user->avatar,
+            'content'   => $content,
+        ];
+        
+        //消息数据
+        $messge = [
+            'user_id'        => $reply_user ? : $this->article->find($aid)->user_id,
+            'from_user_name' => $user->user_name,
+            'aid'            => $aid,
+        ];
+        
+        //事务开始
+        DB::beginTransaction();
+        if( $this->comment->store($data) 
+            && $this->article_relate->incrementCommentNum($aid) 
+            && $this->notice->store($messge)) {
+            Db::commit();
+            return true;
+        } else {
+            Db::rollback();
+            return false;
+        }
     }
 }

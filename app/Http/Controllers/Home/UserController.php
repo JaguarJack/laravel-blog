@@ -67,9 +67,11 @@ class UserController extends Controller
         return view('home.user.setAvatar');
     }
     
-    public function notice()
+    public function notice(UsersRepository $users)
     {
-        return view('home.user.notice');
+        return view('home.user.notice',[   
+            'notice' => $users->getUserNotice($this->request->user('home')->id),
+        ]);
     }
     
     public function activation()

@@ -50,7 +50,7 @@
 	<div class="info">
 	
 	@if (!$comments->count())
-		<div class="no-comment" style="display:none;">空空如也~快来成为第一个评论的人吧</div>
+		<div class="no-comment" >空空如也~快来成为第一个评论的人吧</div>
 	@else	
 	<ul>
 		@foreach ($comments as $key => $comment)

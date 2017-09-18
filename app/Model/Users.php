@@ -5,6 +5,7 @@ namespace App\Model;
 use App\Model\Article;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use App\Model\ArticleRelate;
+use App\Model\Notice;
 
 class Users extends Authenticatable
 {
@@ -40,5 +41,19 @@ class Users extends Authenticatable
                     ->select('article_relate.*', 'articles.*')
                     ->orderBy('articles.id', 'DESC')
                     ->limit(5);
+    }
+    
+    
+    /**
+     * 
+     * @description:通知关联
+     * @author wuyanwen(2017年9月18日)
+     * @param
+     */
+    public function hasManyNotice()
+    {
+        return $this->hasManyThrough(Notice::class, Article::class, 'user_id', 'aid')
+                    ->select('articles.title', 'notice.*')
+                    ->orderBy('id' , 'DESC', 'is_read', 'ASC');
     }
 }

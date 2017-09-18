@@ -4,40 +4,62 @@
 @section('description', '首页')
 @section('content')
 <div class="form">
-	<div class="title">密码修改</div>
-	<form class="layui-form" action="">
-          <div class="layui-form-item">
-            <label class="layui-form-label">邮箱</label>
-            <div class="layui-input-block layui-disabled">
-              <input type="text" name="title" required  lay-verify="required" placeholder="请输入邮箱" autocomplete="off" readonly class="layui-input">
-            </div>
-          </div>
-          <div class="layui-form-item">
-            <label class="layui-form-label">密码</label>
-            <div class="layui-input-block">
-              <input type="password" name="password" required lay-verify="required" placeholder="请输入密码" autocomplete="off" class="layui-input">
-            </div>
-          </div>
-          <div class="layui-form-item">
-            <label class="layui-form-label">确认密码</label>
-            <div class="layui-input-block">
-              <input type="password" name="comfirm_password" lay-verify="required" placeholder="请确认密码" autocomplete="off" class="layui-input">
-            </div>
-          </div>
-          <div class="layui-form-item">
-            <div class="layui-input-block">
-              <button class="layui-btn" lay-submit lay-filter="edit">确认修改</button>
-            </div>
-          </div>
-       </form>
+	<div class="title">消息通知</div>
+	<ul class="layui-timeline">
+	@foreach ($notice as $vo)
+      <li class="layui-timeline-item" >
+        <i class="layui-icon layui-timeline-axis">&#xe63f;</i>
+        <div class="layui-timeline-content layui-text" @if ($vo->is_read == 2) style="opacity:0.5;"@endif>
+          <h3 class="layui-timeline-title">{{ $vo->from_user_name }} </h3>
+          <p>
+          	 @if ($vo->type == 1)
+           	  	 在文章 <a href="{{ url('detail', ['id' => $vo->aid ])}}">{{ $vo->title }}</a> 评论了
+           	 @else
+           	   	发布新文章  <a href="{{ url('detail', ['id' => $vo->aid ])}}">{{ $vo->title }}</a> 评论了
+           	 @if
+            @if ($vo->is_read == 1)
+            <span onclick='read("{{ $vo->id }}")'>
+            	点击查看
+            </span>
+            @else
+             <span class="delete" data="{{ $vo->id }}">
+            	已查看/删除
+             </span>
+            @endif
+          </p>
+        </div>
+      </li>
+  @endforeach
+  <li class="layui-timeline-item">
+    <i class="layui-icon layui-timeline-axis">&#xe63f;</i>
+    <div class="layui-timeline-content layui-text">
+      <div class="layui-timeline-title">只有这么多了~</div>
+    </div>
+  </li>
+   
+  
+</ul>
+
 </div>
 <script src="{{ asset('/assets/layui/layui.js') }}"></script>
 <script>
-layui.use(['element','jquery','form'], function(){
+layui.use(['element','jquery'], function(){
   var element = layui.element
-  			$ = layui.jquery
-  		form  = layui.form;
+  			$ = layui.jquery;
+
+   $('.delete').click(function(){
+		var id = $(this).attr('data');
+		$.post('/deleteNotice',{id,id},function(response){
+			if (response.status == 10000) {
+				$(this).parents('.layui-timeline-item').remove()
+			}
+		})
+	})
 
 });
+
+function read(id) {
+	$.post('/readNotice',{id,id},function(){})
+}
 </script>
 @endsection

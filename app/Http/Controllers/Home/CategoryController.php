@@ -9,6 +9,7 @@ use App\Repository\LikeRepository;
 use App\Repository\AttendRepository;
 use App\Repository\StoreRepository;
 use App\Repository\CommentRepository;
+use App\Service\UsersService;
 
 class CategoryController extends Controller
 {
@@ -58,32 +59,11 @@ class CategoryController extends Controller
      * @author wuyanwen(2017年9月17日)
      * @param
      */
-    public function comment(Request $request, CommentRepository $comment)
+    public function comment(Request $request, UsersService $user_service)
     {
-        if (!$request->user('home')) {
-            $this->ajaxError('请先登录');
-        }
         
-        $content = trim($request->input('content'));
-        if (!$content) {
-            $this->ajaxError('请输入评论内容');
-        }
+        return $user_service->comment($request) ? $this->ajaxSuccess('评论成功') : 
         
-        $aid     = $request->input('aid');
-        $reply_user = $request->input('reply_user');
-        $content= preg_replace('/^(@.*)\s+(.*)/', '<a href="/user/'.$reply_user.'">${1}</a>&nbsp;&nbsp;${2}', $content);
-
-        $user = $request->user('home');
-        //dd($user);
-        if( $comment->store([
-            'user_id'   => $user->id,
-            'user_name' => $user->user_name,
-            'aid'       => $aid,
-            'avatar'    => $user->avatar,
-            'content'   => $content,
-        ])) {
-            return $this->ajaxSuccess('评论成功');
-        }
-        
+                            $this->ajaxError('评论失败~');
     }
 }

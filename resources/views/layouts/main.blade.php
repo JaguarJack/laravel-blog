@@ -5,7 +5,6 @@
  -->
 <!DOCTYPE html>
 <html>
-
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -46,10 +45,11 @@
       <span>
       @if (Auth::guard('home')->check())
            <li class="layui-nav-item">
-            <a href="{{ url('user',['id' => Auth::guard('home')->user()->id ]) }}">个人中心<span class="layui-badge">99+</span></a>
+           @inject('notice', 'App\Service\NoticeService')
+            <a href="{{ url('user',['id' => Auth::guard('home')->user()->id ]) }}">个人中心<span class="layui-badge">{{ $notice->getNotRead(Auth::guard('home')->user()->id) }}</span></a>
           </li>
           <li class="layui-nav-item">
-            <a href=""><img src="http://t.cn/RCzsdCq" class="layui-nav-img">{{ Auth::guard('home')->user()->user_name}}</a>
+            <a href=""><img src="http://t.cn/RCzsdCq" class="layui-nav-img">{{ Auth::guard('home')->user()->user_name }}</a>
             <dl class="layui-nav-child">
               <dd><a href="javascript:;"><i class="fa fa-cog"></i> 编辑信息</a></dd>
               <dd><a href="javascript:;"><i class="fa fa-power-off"></i> 安全管理</a></dd>

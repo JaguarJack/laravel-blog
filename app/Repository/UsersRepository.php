@@ -98,4 +98,15 @@ class UsersRepository
 	{
 	    return self::$users::where('id', '=', $id)->find($id)->hasManyUserArticles;
 	}
+	
+	/**
+	 * 
+	 * @description:获取用户消息通知信息
+	 * @author wuyanwen(2017年9月18日)
+	 * @param
+	 */
+	public function getUserNotice($id)
+	{
+	    return self::$users::where('id', '=', $id)->find($id)->hasManyNotice;
+	}
 }

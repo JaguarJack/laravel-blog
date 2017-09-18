@@ -35,8 +35,10 @@ Route::namespace('Home')->group(function(){
         Route::get('/activation', 'UserController@activation'); 
     });
     
-    Route::get('/write', 'UserController@write');
-    Route::post('/publish', 'UserController@publish');
+    Route::get('/write', 'UserController@write')->middleware('checklogin');
+    Route::post('/publish', 'UserController@publish')->middleware('checklogin');
+    Route::post('/readNotice', 'NoticeController@readNotice')->middleware('checklogin');
+    Route::post('/deleteNotice', 'NoticeController@deleteNotice')->middleware('checklogin');
    // Route::get('/user/{id}', 'UserController@index')->where(['id' => '[0-9]+']);
    // Route::get('/user/like', 'UserController@like');
    // Route::get('/user/attend', 'UserController@attend');
