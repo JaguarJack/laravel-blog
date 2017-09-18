@@ -1,0 +1,136 @@
+@CHARSET "UTF-8";
+/* index css */
+.body {background-color:#f4f6f8;height:100%;}
+.nav {width:74%;margin:0 auto;}
+.nav-right {width:60%;margin:auto auto;display:inline-block;}
+.nav span {float:right;}
+.main {width:71%;margin:0 auto;min-height:500px;}
+.main-left {width:64%;min-height:500px;float:left;}
+.main-right {width:35%;min-height:500px;float:right;}
+.main-left-article {width:98%;height:270px;background-color:white;margin:10px 0;border-radius:5px;}
+.main-left-article .title {width:95%;margin:2px auto;line-height:45px;}
+.main-left-article .content {width:95%;margin:0 auto;height:130px;}
+.main-left-article .content .image {width:30%;height:130px;float:left;}
+.main-left-article .content .image img {width:100%;height:100%;}
+.main-left-article .content .intro {width:69%;height:100px;float:right;display: block;padding-top:30px;text-indent: 2em;}
+.main-left-article .info {background-color: white;color: black;padding-left:5px;}
+.main-left-article .info span{margin-left:5px;}
+.main-right .tab {background:white;margin-top:10px;border-radius:5px;}
+.main-right .tab .title {border-bottom:1px solid #e2e2e2;height:40px;line-height:40px;font-size:16px;opacity:0.5;text-indent:1em;}
+.layui-nav-bar {background-color:#fff;}
+.layui-nav{background-color:#fff;}
+.layui-nav .layui-nav-item a {color:#0a0a0a;}
+/* login */
+.login {width:40%;margin:5% auto;height:50%;background-color:#fff;border-radius:10px;}
+.login .title {border-bottom:1px solid #e2e2e2;height:40px;line-height:40px;text-align:center;font-size:20px;opacity:0.5;text-indent:1em;}
+.login .layui-form {width:88%;margin:30px auto;}
+.login .layui-form .layui-input {border-radius:5px;}
+.login .layui-form .layui-input-block {margin-left:10px;border-radius:5px;}
+.login .layui-form .layui-input-block .layui-btn {width:100%;border-radius:5px;font-size:16px;}
+.login .reset a{color:#10a3a3}
+.login .reset{width:86%;margin:10px auto;text-align:center;font-size:14px;height:50px;color:#10a3a3;line-height:50px;background-color:#e9ffff;}
+/* register */
+.register {width:40%;margin:5% auto;height:40%;background-color:#fff;border-radius:10px;}
+.register .title {border-bottom:1px solid #e2e2e2;height:40px;line-height:40px;text-align:center;font-size:20px;opacity:0.5;text-indent:1em;}
+.register .layui-form {width:88%;margin:30px auto;}
+.register .layui-form .layui-input {border-radius:5px;}
+.register .layui-form .layui-input-block {margin-left:10px;border-radius:5px;}
+.register .layui-form .layui-input-block .layui-btn {width:100%;border-radius:5px;font-size:16px;}
+.register .reset a{color:#10a3a3}
+.register .reset{width:86%;margin:10px auto;text-align:center;font-size:14px;height:50px;color:#10a3a3;line-height:50px;background-color:#e9ffff;}
+/* detail */
+.blog_detail {width:80%;margin:10px auto;min-height:500px;}
+.blog_detail .{width:75%;min-height:500px;float:left;margin-top:10px;border-radius:5px;}
+.blog_detail  .content {width:100%;min-height:300px;background-color:#fff;}
+.blog_detail  .content .title{width:100%;min-height:50px;border-bottom:1px solid #e2e2e2;line-height:30px;padding-top:15px;text-indent:2em;}
+.blog_detail  .content .title span{font-size:22px;}
+.blog_detail  .content .title div{opacity:0.6;font-size:14px;}
+
+.blog_detail  .content .article-content{width:95%;padding-top:15px;min-height:200px;margin:0 auto;padding-bottom:40px;word-wrap: break-word; word-break: normal;}
+/* comment */
+.blog_detail .comment{width:100%;min-height:200px;background-color:white;margin:15px auto;}
+.blog_detail .comment .reply{width:100%;height:50px;line-height:50px;text-indent:2em;font-size:16px;opacity:0.7;border-bottom:1px solid #e2e2e2;}
+.blog_detail .comment .info {width:100%;min-height:150px;}
+.blog_detail .comment .no-comment {width:98%;height:150px;line-height:150px;text-align:center;opacity:0.6;}
+.blog_detail .comment ul {width:98%;min-height:150px;}
+.blog_detail .comment ul li {width:100%;float:left;min-height:70px;margin:5px 10px;border-bottom:1px solid #e2e2e2;}
+.blog_detail .comment ul li .avatar{width:12%;height:85px;float:left;border-radius:50%;}
+.blog_detail .comment ul li .avatar img{width:90%;height:90%;}
+
+.blog_detail .comment ul li .comment-info{width:88%;min-height:80px;float:right;}
+
+.blog_detail .comment ul li .comment-info div {height:20px;}
+.blog_detail .comment ul li .comment-info div .span-left{float:left;margin-left:10px;}
+.blog_detail .comment ul li .comment-info div .span-left a{color:green;}
+.blog_detail .comment ul li .comment-info div .span-right{float:right;margin-right:10px;opacity:0.6;}
+.blog_detail .comment ul li .comment-info div .time{opacity:0.6;text-indent:1em;}
+.blog_detail .comment ul li .comment-info p {text-indent:1em;margin-top:3px;}
+.blog_detail .editor{width:100%;height:160px;background-color:white;margin:15px auto;}
+.blog_detail .comment ul li .comment-info p a {color:green;}
+
+
+.detail .main-right {width:24%;min-height:500px;float:right;}
+.detail .main-right .tab .title {text-align:center;}
+.detail .main-right .tab .avatar {width:100px;height:100px;border:1px solid #ddd;border-radius:50%;margin:10px auto;}
+.detail .main-right .tab .avatar img {width:100%;height:100%;border-radius:50%;}
+.detail .main-right .tab .sign {width:90%;min-height:30px;margin:0 auto;word-wrap:break-word;text-align:center;}
+.detail .main-right .tab .btn {width:90%;min-height:30px;margin:0 auto;text-align:center;line-height:30px;font-size:16px;background-color:#FFB800;border-radius:5px;color:#fff;}
+.fa {display:inline;}
+
+
+/* user center */
+.user {width:74%;min-height:500px;margin:10px auto;}
+.user .user-left {width:29%;height:800px;float:left;}
+.user .user-left .user-card {width:100%;height:380px;background-color:#fff;}
+.user .user-left .user-relate {width:100%;height:250px;margin-top:15px;background-color:#fff;}
+.user .user-right {width:69%;min-height:800px;float:right;}
+.user .user-left .user-card .name {width:100%;height:40px;line-height:40px;text-align:center;font-size:20px;border-bottom:1px solid #e2e2e2;}
+.user .user-left .user-card .avatar {width:140px;height:140px;margin:0 auto;border-radius:50%;}
+.user .user-left .user-card .avatar img {width:100%;height:100%;border-radius:50%;}
+.user .user-left .user-card .layui-btn {width:98%;margin:0 auto;}
+.user .user-left .user-card .intro {width:100%;min-height:100px;margin-bottom:10px;border-bottom:1px solid #e2e2e2;}
+.user .user-left .user-card .intro div{width:100%;height:30px;line-height:30px;text-align:center;font-size:16px;}
+
+.user .user-left .user-relate .layui-btn {width:98%;margin:5px auto;}
+.user .user-right .share{width:100%;min-height:150px;background-color:#fff;}
+.user .user-right .share .title {width:100%;height:40px;border-bottom:1px solid #e2e2e2;background-color:#fff;line-height:40px;font-size:18px;text-indent:1em;opacity:0.5;}
+.user .user-right .share .btn {width:20%;height:50px;margin:24px auto;line-height:50px;font-size:16px;border-radius:5px;text-align:center;background-color:#05a1a2;color:#fff;}
+.user .user-right .write{width:100%;margin:15px auto;min-height:150px;background-color:#fff;}
+.user .user-right .write .title {width:100%;height:40px;border-bottom:1px solid #e2e2e2;background-color:#fff;line-height:40px;font-size:18px;text-indent:1em;opacity:0.5;}
+.user .user-right .write .no-article {width:98%;height:150px;line-height:150px;text-align:center;opacity:0.6;}
+.user .user-right .write ul{width:100%;min-height:150px;}
+.user .user-right .write ul li {width:100%;line-height:50px;height:50px;text-indent: 2em;border-bottom: 1px solid #e2e2e2;}
+.user .user-right .write ul li a {color:#05a1a2;font-size:15px;}
+.user .user-right .write ul li .info a {color:#0a0a0a;}
+.user .user-right .write ul li .info {opacity:0.6;}
+/* 回复*/
+.user .user-right .reply{width:100%;margin:15px auto;min-height:150px;background-color:#fff;}
+.user .user-right .reply .title {width:100%;height:40px;border-bottom:1px solid #e2e2e2;background-color:#fff;line-height:40px;font-size:18px;text-indent:1em;opacity:0.5;}
+.user .user-right .reply .no-reply {width:98%;height:150px;line-height:150px;text-align:center;opacity:0.6;}
+.user .user-right .reply ul {width:100%;min-height:150px;}
+.user .user-right .reply ul li {width:100%;padding-top:10px;min-height:50px;text-indent: 2em;border-bottom: 1px solid #e2e2e2;}
+.user .user-right .reply ul li a {color:#05a1a2;font-size:15px;}
+.user .user-right .reply ul li .info a {color:#0a0a0a;}
+.user .user-right .reply ul li .info {opacity:0.6;font-size:10px;}
+.user .user-right .reply ul li .reply-info {min-height:25px;font-size:14px;padding-top:10px;width: 94%;margin: 0 auto;padding-bottom: 10px;}
+
+.user .user-right .user-nav {width:100%;height:30px;margin-bottom:10px;line-height: 30px;text-indent:1em;font-size:16px;background-color:#fff;}
+.user .user-right .user-nav a {color:#05a1a2;}
+
+/* edit */
+.user-edit {width:70%;min-height:780px;margin:10px auto;}
+.user-edit .user-edit-left {width:25%;height:500px;float:left;}
+.user-edit .user-edit-left .user-edit-option{width:100%;height:280px;background-color:#fff;}
+.user-edit .user-edit-left .user-edit-option .layui-btn {width:100%;margin:5px auto;font-size:17px;}
+.user-edit .user-edit-right {width:74%;min-height:500px;float:right;}
+.user-edit .user-edit-right .form {width:100%;min-height:300px;background-color:#fff;}
+.user-edit .user-edit-right .form .title {width:100%;height:40px;border-bottom:1px solid #e2e2e2;background-color:#fff;line-height:40px;font-size:18px;text-indent:1em;opacity:0.5;}
+.user-edit .user-edit-right .form .layui-form {width: 55%;padding-bottom: 10px;padding-top: 10px;}
+
+
+.footer {width:100%;height:200px;background:grey;margin-top:20px;}
+
+
+
+
+
