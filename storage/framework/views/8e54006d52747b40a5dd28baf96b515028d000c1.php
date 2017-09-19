@@ -5,7 +5,6 @@
  -->
 <!DOCTYPE html>
 <html>
-
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -46,7 +45,8 @@
       <span>
       <?php if(Auth::guard('home')->check()): ?>
            <li class="layui-nav-item">
-            <a href="<?php echo e(url('user',['id' => Auth::guard('home')->user()->id ])); ?>">个人中心<span class="layui-badge">99+</span></a>
+           <?php $notice = app('App\Service\NoticeService'); ?>
+            <a href="<?php echo e(url('user',['id' => Auth::guard('home')->user()->id ])); ?>">个人中心<span class="layui-badge"><?php echo e($notice->getNotRead(Auth::guard('home')->user()->id)); ?></span></a>
           </li>
           <li class="layui-nav-item">
             <a href=""><img src="http://t.cn/RCzsdCq" class="layui-nav-img"><?php echo e(Auth::guard('home')->user()->user_name); ?></a>

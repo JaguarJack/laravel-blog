@@ -51,7 +51,7 @@
 	<div class="info">
 	
 	<?php if(!$comments->count()): ?>
-		<div class="no-comment" style="display:none;">空空如也~快来成为第一个评论的人吧</div>
+		<div class="no-comment" >空空如也~快来成为第一个评论的人吧</div>
 	<?php else: ?>	
 	<ul>
 		<?php $__currentLoopData = $comments; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $comment): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
