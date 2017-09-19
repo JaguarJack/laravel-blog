@@ -27,7 +27,8 @@ class CreateUserTable extends Migration
             $table->string('github_homepage', 100)->comment('github 主页')->default('');
             $table->string('sina_name', 10)->comment('新浪微博昵称')->default('');
             $table->string('sina_homepage', 250)->comment('新浪微博主页地址')->default('');
-            $table->string('come_from', 10)->comment('用户所在城市')->default('');
+            $table->string('company', 50)->comment('用户公司')->default('');
+            $table->string('city', 10)->comment('用户所在城市')->default('');
             $table->string('website', 10)->comment('用户个人主页')->default('');
             $table->string('introduction', 255)->comment('个人签名')->default('');
             $table->string('signature', 255)->comment('个人署名')->default('');
