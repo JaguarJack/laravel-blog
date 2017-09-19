@@ -29,18 +29,17 @@ class IndexController extends Controller
         foreach ($reuslt as $vo) {
             if ($vo->type) {
                 $sql = sprintf('insert into users (
-            id,account, open_id,user_name,
-            password,email,real_name,remember_token,
-            avatar,github_name,github_homepage,sina_name,
-            sina_homepage,come_from,personal_website,introduction,
-            signature,type,gender,activation,
-            online,status) value (
-                    %d,"%s","%s","%s",
-            "%s","%s","%s","%s",
-            "%s","%s","%s","%s",
-            "%s","%s","%s","%s","%s",
-            %d,%d,%d,%d,%d
-                    
+                                id,account, open_id,user_name,
+                                password,email,real_name,remember_token,
+                                avatar,github_name,github_homepage,sina_name,
+                                sina_homepage,come_from,personal_website,introduction,
+                                signature,type,gender,activation,
+                                online,status) value (
+                                        %d,"%s","%s","%s",
+                                "%s","%s","%s","%s",
+                                "%s","%s","%s","%s",
+                                "%s","%s","%s","%s","%s",
+                                %d,%d,%d,%d,%d
               )',$vo->id,!$vo->type ? $vo->open_id : '', $vo->type ? $vo->open_id : '',
                     
                     $vo->uname, !$vo->type ? bcrypt('123456') : '',$vo->email,

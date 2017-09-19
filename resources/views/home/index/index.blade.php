@@ -42,7 +42,7 @@ layui.use(['carousel','flow'], function(){
 		        	var str= '';
 		        	str += '<div class="main-left-article"><div class="title">';
 		        	str += '<span class="layui-btn layui-btn-danger">' +item.category+ '</span>'
-		        	str += '<span style="font-size:24px;"><a href="/detail/'+item.aid+'">' +item.title+ '</a></span>'
+		        	str += '<span style="font-size:24px;margin-left:10px;"><a href="/detail/'+item.aid+'">' +item.title.substr(0, 25)+ '</a></span>'
 		        	str += '</div><hr>'
 		        	str += '<div class="content"><div class="image">'
 		            str +='<img lay-src="' + item.thumb_img + '"/></div>';
@@ -69,7 +69,7 @@ layui.use(['carousel','flow'], function(){
 	     var tag_str = '';
 	     for (i=0;i<tags.length ;i++ ) 
          { 
-            tag_str += tags[i] + '&nbsp';
+            tag_str += '<a href="/tag/'+tags[i]+'">'+tags[i] + '</a>&nbsp';
         	
          }
 	     return tag_str;

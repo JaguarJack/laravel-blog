@@ -4,6 +4,7 @@ namespace App\Model;
 
 use App\Model\ArticleRelate;
 use App\Model\Comment;
+use App\Model\Users;
 
 class Article extends BaseModel
 {
@@ -29,7 +30,8 @@ class Article extends BaseModel
      */
     public function hasOneRelateInfo()
     {
-        return $this->hasOne(ArticleRelate::class, 'aid');
+        return $this->hasOne(ArticleRelate::class, 'aid')
+                    ->select('article_relate.*');
     }
     
     /**
@@ -41,5 +43,16 @@ class Article extends BaseModel
     public function hasManyComments()
     {
         return $this->hasMany(Comment::class, 'aid');
+    }
+    
+    /**
+     * @description:
+     * @author wuyanwen(2017年9月19日)
+     */
+    public function hasManyRelateInfo()
+    {
+        return $this->hasManyThrough(ArticleRelate::class,'aid')
+                    ->select('article_relate.like_number', 'article_relate.store_number', 'article_relate.comment_number', 
+                             'article_relate.pv_number');
     }
 }

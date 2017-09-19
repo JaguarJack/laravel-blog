@@ -27,7 +27,7 @@ class Users extends Authenticatable
      */
     public function hasManyArticles()
     {
-        return $this->hasMany(Article::class, 'uid')->limit(5);
+        return $this->hasMany(Article::class, 'user_id')->limit(5);
     }
     
     /**
@@ -42,7 +42,6 @@ class Users extends Authenticatable
                     ->orderBy('articles.id', 'DESC')
                     ->limit(5);
     }
-    
     
     /**
      * 

@@ -7,6 +7,7 @@ use App\Http\Requests\StoreArticleRequest;
 use App\Http\Controllers\Controller;
 use App\Repository\UsersRepository;
 use App\Service\UsersService;
+use App\Repository\ArticleRepository;
 
 class UserController extends Controller
 {
@@ -24,12 +25,18 @@ class UserController extends Controller
     {
         return view('home.user.index',[
             'articles' => $this->user->getArticles(intval($id)),
+            'id'       => $id,
         ]);
     }
     
-    public function share()
+    public function share($id, ArticleRepository $article)
     {
-        return view('home.user.share');
+        $total = $article->getTotalAritcle($id);
+        return view('home.user.share',[
+                'id' => $id,
+            'pages'  => $total['pages'],
+            'total'  => $total['total'],
+        ]);
     }
     
     public function comment()

@@ -29,9 +29,9 @@ class ArticleRepository
         ];
 
         return self::$article::where($where)->select('article_relate.*','users.*','articles.*')
-                                   ->leftjoin('article_relate', 'articles.id', '=', 'article_relate.aid')
-                                   ->leftjoin('users', 'articles.user_id', '=', 'users.id')
-                                   ->first(); 
+                                            ->leftjoin('article_relate', 'articles.id', '=', 'article_relate.aid')
+                                            ->leftjoin('users', 'articles.user_id', '=', 'users.id')
+                                            ->first(); 
     }
     
     /**
@@ -60,8 +60,7 @@ class ArticleRepository
      */
     public function total($limit = 0)
     {
-        return self::$article::where('status', '=', self::$article::PASS_STATUS)->count() 
-        
+        return self::$article::where('status', '=', self::$article::PASS_STATUS)->count()        
         
                             / ($limit ? : self::$article::LIMIT);
     }
@@ -98,6 +97,49 @@ class ArticleRepository
             self::$article::where(array_merge($where, [['id', '<', $id]]))->orderBy('id', 'DESC')->first(),
         ];
 
+    }
+    
+    
+    /**
+     * @description:获取用户文章
+     * @author wuyanwen(2017年9月19日)
+     * @param number $offset
+     * @param number $limit
+     * @return unknown
+     */
+    public function getUserArticles($user_id, $offset = 0, $limit = 0)
+    {
+        $where = [
+            ['user_id', '=', $user_id],
+            ['status', '=', self::$article::PASS_STATUS],
+        ];
+        
+        return self::$article::where($where)
+                            ->select('articles.title', 'articles.author','articles.id','articles.intro', 'articles.created_at')
+                            ->offset($offset * ($limit ? : self::$article::LIMIT))
+                            ->limit($limit ? : self::$article::LIMIT)
+                            ->orderBy('articles.id', 'DESC')
+                            ->get();
+        
+    }
+    /**
+     * @description:获取用户文章总页码
+     * @author wuyanwen(2017年9月19日)
+     * @param unknown $user_id
+     * @param unknown $limit
+     * @return number
+     */
+    public function getTotalAritcle($user_id, $limit = null)
+    {
+        
+        $where = [
+            ['user_id', '=', $user_id],
+            ['status', '=', self::$article::PASS_STATUS],
+        ];
+        
+        $total = self::$article::where($where)->count();
+        
+        return ['total' => $total, 'pages'=> ceil($total/ ($limit ? : self::$article::LIMIT))];
     }
     
     /**

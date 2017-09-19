@@ -2,6 +2,8 @@
 
 namespace App\Model;
 
+use App\Model\Users;
+
 class ArticleRelate extends BaseModel
 {
     //
@@ -10,5 +12,8 @@ class ArticleRelate extends BaseModel
     protected $fillable = [
         'aid', 'user_id', 'like_num', 'enshirne_num', 'comment_num' ,
     ];
+    
+    
+    
     
 }

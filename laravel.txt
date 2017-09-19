@@ -1,1 +1,5 @@
 1. 所有的post 提交都需要csrf验证，否则提交不了
+2.如果需要对migration 单个文件生成表结构，请修改源码
+namespace Illuminate\Database\Migrations
+
+class Migrator->function getMigrationFiles
