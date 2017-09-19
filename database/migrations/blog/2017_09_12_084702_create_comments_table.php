@@ -19,6 +19,7 @@ class CreateCommentsTable extends Migration
             $table->integer('user_name')->comment('评论者昵称');
             $table->integer('avatar')->comment('评论者头像');
             $table->integer('aid')->comment('评论文章ID');
+            $table->integer('comment_id')->comment('评论ID');
             $table->text('content')->comment('评论内容');
             $table->timestamps();
         });
