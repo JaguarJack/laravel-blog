@@ -28,7 +28,7 @@ class CreateUserTable extends Migration
             $table->string('sina_name', 10)->comment('新浪微博昵称')->default('');
             $table->string('sina_homepage', 250)->comment('新浪微博主页地址')->default('');
             $table->string('come_from', 10)->comment('用户所在城市')->default('');
-            $table->string('personal_website', 10)->comment('用户个人主页')->default('');
+            $table->string('website', 10)->comment('用户个人主页')->default('');
             $table->string('introduction', 255)->comment('个人签名')->default('');
             $table->string('signature', 255)->comment('个人署名')->default('');
             $table->tinyInteger('type')->comment('1:注册用户,2:qq用户,3:微博用户,4:github,5:其他')->default(1);
