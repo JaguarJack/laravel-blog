@@ -93,7 +93,7 @@
 							<a name="reply{{ $comment->id }}" id="reply{{ $comment->id }}" href="#reply{{ $comment->id }}">#{{ $key+1 }}</a> {{ $comment->created_at }}
 						</div>
 					</div>
-					<p>{!! $comment->content !!}</p>
+					<p>{!! htmlspecialchars_decode($comment->content) !!}</p>
 				</div>
 			</li>
 		 @endforeach

@@ -109,4 +109,24 @@ class UsersRepository
 	{
 	    return self::$users::where('id', '=', $id)->find($id)->hasManyNotice;
 	}
+	
+	/**
+	 * 
+	 * @description:更新用户信息
+	 * @author wuyanwen(2017年9月19日)
+	 * @param@param unknown $data
+	 */
+	public function update($data)
+	{
+	    $user = $this->find('id', $data['id']);
+	    
+	    unset($data['id']);
+	    
+	    foreach ($data as $key => $vo)
+	    {
+	        $user->$key = $vo;
+	    }
+	    
+	    return $user->save();
+	}
 }

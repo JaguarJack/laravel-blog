@@ -7,6 +7,7 @@ use App\Repository\CategoryRepository;
 use App\Repository\CommentRepository;
 use App\Repository\ArticleRelateRepository;
 use App\Repository\NoticeRepository;
+use App\Repository\UsersRepository;
 
 class UsersService
 {
@@ -22,7 +23,7 @@ class UsersService
     protected $comment;
     protected $article_relate;
     protected $notice;
-    
+    protected $user;
     /**
      * 
      * @description:初始化
@@ -33,13 +34,14 @@ class UsersService
      */
     public function __construct(CategoryRepository $category, 
         ArticleRepository $article, CommentRepository $comment,
-        ArticleRelateRepository $article_relate,NoticeRepository $notice)
+        ArticleRelateRepository $article_relate,NoticeRepository $notice, UsersRepository $user)
     {
         $this->category = $category;
         $this->article  = $article;
         $this->comment  = $comment;
         $this->article_relate = $article_relate;
         $this->notice   = $notice;
+        $this->user     = $user;
     }
     
     /**
@@ -135,5 +137,20 @@ class UsersService
         } else {
             return false;
         }
+    }
+    
+    /**
+     * 
+     * @description:修改用户信息
+     * @author wuyanwen(2017年9月19日)
+     * @param@param unknown $request
+     */
+    public function updateInfo($request)
+    {
+        $data = $request->all();
+        
+        $data['id'] = $request->user('home')->id;
+        
+        return $this->user->update($data);
     }
 }

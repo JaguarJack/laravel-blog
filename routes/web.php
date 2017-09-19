@@ -32,7 +32,8 @@ Route::namespace('Home')->group(function(){
         Route::get('/setPassword', 'UserController@setPassword');
         Route::get('/setAvatar', 'UserController@setAvatar');
         Route::get('/notice', 'UserController@notice');
-        Route::get('/activation', 'UserController@activation'); 
+        Route::get('/activation', 'UserController@activation');
+        Route::post('/updateUserInfo', 'UserController@updateUserInfo');
     });
     Route::get('/tag/{tagname}', 'TagsController@index')->where('tagname', '.*');
     Route::get('/getUserArticles', 'ArticleController@getUserArticles');
