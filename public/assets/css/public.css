@@ -43,7 +43,8 @@
 .blog_detail  .content {width:100%;min-height:300px;background-color:#fff;}
 .blog_detail  .content .title{width:100%;min-height:50px;border-bottom:1px solid #e2e2e2;line-height:30px;padding-top:15px;text-indent:2em;}
 .blog_detail  .content .title span{font-size:22px;}
-.blog_detail  .content .title div{opacity:0.6;font-size:14px;}
+.blog_detail  .content .title div{font-size:14px;}
+.blog_detail  .content .title div img{width:50px;height:50px;border-radius:50%;float:left;}
 
 .blog_detail  .content .article-content{width:95%;padding-top:15px;min-height:200px;margin:0 auto;padding-bottom:40px;word-wrap: break-word; word-break: normal;}
 /* comment */

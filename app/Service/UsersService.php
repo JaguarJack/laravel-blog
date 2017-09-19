@@ -5,7 +5,6 @@ namespace App\Service;
 use App\Repository\ArticleRepository;
 use App\Repository\CategoryRepository;
 use App\Repository\CommentRepository;
-use Illuminate\Support\Facades\DB;
 use App\Repository\ArticleRelateRepository;
 use App\Repository\NoticeRepository;
 
@@ -65,12 +64,11 @@ class UsersService
         $category = $this->category->find('id', $request->input('category'));
 
         $user = $request->user('home');
-        //dd($request->input('tags'));
         $data = [
             'cid'      => $category->id,
             'fid'      => $category->fid,
             'title'    => $request->input('title'),
-            'tags'     => strpos('，', $request->input('tgas')) ? str_replace('，', ',', $request->input('tags')) : $request->input('tags'),
+            'tags'     => strpos($request->input('tags'), '，') ? str_replace('，', ',', $request->input('tags')) : $request->input('tags'),
             'content'  => $request->input('content'),
             'intro'    => $request->input('intro'),
             'user_id'  => $user->id,
@@ -127,15 +125,14 @@ class UsersService
             'aid'            => $aid,
         ];
         
-        //事务开始
-        DB::beginTransaction();
-        if( $this->comment->store($data) 
-            && $this->article_relate->incrementCommentNum($aid) 
-            && $this->notice->store($messge)) {
-            Db::commit();
-            return true;
+        $comment = $this->comment->store($data);
+        $messge['comment_id'] = $comment->id;
+        //如果成功返回数据
+        if( $this->article_relate->incrementCommentNum($aid) && $this->notice->store($messge)) {
+            $data['id'] = $comment->id;
+            $data['created_at'] = date('Y-m-d H:i:s');
+            return $data;
         } else {
-            Db::rollback();
             return false;
         }
     }

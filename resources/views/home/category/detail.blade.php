@@ -4,15 +4,38 @@
 @section('description', '首页')
 @section('class', 'detail')
 @section('main')
+
 <div class="blog_detail">
 <div class="content" id="markdown">
 	<div class="title">
 	<span>{{ $article_info->title }}</span>
-	<div>
-		<i class="fa fa-user-o"></i>{{ $article_info->author }} 发布与
+	<div style="margin-left:2em;height:55px;">
+		<div>
+			<img src="http://t.cn/RCzsdCq">
+		
+		<div style="width:400px;height:50px;float:left;">
+			<button class="layui-btn-primary layui-btn-mini" style="margin-left:-10px;">作者</button> 
+			{{ $article_info->author }}
+			<a href="javascript:;">
+    			@if (!$attented)   
+    				<button class="layui-btn layui-btn-mini attend">关注</button>
+    			@else
+    				<button class="layui-btn-primary layui-btn-mini attend">已关注</button>
+    			@endif
+			</a>
+			<p>			
+				*{{ $article_info->created_at }}  收藏 {{$article_info->store_number}}  
+				评论 {{$article_info->comment_number}}  喜欢{{$article_info->like_number}}  阅读{{$article_info->pv_number }}
+			</p>
+		</div>
+		<!--  <i class="fa fa-user-o"></i>{{ $article_info->author }} 发布与
 		<i class="fa fa-clock-o"></i>{{ $article_info->created_at }}
 		<i class="fa fa-tags"></i>
-		<i class="fa fa-eye"></i>100
+		@foreach (explode(',', $article_info->tags) as $tag)
+			<a href="{{ url('tag', ['tagname' => $tag]) }}">{{ $tag }}</a>
+		@endforeach
+		<i class="fa fa-eye"></i>{{ $article_info->pv_number }}-->
+	</div>
 	</div>
 	</div>
 	<div class="article-content">
@@ -22,14 +45,14 @@
 	<div style="width:100%;height:50px;background-color:#fff;">
 		<div style="width:50%;height:50px;margin:0 auto;text-align:center;">
 		@if (!$liked) 
-			<span class="layui-btn layui-btn-radius layui-btn-primary like"><i class="fa fa-thumbs-o-up"></i>&nbsp; 点赞  <span>{{ $article_info->like_number }}</span></span>		
+			<span class="layui-btn layui-btn-radius layui-btn-primary like">喜欢  <span>{{ $article_info->like_number }}</span></span>		
 		@else
-		    <span class="layui-btn layui-btn-radius like"><i class="fa fa-thumbs-up"></i>&nbsp;点赞  <span>{{ $article_info->like_number }}</span></span>
+		    <span class="layui-btn layui-btn-radius like">喜欢   <span>{{ $article_info->like_number }}</span></span>
 		@endif
 		@if (!$stored)
-			<span class="layui-btn layui-btn-radius layui-btn-primary store">&nbsp;收藏  <span>{{ $article_info->store_number }}</span></span>
+			<span class="layui-btn layui-btn-radius layui-btn-primary store">收藏   <span>{{ $article_info->store_number }}</span></span>
 		@else
-			<span class="layui-btn layui-btn-radius store"><i class="layui-icon">&#xe6c6;</i>&nbsp;收藏  <span>{{ $article_info->store_number }}</span></span>
+			<span class="layui-btn layui-btn-radius store">收藏   <span>{{ $article_info->store_number }}</span></span>
 		@endif
 		</div>
 	</div>
@@ -52,7 +75,7 @@
 	@if (!$comments->count())
 		<div class="no-comment" >空空如也~快来成为第一个评论的人吧</div>
 	@else	
-	<ul>
+	<ul class="comment_content">
 		@foreach ($comments as $key => $comment)
 			<li>
 				<div class="avatar">
@@ -67,7 +90,7 @@
 						</a>
 						</div>
 						<div class="time">
-							<a href="{{ url('detail',['id' => $article_info->id ] )}}#reply{{ $comment->id }}">#{{ $key+1 }}</a> {{ $comment->created_at }}
+							<a name="reply{{ $comment->id }}" id="reply{{ $comment->id }}" href="#reply{{ $comment->id }}">#{{ $key+1 }}</a> {{ $comment->created_at }}
 						</div>
 					</div>
 					<p>{!! $comment->content !!}</p>
@@ -138,7 +161,7 @@ layui.use(['jquery','layer'], function(){
 			$(this).css('border','1px solid #e6e6e6')
 		});
 
-		$('.span-right').click(function(){
+		$('.comment_content').on('click', '.span-right' ,function(){
 			var user_id = $(this).attr('data');
 			var name    = $(this).attr('name');
 			var html    = '@'+name+' ';
@@ -151,42 +174,77 @@ layui.use(['jquery','layer'], function(){
 			var reply_user = $('input[name=reply_user]').val();
 			var aid        = "{{ $article_info->id }}"
 			var content    = $('#edit').val();
-
+			if (content.length < 1) { layer.msg('请输入评论内容'); return false;}
 			$.post('/comment', {reply_user:reply_user, aid:aid, content:content},function(response){
 					if (response.status == 10000) {
-						window.location.reload();
+						var str='';
+						str += '<li>';
+						str += '<div class="avatar">';
+						str += '<img src="'+response.data.avatar+'"/>';
+						str += '</div>';
+						str += '<div class="comment-info"><div style="min-height:40px;"><div>';
+						str += '<span  class="span-left" data="'+response.data.user_id+'"><a href="javascript:;">'+response.data.user_name+'</a></span>'
+						str += '<a href="javascript:;">'
+						str += '<span class="span-right" data="'+response.data.user_id+'" name="'+response.data.user_name+'"><i class="fa fa-mail-reply"></i> 回复</span>'
+						str += '</a>'
+						str += '</div><div class="time">'
+						str += '<a name="reply'+response.data.id+'"href="#reply'+response.data.id+'">#'+(parseInt($('.comment_content').children('li').length)+1)+'</a> '+response.data.created_at
+						str += '</div></div>'
+						str += '<p>'+response.data.content+'</p>'
+						str += '</div></li>'
+						$('.comment_content').append(str);
+
+						$('#edit').text(' ');
 					} else {
 						layer.msg(response.msg);
 				    }
 			})
 
 		})
-		$('.span-left').mouseover(function(){
-			layer.tips('只想提示地精准些', $(this), {
-				tips: 1
-			});
-		});
+		//$('.span-left').mouseover(function(){
+			//layer.tips('只想提示地精准些', $(this), {
+				//tips: 1
+			//});
+		//});
 
 	    $('.like').click(function(){
 			$.post("{{ url('api/like')}}",{aid:aid,user_id:"{{ $user_id }}"}, function(response){
 					if (response.code == 10000) {
-						window.location.reload();
+						var number = $('.like span').html();
+						if ($('.like').hasClass('layui-btn-primary')) {
+							$('.like').removeClass('layui-btn-primary');
+							$('.like span').html(parseInt(number) + 1);
+						} else {
+							$('.like').addClass('layui-btn-primary');
+							$('.like span').html(parseInt(number) - 1);
+						}
 					}
 		    })
 		})
 
 		$('.store').click(function(){
 			$.post("{{ url('api/store')}}",{aid:aid,user_id:"{{ $user_id }}"}, function(response){
-					if (response.code == 10000) {
-						window.location.reload();
-					}
+    				var number = $('.store span').html();
+    				if ($('.store').hasClass('layui-btn-primary')) {
+    					$('.store').removeClass('layui-btn-primary');
+    					$('.store span').html(parseInt(number) + 1);
+    				} else {
+    					$('.store').addClass('layui-btn-primary');
+    					$('.store span').html(parseInt(number) - 1);
+    				}
 		    })
 		})
 		
 		$('.attend').click(function(){
 			$.post("{{ url('api/attend')}}",{attend_user_id:attend_user_id,user_id:"{{ $user_id }}"}, function(response){
 					if (response.code == 10000) {
-						window.location.reload();
+						//为关注状态
+						if ($('.attend').hasClass('layui-btn')) {
+							$('.attend').removeClass('layui-btn').addClass('layui-btn-primary').html('已关注');							
+						} else {
+							$('.attend').removeClass('layui-btn-primary').addClass('layui-btn').html('关注');
+
+						}
 					}
 		    })
 		})		

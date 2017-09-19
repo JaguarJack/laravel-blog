@@ -23,18 +23,19 @@ Route::namespace('Home')->group(function(){
     Route::prefix('user')->middleware('checklogin')->group(function () {
         Route::get('like','UserController@like');
         Route::get('/{id}', 'UserController@index')->where(['id' => '[0-9]+']);
-        Route::get('/like', 'UserController@like');
-        Route::get('/attend', 'UserController@attend');
-        Route::get('/comment', 'UserController@comment');
-        Route::get('/share', 'UserController@share');
-        Route::get('/store', 'UserController@store');
+        Route::get('/like/{id}', 'UserController@like')->where(['id' => '[0-9]+']);;
+        Route::get('/attend/{id}', 'UserController@attend')->where(['id' => '[0-9]+']);;
+        Route::get('/comment/{id}', 'UserController@comment')->where(['id' => '[0-9]+']);;
+        Route::get('/share/{id}', 'UserController@share')->where(['id' => '[0-9]+']);;
+        Route::get('/store/{id}', 'UserController@store')->where(['id' => '[0-9]+']);;
         Route::get('/edit', 'UserController@edit');
         Route::get('/setPassword', 'UserController@setPassword');
         Route::get('/setAvatar', 'UserController@setAvatar');
         Route::get('/notice', 'UserController@notice');
         Route::get('/activation', 'UserController@activation'); 
     });
-    
+    Route::get('/tag/{tagname}', 'TagsController@index')->where('tagname', '.*');
+    Route::get('/getUserArticles', 'ArticleController@getUserArticles');
     Route::get('/write', 'UserController@write')->middleware('checklogin');
     Route::post('/publish', 'UserController@publish')->middleware('checklogin');
     Route::post('/readNotice', 'NoticeController@readNotice')->middleware('checklogin');

@@ -13,6 +13,6 @@ class Notice extends BaseModel
     protected $table = 'notice';
     
     protected $fillable = [
-      'user_id', 'from_user_name', 'aid', 'type', 'is_read',  
+      'user_id', 'from_user_name', 'aid', 'type', 'is_read', 'comment_id' 
     ];
 }
