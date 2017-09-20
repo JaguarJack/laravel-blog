@@ -9,4 +9,10 @@ return [
         'limit'      => true,
         'limit_time' => 60,
     ],
+    
+    
+    'image'   => [
+        'type' => ['jpg', 'png', 'gif', 'jpeg'],
+        'size' => 500,
+    ]
 ];

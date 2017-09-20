@@ -34,7 +34,7 @@ class UserController extends Controller
      * @param@return \Illuminate\View\View|\Illuminate\Contracts\View\Factory
      */
     public function index($id, CommentRepository $comment)
-    {
+    {dd(config('filesystems.disks.public.url'));
         return view('home.user.index',[
             'articles' => $this->user->getArticles(intval($id)),
             //'user'     => $this->user->find('id', intval(id)),

@@ -46,6 +46,8 @@ Route::namespace('Home')->group(function(){
     Route::get('/getStoreArticles', 'StoreController@getStoreArticles')->middleware('checklogin');
     Route::get('/getLikeArticles', 'LikeController@getLikeArticles')->middleware('checklogin');
     Route::post('/comment', 'CategoryController@comment')->middleware('checklogin');
+    Route::post('/uploadImage', 'FileController@uploadImage')->middleware('checklogin');
+    
 });
 
 Route::middleware('auth')->namespace('Admin')->group(function(){    

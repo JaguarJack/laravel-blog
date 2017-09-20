@@ -23,12 +23,12 @@ layui.use(['element','jquery','upload'], function(){
 	
   upload.render({
 	  elem: '#btn'
-	  ,url: '/api/upload/'
+	  ,url: '/uploadImage'
 	  ,method:'post'
 	  ,auto: false //选择文件后不自动上传
 	  ,bindAction: '#upload' //指向一个按钮触发上传
 	  ,accept:'images'
-	  ,exts:'jpg|png|gif|bmp|jpeg'
+	  ,exts:'jpg|png|gif|jpeg'
 	  ,size:500
 	  ,choose: function(obj){
 	    //将每次选择的文件追加到文件队列
@@ -46,11 +46,8 @@ layui.use(['element','jquery','upload'], function(){
 	      //delete files[index]; //删除列表中对应的文件，一般在某个事件中使用
 	    });
 	  }
-  	,done: function(res){
-        //如果上传失败
-        if(res.code > 0){
-          return layer.msg('上传失败');
-        }
+  	,done: function(response){
+        layer.msg(response.msg);
         //上传成功
       }
 	});      
