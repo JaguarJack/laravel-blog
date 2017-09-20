@@ -22,14 +22,27 @@ class LoginController extends Controller
         $this->middleware('guest')->except('signout');
     }
     
+    /**
+     * 
+     * @description:登录页面
+     * @author wuyanwen(2017年9月20日)
+     * @param@return \Illuminate\View\View|\Illuminate\Contracts\View\Factory
+     */
     public function signin()
     {
         return view('home.index.login');
     }
     
+    /**
+     * 
+     * @description:登录
+     * @author wuyanwen(2017年9月20日)
+     * @param@param Request $request
+     * @param@return \Illuminate\Http\RedirectResponse|\Illuminate\Http\Response
+     */
     public function doLogin(Request $request)
     {
-        $this->login($request);
+        return $this->login($request);
     }
     
     /**
@@ -55,7 +68,7 @@ class LoginController extends Controller
      */
     public function redirectTo()
     {
-        return url()->previous();
+        return url('user',['id' => $this->guard()->user()->id]);
     }
     
     /**

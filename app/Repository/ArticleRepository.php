@@ -39,10 +39,19 @@ class ArticleRepository
      * @author wuyanwen(2017年9月13日)
      * @param number $offset
      * @param number $limit
+     * @param number $category_id 获取分类文章
      */
-    public function getArticles($offset = 0, $limit = 0)
+    public function getArticles($offset = 0, $limit = 0, $category_id = 0)
     {
-        return self::$article::where('articles.status', '=' , self::$article::PASS_STATUS)
+        $where = [
+            ['articles.status', '=' , self::$article::PASS_STATUS],
+        ];
+        
+        if ($category_id) {
+            $where[] = ['cid', '=', $category_id];
+        }
+        
+        return self::$article::where($where)
                               ->select('articles.*', 'article_relate.*')
                               ->leftjoin('article_relate', 'articles.id', '=', 'article_relate.aid')
                               ->offset($offset * ($limit ? : self::$article::LIMIT))
@@ -65,6 +74,21 @@ class ArticleRepository
                             / ($limit ? : self::$article::LIMIT);
     }
     
+    /**
+     * 
+     * @description:获取分类文章总数
+     * @author wuyanwen(2017年9月20日)
+     * @param@param unknown $category_id
+     */
+    public function getCategotyTotal($category_id)
+    {
+        $where = [
+            ['cid', '=', $category_id],
+            ['status', '=', self::$article::PASS_STATUS],
+        ];
+        
+        return self::$article::where($where)->count();
+    }
     /**
      * 
      * @description:

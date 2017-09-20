@@ -4,15 +4,15 @@
     <div class="user">
         <div class="user-left">
         	<div class="user-card">
-        		<div class="name">author</div>
+        		<div class="name">{{ $user->user_name }}</div>
         		<div class="avatar">
         			<img src="https://dn-phphub.qbox.me/uploads/avatars/18206_1502242007.png?imageView2/1/w/200/h/200">
         		</div>
         		<hr/>
         		<div class="intro">
-        			<div><span class="layui-badge-dot layui-bg-gray"></span> 第 18206 位会员</div>
-        			<div><span class="layui-badge-dot layui-bg-gray"></span> 注册at 2017-09-25</div>
-         			<div><span class="layui-badge-dot layui-bg-gray"></span> 最近登录 2017-89-63</div>
+        			<div><span class="layui-badge-dot layui-bg-gray"></span> 第 {{ $user->id }} 位会员</div>
+        			<div><span class="layui-badge-dot layui-bg-gray"></span> 注册at  {{ $user->created_at }}</div>
+         			<div><span class="layui-badge-dot layui-bg-gray"></span> 最近登录    {{ $user->updated_at }}</div>
         		</div>
         		<a href="{{ url('/user/edit') }}">
         		<span class="layui-btn layui-btn-primary"><i class="fa fa-pencil-square-o"></i> 编 辑 资 料</span>

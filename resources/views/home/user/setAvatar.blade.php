@@ -7,7 +7,7 @@
 	<div class="title">头像修改</div>
 	<div class="layui-upload" style="width:80%;margin:0 auto;padding-bottom:20px;">
       <div class="layui-upload-list">
-        <img class="layui-upload-img" src="https://dn-phphub.qbox.me/uploads/avatars/3848_1477641871.png?imageView2/1/w/100/h/100" id="avatar" style="width:300px;height:300px;">
+        <img class="layui-upload-img" src="{{ $avatar }}" id="avatar" style="width:300px;height:300px;">
       </div>
 
       <button type="button" class="layui-btn layui-btn-danger" id="btn"><i class="layui-icon"></i>上传预览图片</button>
@@ -23,7 +23,7 @@ layui.use(['element','jquery','upload'], function(){
 	
   upload.render({
 	  elem: '#btn'
-	  ,url: '/uploadImage'
+	  ,url: '/uploadAvatar'
 	  ,method:'post'
 	  ,auto: false //选择文件后不自动上传
 	  ,bindAction: '#upload' //指向一个按钮触发上传

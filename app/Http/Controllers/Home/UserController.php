@@ -34,10 +34,10 @@ class UserController extends Controller
      * @param@return \Illuminate\View\View|\Illuminate\Contracts\View\Factory
      */
     public function index($id, CommentRepository $comment)
-    {dd(config('filesystems.disks.public.url'));
+    {
         return view('home.user.index',[
             'articles' => $this->user->getArticles(intval($id)),
-            //'user'     => $this->user->find('id', intval(id)),
+            'user'     => $this->user->find('id', intval($id)),
             'comments' => $comment->getComments(intval($id)),
             'id'       => $id,
         ]);
@@ -150,9 +150,11 @@ class UserController extends Controller
      * @author wuyanwen(2017年9月19日)
      * @param@return \Illuminate\View\View|\Illuminate\Contracts\View\Factory
      */
-    public function setPassword()
+    public function setPassword(Request $request)
     {
-        return view('home.user.setPassword');
+        return view('home.user.setPassword',[
+            'email' => $request->user('home')->email,
+        ]);
     }
     
     /**
@@ -161,9 +163,11 @@ class UserController extends Controller
      * @author wuyanwen(2017年9月19日)
      * @param@return \Illuminate\View\View|\Illuminate\Contracts\View\Factory
      */
-    public function setAvatar()
+    public function setAvatar(Request $request)
     {
-        return view('home.user.setAvatar');
+        return view('home.user.setAvatar',[
+            'avatar' => $request->user('home')->avatar,
+        ]);
     }
     
     /**
@@ -186,9 +190,14 @@ class UserController extends Controller
      * @author wuyanwen(2017年9月19日)
      * @param@return \Illuminate\View\View|\Illuminate\Contracts\View\Factory
      */
-    public function activation()
+    public function activation(Request $request)
     {
-        return view('home.user.activation');
+        $user = $request->user('home');
+
+        return view('home.user.activation',[
+            'activation' => $user->activation,
+            'email'      => $user->email,
+        ]);
     }
     
     /**

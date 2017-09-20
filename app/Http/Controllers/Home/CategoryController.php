@@ -26,9 +26,12 @@ class CategoryController extends Controller
      * @description:分类页面
      * @author wuyanwen(2017年9月14日)
      */
-    public function index()
+    public function index($id)
     {
-        return view('home.category.index');
+        return view('home.category.index',[
+            'total' => $this->article->getCategotyTotal($id),
+            'id'    => $id,
+        ]);
     }
     
     /**

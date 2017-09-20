@@ -13,18 +13,9 @@
         <div>条目5</div>
       </div>
 </div>
+@section('content')
+<div id="article"></div>
 @endsection
-@section('article-tab')
-<div class="layui-tab tab">
-  <ul class="layui-tab-title">
-    <li class="layui-this" style="font-size:16px;opacity:0.5;">热门文章</li>
-    <li style="font-size:16px;opacity:0.5;">最新文章</li>
-  </ul>
-  <div class="layui-tab-content" style="height: 100px;background-color:white;">
-    <div class="layui-tab-item layui-show">1</div>
-    <div class="layui-tab-item">2</div>
-  </div>
-</div>
 <script>
 layui.use(['carousel','flow'], function(){
 	  var $ = layui.jquery

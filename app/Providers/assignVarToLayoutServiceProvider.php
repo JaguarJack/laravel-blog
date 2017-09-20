@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use App\Service\BuildMenuService;
+use Auth;
 
 class assignVarToLayoutServiceProvider extends ServiceProvider
 {
@@ -22,7 +23,11 @@ class assignVarToLayoutServiceProvider extends ServiceProvider
     {
         view()->composer('layouts/main', function ($view) use ($menuService) {
             $menu = $menuService->sortMenu();
-            $view->with('menus', $menu);
+            $view->with([
+                'menus' => $menu,
+                'user'  => Auth::guard('home')->user(),
+                
+            ]);
         });
     }
 

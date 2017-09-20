@@ -17,7 +17,7 @@ Route::namespace('Home')->group(function(){
     Route::post('/doRegister', 'RegisterController@doRegister');
     Route::post('/doLogin', 'LoginController@doLogin');
     Route::get('/signout', 'LoginController@signout');
-   // Route::get('/{code}', 'CategoryController@index');
+    Route::get('/category/{id}', 'CategoryController@index')->where(['id' => '[0-9]+']);
     Route::get('/detail/{id}', 'CategoryController@detail')->where(['id' => '[0-9]+']);
     
     Route::prefix('user')->middleware('checklogin')->group(function () {
@@ -36,7 +36,12 @@ Route::namespace('Home')->group(function(){
         Route::post('/updateUserInfo', 'UserController@updateUserInfo');
     });
     Route::get('/tag/{tagname}', 'TagsController@index')->where('tagname', '.*');
+    Route::get('/getTagArticles', 'TagsController@getTagArticles');
+    
+    
     Route::get('/getUserArticles', 'ArticleController@getUserArticles');
+    Route::get('/getCategory', 'ArticleController@getCategory');
+    
     Route::get('/write', 'UserController@write')->middleware('checklogin');
     Route::post('/publish', 'UserController@publish')->middleware('checklogin');
     Route::post('/readNotice', 'NoticeController@readNotice')->middleware('checklogin');
@@ -46,7 +51,7 @@ Route::namespace('Home')->group(function(){
     Route::get('/getStoreArticles', 'StoreController@getStoreArticles')->middleware('checklogin');
     Route::get('/getLikeArticles', 'LikeController@getLikeArticles')->middleware('checklogin');
     Route::post('/comment', 'CategoryController@comment')->middleware('checklogin');
-    Route::post('/uploadImage', 'FileController@uploadImage')->middleware('checklogin');
+    Route::post('/uploadAvatar', 'FileController@uploadAvatar')->middleware('checklogin');
     
 });
 

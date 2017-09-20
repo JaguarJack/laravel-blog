@@ -30,12 +30,12 @@
      <div class="nav-right">
      <li class="layui-nav-item"><a href="/">首页</a>
       @foreach($menus as $menu)
-      	<li class="layui-nav-item"><a href="javascript:;">{{ $menu['name']}}</a>
+      	<li class="layui-nav-item"><a href="{{ url('category',['id' => $menu['id']]) }}">{{ $menu['name']}}</a>
       	
       	@if (count($menu[$menu['id']]))
           	<dl class="layui-nav-child"> <!-- 二级菜单 -->
           	@foreach($menu[$menu['id']] as $_menu)
-              <dd><a href="{{ url('/s/') }}">{{ $_menu['name']}}</a></dd>
+              <dd><a href="{{ url('category',['id' => $_menu['id']]) }}">{{ $_menu['name']}}</a></dd>
     		@endforeach
 		@endif
         </dl>
@@ -46,13 +46,17 @@
       @if (Auth::guard('home')->check())
            <li class="layui-nav-item">
            @inject('notice', 'App\Service\NoticeService')
-            <a href="{{ url('user',['id' => Auth::guard('home')->user()->id ]) }}">个人中心<span class="layui-badge">{{ $notice->getNotRead(Auth::guard('home')->user()->id) }}</span></a>
+            <a href="javascript;">个人分享<span class="layui-badge">{{ $notice->getNotRead($user->id) }}</span></a>
+            <dl class="layui-nav-child">
+              <dd><a href="{{ url('user/write') }}"><i class="fa fa-cog"></i> 分享所闻</a></dd>
+              <dd><a href="{{ url('user/notice') }}"><i class="fa fa-power-off"></i> 消息通知</a></dd>
+            </dl>
           </li>
           <li class="layui-nav-item">
-            <a href=""><img src="http://t.cn/RCzsdCq" class="layui-nav-img">{{ Auth::guard('home')->user()->user_name }}</a>
+            <a href="javascript:;"><img src="{{ $user->avatar }}" class="layui-nav-img">{{ $user->user_name }}</a>
             <dl class="layui-nav-child">
-              <dd><a href="javascript:;"><i class="fa fa-cog"></i> 编辑信息</a></dd>
-              <dd><a href="javascript:;"><i class="fa fa-power-off"></i> 安全管理</a></dd>
+              <dd><a href="{{ url('user', ['id' => $user->id ]) }}"><i class="fa fa-cog"></i> 个人中心</a></dd>
+              <dd><a href="{{ url('user/edit') }}"><i class="fa fa-power-off"></i> 编辑资料</a></dd>
               <dd><a href="{{ url('signout') }}"><i class="fa fa-power-off"></i> 退出</a></dd>
             </dl>
           </li>
