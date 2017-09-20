@@ -61,4 +61,28 @@ class AttendRepository
         
         return self::$attend::where($where)->delete();
     }
+    
+    /**
+     * @description:
+     * @author wuyanwen(2017年9月20日)
+     */
+    public function getTotalAttendUser($user_id)
+    {
+        return self::$attend::where('user_id', '=', $user_id)->count();
+    }
+    
+    /**
+     * @description:
+     * @author wuyanwen(2017年9月20日)
+     */
+    public function getAttendUser($user_id, $limit = 10, $offset = 0)
+    {
+        return self::$attend::where('attend.user_id', '=', $user_id)
+                            ->leftjoin('users', 'attend.attend_user_id', '=', 'users.id')
+                            ->select('users.id', 'users.user_name', 'users.introduction','users.avatar')
+                            ->offset($offset * $limit)
+                            ->limit($limit)
+                            ->orderBy('attend.created_at')
+                            ->get();
+    }
 }

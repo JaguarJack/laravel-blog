@@ -27,15 +27,17 @@
 <div class="reply">
 	<div class="title">最新评论</div>
 	<div>
-	<ul>
-			<li>
-    			<span style="font-size:13px;opacity:0.6;">在</span>&nbsp;
-    			<a href="javascript:;">这是第一篇文章</a>&nbsp;
-    			<span class="info">@2017-09-23 · 评论</span>
-				<div class="reply-info">123123123123123</div>
-    		</li>
+    	<ul>
+    	    @foreach ($comments as $comment)
+    			<li>
+        			<span style="font-size:13px;opacity:0.6;">在</span>&nbsp;
+        			<a href="{{url('detail',['id' => $comment->aid])}}#reply{{$comment->id}}">{{ $comment->title }}</a>&nbsp;
+        			<span class="info">at {{ $comment->created_at }} · 评论</span>
+    				<div class="reply-info">{!! $comment->content !!}</div>
+        		</li>
+    		@endforeach
     	</ul>
-		<div class="no-reply" style="display:none;">空空如也~</div>
+	<div class="no-reply" style="display:none;">空空如也~</div>
 		
 	</div>
 </div>

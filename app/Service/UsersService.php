@@ -2,15 +2,20 @@
 
 namespace App\Service;
 
+use Cookie;
+use Config;
 use App\Repository\ArticleRepository;
 use App\Repository\CategoryRepository;
 use App\Repository\CommentRepository;
 use App\Repository\ArticleRelateRepository;
 use App\Repository\NoticeRepository;
 use App\Repository\UsersRepository;
+use App\Traits\Response;
 
 class UsersService
 {
+    use Response;
+    
     protected $type = [
         1 => '注册用户',
         2 => 'QQ用户',
@@ -98,19 +103,24 @@ class UsersService
      * @param
      */
     public function comment($request)
-    {       
+    {           
+        //获取用户信息
+        $user = $request->user('home');
+        //默认设置限制评论
+        if (Config::get('home.comment.limit') && $this->limitComment($user, $request)) {
+            return '评论频次太高，请稍后再试';
+        }
+       
         $content = trim($request->input('content'));
-        
         if (!$content) {
-            $this->ajaxError('请输入评论内容');
+            return '请输入评论内容';
         }
         
         $aid     = $request->input('aid');
         $reply_user = $request->input('reply_user');
-        $content= preg_replace('/^(@.*)\s+(.*)/', '<a href="/user/'.$reply_user.'">${1}</a>&nbsp;&nbsp;${2}', $content);
-        
-        $user = $request->user('home');
-        
+        //匹配@用户
+        $link = sprintf('<a href="/user/%d">${1}</a>&nbsp;&nbsp;${2}', $reply_user);
+        $content= preg_replace('/^(@.*)\s+(.*)/', $link, $content);
         //评论数据
         $data = [
             'user_id'   => $user->id,
@@ -118,15 +128,14 @@ class UsersService
             'aid'       => $aid,
             'avatar'    => $user->avatar,
             'content'   => $content,
-        ];
-        
+        ]; 
         //消息数据
         $messge = [
             'user_id'        => $reply_user ? : $this->article->find($aid)->user_id,
             'from_user_name' => $user->user_name,
             'aid'            => $aid,
         ];
-        
+
         $comment = $this->comment->store($data);
         $messge['comment_id'] = $comment->id;
         //如果成功返回数据
@@ -135,7 +144,7 @@ class UsersService
             $data['created_at'] = date('Y-m-d H:i:s');
             return $data;
         } else {
-            return false;
+            return '评论失败~';
         }
     }
     
@@ -152,5 +161,25 @@ class UsersService
         $data['id'] = $request->user('home')->id;
         
         return $this->user->update($data);
+    }
+    
+    /**
+     * @description:限制评论发送
+     * @author wuyanwen(2017年9月20日)
+     */
+    public function limitComment($user, $request)
+    {
+        $key = 'next_comment_time_' . $user->id;
+        
+        if ($request->hasCookie($key)) {
+            if ($request->cookie($key) > time()) {
+                return true;
+            } else {
+                Cookie::queue($key, time() + Config::get('home.comment.limit_time'), 60);
+                return false;
+            }
+        } else{
+            Cookie::queue($key, time() + Config::get('home.comment.limit_time'), 60);
+        } 
     }
 }

@@ -7,24 +7,17 @@
 	<a href="{{ url('user/center') }}"> 个人中心 </a>  <span style="opacity:0.5;">\ 个人分享</span>
 </div>
 <div class="share">
-	<div class="title">已分享({{ $total }})~</div>
+	<div class="title">已分享({{ $total }})</div>
+	@if($total)
 		<ul class="layui-timeline" id="user_share">
-          <li class="layui-timeline-item">
-            <i class="layui-icon layui-timeline-axis">&#xe63f;</i>
-            <div class="layui-timeline-content layui-text">
-              <h3 class="layui-timeline-title">8月18日</h3>
-              <p>
-                layui 2.0 的一切准备工作似乎都已到位。发布之弦，一触即发。
-                <br>不枉近百个日日夜夜与之为伴。因小而大，因弱而强。
-                <br>无论它能走多远，抑或如何支撑？至少我曾倾注全心，无怨无悔 <i class="layui-icon"></i>
-              </p>
-            </div>
-          </li>
+       	
         </ul>
-	<!-- <a href="javascript:;">
-	<div class="btn"><i class="fa fa-pencil"></i> 分享所思所闻</div>
-	</a> -->
-	<div id="page"></div>
+        <div id="page"></div>
+    @else
+    	<a href="{{ url('write') }}">
+    		<div class="btn"><i class="fa fa-pencil"></i> 分享所思所闻</div>
+    	</a>
+	@endif
 </div>
 <script>
    layui.use(['laypage','jquery'], function(){
@@ -32,7 +25,7 @@
       		$     = layui.jquery;
       laypage.render({
         elem: "page"
-        ,count: "{{ $pages }}"
+        ,count: "{{ $total }}"
         ,jump: function(obj, first){
             $.get('/getUserArticles', {page:obj.curr,user_id:"{{ $id }}"} ,function(data){
 				var str = '';

@@ -2,6 +2,8 @@
 
 namespace App\Model;
 
+use App\Model\Article;
+
 class Comment extends BaseModel
 {
     //
@@ -9,5 +11,5 @@ class Comment extends BaseModel
     
     public $fillable = [
         'user_id','user_name', 'content', 'aid','avatar',
-    ];
+    ];    
 }

@@ -9,7 +9,10 @@ use App\Repository\UsersRepository;
 use App\Service\UsersService;
 use App\Repository\ArticleRepository;
 use App\Http\Requests\StoreUserInfoRequest;
-use App\Repository\UserRepository;
+use App\Repository\CommentRepository;
+use App\Repository\StoreRepository;
+use App\Repository\AttendRepository;
+use App\Repository\LikeRepository;
 
 class UserController extends Controller
 {
@@ -30,10 +33,12 @@ class UserController extends Controller
      * @param@param unknown $id
      * @param@return \Illuminate\View\View|\Illuminate\Contracts\View\Factory
      */
-    public function index($id)
+    public function index($id, CommentRepository $comment)
     {
         return view('home.user.index',[
             'articles' => $this->user->getArticles(intval($id)),
+            //'user'     => $this->user->find('id', intval(id)),
+            'comments' => $comment->getComments(intval($id)),
             'id'       => $id,
         ]);
     }
@@ -49,6 +54,7 @@ class UserController extends Controller
     public function share($id, ArticleRepository $article)
     {
         $total = $article->getTotalAritcle($id);
+        
         return view('home.user.share',[
                 'id' => $id,
             'pages'  => $total['pages'],
@@ -62,9 +68,15 @@ class UserController extends Controller
      * @author wuyanwen(2017年9月19日)
      * @param@return \Illuminate\View\View|\Illuminate\Contracts\View\Factory
      */
-    public function comment()
-    {
-        return view('home.user.comment');
+    public function comment($id, CommentRepository $comment)
+    {   
+        $total = $comment->getTotalUserComments($id);
+        
+        return view('home.user.comment',[
+            'id'     => $id,
+            'pages'  => $total['pages'],
+            'total'  => $total['total'],
+        ]);
     }
     
     /**
@@ -73,9 +85,12 @@ class UserController extends Controller
      * @author wuyanwen(2017年9月19日)
      * @param@return \Illuminate\View\View|\Illuminate\Contracts\View\Factory
      */
-    public function like()
+    public function like($id, LikeRepository $like)
     {
-        return view('home.user.like');
+        return view('home.user.like',[
+            'id' => $id,
+            'total' => $like->getTotalLike($id),
+        ]);
     }
     
     /**
@@ -84,9 +99,12 @@ class UserController extends Controller
      * @author wuyanwen(2017年9月19日)
      * @param@return \Illuminate\View\View|\Illuminate\Contracts\View\Factory
      */
-    public function attend()
+    public function attend($id, AttendRepository $attend)
     {
-        return view('home.user.attend');
+        return view('home.user.attend',[
+            'id'    => $id,
+            'total' => $attend->getTotalAttendUser($id),
+        ]);
     }
     
     /**
@@ -95,9 +113,12 @@ class UserController extends Controller
      * @author wuyanwen(2017年9月19日)
      * @param@return \Illuminate\View\View|\Illuminate\Contracts\View\Factory
      */
-    public function store()
+    public function store($id, StoreRepository $store)
     {
-        return view('home.user.store');
+        return view('home.user.store',[
+            'id'    => $id,
+            'total' => $store->getTotalStore($id),
+        ]);
     }
     
     /**

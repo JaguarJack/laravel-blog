@@ -19,19 +19,19 @@
         		</a>
         	</div>
         	<div class="user-relate">
-        	    <a href="{{ url('/user/share', ['id' => $id]) }}">
+        	    <a href="{{ route('user.like',[ $id ]) }}">
         			<span class="layui-btn layui-btn-primary"><i class="fa fa-pencil"></i> Ta 发布的文章</span>
         		</a>
-        		<a href="{{ url('/user/comment', ['id' => $id]) }}">
+        		<a href="{{ route('user.comment',[ $id ]) }}">
         			<span class="layui-btn layui-btn-primary"><i class="fa fa-comments-o"></i> Ta 发表的评论</span>
         		</a>
-        		<a href="{{ url('/user/attend', ['id' => $id]) }}">
+        		<a href="{{ route('user.attend',[ $id ]) }}">
         			<span class="layui-btn layui-btn-primary"><i class="fa fa-eye"></i> Ta 关注的用户</span>
         		</a>
-        		<a href="{{ url('/user/like', ['id' => $id]) }}">
+        		<a href="{{ route('user.like',[ $id ]) }}">
         			<span class="layui-btn layui-btn-primary"><i class="fa fa-thumbs-up"></i> Ta 赞过的文章</span>
         		</a>
-        		<a href="{{ url('/user/store', ['id' => $id]) }}">
+        		<a href="{{ route('user.stores',[ $id ]) }}">
         			<span class="layui-btn layui-btn-primary"><i class="fa fa-plus-square-o"></i> Ta 收藏的文章</span>
         		</a>
         		

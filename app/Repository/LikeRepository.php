@@ -60,4 +60,29 @@ class LikeRepository
         
         return self::$like::where($where)->delete();
     }
+    
+    /**
+     * @description:获取用户喜欢的文章
+     * @author wuyanwen(2017年9月20日)
+     */
+    public function getLikeArticles($user_id, $limit = 10, $offset = 0)
+    {
+        return self::$like::where('like.user_id', '=', $user_id)
+                            ->leftjoin('articles', 'like.aid', '=', 'articles.id')
+                            ->select('articles.id as aid','articles.title', 'articles.user_id', 'articles.author', 'articles.category', 'articles.cid')
+                            ->orderBy('like.created_at', 'DESC')
+                            ->offset($offset * $limit)
+                            ->limit($limit)
+                            ->get();
+    }
+    
+    /**
+     * @description:获取用户喜欢文章的总数
+     * @author wuyanwen(2017年9月20日)
+     * @param unknown $id
+     */
+    public function getTotalLike($user_id)
+    {
+        return self::$like::where('user_id', '=', $user_id)->count();
+    }
 }

@@ -6,6 +6,7 @@ use App\Model\Article;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use App\Model\ArticleRelate;
 use App\Model\Notice;
+use App\Model\Comment;
 
 class Users extends Authenticatable
 {
@@ -39,7 +40,7 @@ class Users extends Authenticatable
     {
         return $this->hasManyThrough(Article::class, ArticleRelate::class, 'aid', 'user_id')
                     ->select('article_relate.*', 'articles.*')
-                    ->orderBy('articles.id', 'DESC')
+                    ->orderBy('articles.created_at', 'DESC')
                     ->limit(5);
     }
     

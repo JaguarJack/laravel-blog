@@ -69,13 +69,12 @@
 	@endif
 	</div>
 <div class="comment">
-	<div class="reply">已回复评论({{ $comments->count() }})</div>
-	<div class="info">
-	
+	<div class="reply">已回复评论(<span class="comment_number">{{ $comments->count() }}</span>)</div>
+	<div class="info">	
+	<ul class="comment_content">
 	@if (!$comments->count())
 		<div class="no-comment" >空空如也~快来成为第一个评论的人吧</div>
-	@else	
-	<ul class="comment_content">
+	@else
 		@foreach ($comments as $key => $comment)
 			<li>
 				<div class="avatar">
@@ -177,6 +176,7 @@ layui.use(['jquery','layer'], function(){
 			if (content.length < 1) { layer.msg('请输入评论内容'); return false;}
 			$.post('/comment', {reply_user:reply_user, aid:aid, content:content},function(response){
 					if (response.status == 10000) {
+						if($('.comment_content .no-comment').length) {$('.no-comment').remove();}
 						var str='';
 						str += '<li>';
 						str += '<div class="avatar">';
@@ -193,8 +193,8 @@ layui.use(['jquery','layer'], function(){
 						str += '<p>'+response.data.content+'</p>'
 						str += '</div></li>'
 						$('.comment_content').append(str);
-
-						$('#edit').text(' ');
+						$('.comment_number').html(parseInt($('.comment_number').html()) + 1);
+						$('#edit').val('');
 					} else {
 						layer.msg(response.msg);
 				    }

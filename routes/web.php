@@ -23,11 +23,11 @@ Route::namespace('Home')->group(function(){
     Route::prefix('user')->middleware('checklogin')->group(function () {
         Route::get('like','UserController@like');
         Route::get('/{id}', 'UserController@index')->where(['id' => '[0-9]+']);
-        Route::get('/like/{id}', 'UserController@like')->where(['id' => '[0-9]+']);;
-        Route::get('/attend/{id}', 'UserController@attend')->where(['id' => '[0-9]+']);;
-        Route::get('/comment/{id}', 'UserController@comment')->where(['id' => '[0-9]+']);;
-        Route::get('/share/{id}', 'UserController@share')->where(['id' => '[0-9]+']);;
-        Route::get('/store/{id}', 'UserController@store')->where(['id' => '[0-9]+']);;
+        Route::get('/{id}/like', 'UserController@like')->name('user.like')->where(['id' => '[0-9]+']);
+        Route::get('/{id}/attend', 'UserController@attend')->name('user.attend')->where(['id' => '[0-9]+']);
+        Route::get('/{id}/comment', 'UserController@comment')->name('user.comment')->where(['id' => '[0-9]+']);
+        Route::get('/{id}/share', 'UserController@share')->name('user.share')->where(['id' => '[0-9]+']);
+        Route::get('/{id}/store', 'UserController@store')->name('user.stores')->where(['id' => '[0-9]+']);
         Route::get('/edit', 'UserController@edit');
         Route::get('/setPassword', 'UserController@setPassword');
         Route::get('/setAvatar', 'UserController@setAvatar');
@@ -41,18 +41,10 @@ Route::namespace('Home')->group(function(){
     Route::post('/publish', 'UserController@publish')->middleware('checklogin');
     Route::post('/readNotice', 'NoticeController@readNotice')->middleware('checklogin');
     Route::post('/deleteNotice', 'NoticeController@deleteNotice')->middleware('checklogin');
-   // Route::get('/user/{id}', 'UserController@index')->where(['id' => '[0-9]+']);
-   // Route::get('/user/like', 'UserController@like');
-   // Route::get('/user/attend', 'UserController@attend');
-   // Route::get('/user/comment', 'UserController@comment');
-   // Route::get('/user/share', 'UserController@share');
-   // Route::get('/user/store', 'UserController@store');
-   // Route::get('/user/edit', 'UserController@edit');
-   // Route::get('/user/setPassword', 'UserController@setPassword');
-   // Route::get('/user/setAvatar', 'UserController@setAvatar');
-   // Route::get('/user/notice', 'UserController@notice');
-   // Route::get('/user/activation', 'UserController@activation');
-   // Route::get('/write', 'UserController@write');
+    Route::get('/getAttend', 'AttendController@getAttend')->middleware('checklogin');
+    Route::get('/getComments', 'CommentController@getComments')->middleware('checklogin');
+    Route::get('/getStoreArticles', 'StoreController@getStoreArticles')->middleware('checklogin');
+    Route::get('/getLikeArticles', 'LikeController@getLikeArticles')->middleware('checklogin');
     Route::post('/comment', 'CategoryController@comment')->middleware('checklogin');
 });
 

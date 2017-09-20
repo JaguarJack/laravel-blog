@@ -62,8 +62,8 @@ class CategoryController extends Controller
     public function comment(Request $request, UsersService $user_service)
     {
         $data = $user_service->comment($request);
-        
-        return $data ? $this->ajaxSuccess('评论成功', $data) : $this->ajaxError('评论失败~');
+        $request->cookie();
+        return is_array($data) ? $this->ajaxSuccess('评论成功', $data) : $this->ajaxError($data);
 
     }
 }

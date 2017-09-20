@@ -7,16 +7,41 @@
 	<a href="{{ url('user/center') }}"> 个人中心 </a>  <span style="opacity:0.5;">\ 个人关注</span>
 </div>
 <div class="write">
-	<div class="title">个人关注</div>
+	<div class="title">个人关注({{ $total }})</div>
 	<div>
-		<ul>
-			<li>
-    			<span><img src="https://dn-phphub.qbox.me/uploads/avatars/1_1479342408.png?imageView2/1/w/100/h/100"  style="width:30px;height:30px;"></span>&nbsp;&nbsp;
-    			<a href="javascript:;">JaguarJack</a>&nbsp;&nbsp;--
-    			<span class="info"><a href="javascript:;">难道这就是第一个我关注的人吗?</span>
-    		</li>
+	@if ($total)
+		<ul id="user_attend">
+	
     	</ul>
-		<div class="no-article" style="display:none;">空空如也~</div>
+    	<div id="page"></div>
+    @else 
+		<div class="no-article">空空如也~</div>
+	@endif	
 	</div>
 </div>
+<script>
+   layui.use(['laypage','jquery'], function(){
+      var laypage = layui.laypage
+      		$     = layui.jquery;
+      laypage.render({
+        elem: "page"
+        ,count: "{{ $total }}"
+        ,jump: function(obj, first){
+            $.get('/getAttend', {page:obj.curr,user_id:"{{ $id }}"} ,function(data){
+				var str = '';
+				var data = data.data;
+				for (i=0;i < data.length;i++) {
+					str += '<li>';
+					str += '<span>'
+				    str += '<img src="'+data[i].avatar+'" style="width:30px;height:30px;"></span>&nbsp;&nbsp;'
+    			    str += '<a href="/user/'+data[i].id+'">'+data[i].user_name+'</a>&nbsp;&nbsp;--'
+    				str += '<span class="info"><a href="javascript:;">'+data[i].introduction+'</span>'
+    				str += '</li>';
+				}
+				$('#user_attend').html(str);
+            })
+      	}
+    });
+   })
+</script>
 @endsection

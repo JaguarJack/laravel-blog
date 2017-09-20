@@ -96,9 +96,11 @@ class UsersRepository
 	 */
 	public function getArticles($id)
 	{
-	    return self::$users::where('id', '=', $id)->find($id)->hasManyUserArticles;
+	    $user = self::$users::where('id', '=', $id)->find($id);
+	    
+	    return $user ? $user->hasManyUserArticles : [];
 	}
-	
+
 	/**
 	 * 
 	 * @description:获取用户消息通知信息
@@ -107,7 +109,9 @@ class UsersRepository
 	 */
 	public function getUserNotice($id)
 	{
-	    return self::$users::where('id', '=', $id)->find($id)->hasManyNotice;
+	    $user = self::$users::where('id', '=', $id)->find($id);
+	    
+	    return $user ? $user->hasManyNotice : [];
 	}
 	
 	/**

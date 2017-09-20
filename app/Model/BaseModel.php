@@ -8,4 +8,6 @@ abstract class BaseModel extends Model
 {
     const NORMAL_STATUS = 1;
     const DELETE_STATUS = 2;
+    
+    const LIMIT         = 10;
 }

@@ -20,8 +20,6 @@ class Article extends BaseModel
     const AUDIT_STATUS = 2;
     //通过状态
     const PASS_STATUS  = 3;
-    //限制每页数量
-    const LIMIT        = 10;
     
     /**
      * @description:关联article_relate
