@@ -4,6 +4,9 @@ namespace App\Http\Controllers\Home;
 
 use App\Http\Controllers\Controller;
 use App\Repository\ArticleRepository;
+use App\Mail\Notice;
+use App\Http\Requests\Request;
+use Mail;
 
 class IndexController extends Controller
 {
@@ -13,9 +16,19 @@ class IndexController extends Controller
      * @param ArticleRepository $article
      * @return \Illuminate\View\View|\Illuminate\Contracts\View\Factory
      */
-    public function index(ArticleRepository $article)
+    public function index(Request $request, ArticleRepository $article)
     {
-      
+       // $user = $request->user('home');
+        
+        //dd($user);
+       // $data = [
+            //'message' => '注册邮箱激活',
+            //'user_name' => $user->user_name,
+            //'url'       => 'http:www.njphper.com',
+       // ];
+        
+        //Mail::to($user)->send(new Notice($data));die;
+
         return view('home.index.index');
     }
     

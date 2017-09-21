@@ -46,9 +46,9 @@
       @if (Auth::guard('home')->check())
            <li class="layui-nav-item">
            @inject('notice', 'App\Service\NoticeService')
-            <a href="javascript;">个人分享<span class="layui-badge">{{ $notice->getNotRead($user->id) }}</span></a>
+            <a href="javascript:;">个人分享<span class="layui-badge">{{ $notice->getNotRead($user->id) }}</span></a>
             <dl class="layui-nav-child">
-              <dd><a href="{{ url('user/write') }}"><i class="fa fa-cog"></i> 分享所闻</a></dd>
+              <dd><a href="{{ url('write') }}"><i class="fa fa-cog"></i> 分享所闻</a></dd>
               <dd><a href="{{ url('user/notice') }}"><i class="fa fa-power-off"></i> 消息通知</a></dd>
             </dl>
           </li>

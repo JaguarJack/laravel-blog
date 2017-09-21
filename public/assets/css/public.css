@@ -4,6 +4,7 @@
 .nav {width:74%;margin:0 auto;}
 .nav-right {width:60%;margin:auto auto;display:inline-block;}
 .nav span {float:right;}
+.layui-nav .layui-nav-more {display:none;}
 .main {width:71%;margin:0 auto;min-height:500px;}
 .main-left {width:64%;min-height:500px;float:left;}
 .main-right {width:35%;min-height:500px;float:right;}

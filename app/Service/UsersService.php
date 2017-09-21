@@ -16,7 +16,7 @@ class UsersService
 {
     use Response;
     
-    protected $type = [
+    public $type = [
         1 => '注册用户',
         2 => 'QQ用户',
         3 => '微博用户',

@@ -59,6 +59,7 @@ class UserController extends Controller
                 'id' => $id,
             'pages'  => $total['pages'],
             'total'  => $total['total'],
+            'user'     => $this->user->find('id', intval($id)),
         ]);
     }
     
@@ -76,6 +77,7 @@ class UserController extends Controller
             'id'     => $id,
             'pages'  => $total['pages'],
             'total'  => $total['total'],
+            'user'     => $this->user->find('id', intval($id)),
         ]);
     }
     
@@ -90,6 +92,7 @@ class UserController extends Controller
         return view('home.user.like',[
             'id' => $id,
             'total' => $like->getTotalLike($id),
+            'user'     => $this->user->find('id', intval($id)),
         ]);
     }
     
@@ -104,6 +107,7 @@ class UserController extends Controller
         return view('home.user.attend',[
             'id'    => $id,
             'total' => $attend->getTotalAttendUser($id),
+            'user'     => $this->user->find('id', intval($id)),
         ]);
     }
     
@@ -118,6 +122,7 @@ class UserController extends Controller
         return view('home.user.store',[
             'id'    => $id,
             'total' => $store->getTotalStore($id),
+            'user'     => $this->user->find('id', intval($id)),
         ]);
     }
     
@@ -190,10 +195,10 @@ class UserController extends Controller
      * @author wuyanwen(2017年9月19日)
      * @param@return \Illuminate\View\View|\Illuminate\Contracts\View\Factory
      */
-    public function activation(Request $request)
+    public function activation(Request $request, UsersRepository $user)
     {
-        $user = $request->user('home');
-
+        $user = $user->find('id', $request->user('home')->id);
+        
         return view('home.user.activation',[
             'activation' => $user->activation,
             'email'      => $user->email,
@@ -226,6 +231,15 @@ class UserController extends Controller
     {
         return $userService->publish($request) ? $this->ajaxSuccess('发布成功') : $this->ajaxError('发布失败,请检查~');
         
+    }
+    
+    /**
+     * @description:邮箱确认
+     * @author wuyanwen(2017年9月21日)
+     */
+    public function confirm($type, $code)
+    {
+        dd($code);
     }
    
 }

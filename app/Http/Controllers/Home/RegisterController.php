@@ -18,7 +18,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/signin';
+    protected $redirectTo = '/';
     protected $user;
     
     /**
@@ -89,6 +89,16 @@ class RegisterController extends Controller
             'password.max'  => '超过密码最大长度',
             
         ];
+    }
+    
+    /**
+     * @description:跳转地址
+     * @author wuyanwen(2017年9月21日)
+     * @return \Illuminate\Contracts\Routing\UrlGenerator|string
+     */
+    public function redirectTo()
+    {
+        return url('user/activation');
     }
     /**
      * Create a new user instance after a valid registration.

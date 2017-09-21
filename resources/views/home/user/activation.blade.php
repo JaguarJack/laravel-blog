@@ -9,7 +9,7 @@
           <div class="layui-form-item">
             <label class="layui-form-label">邮箱</label>
             <div class="layui-input-block layui-disabled">
-              <input type="text" name="title" required  lay-verify="required" placeholder="请输入邮箱" autocomplete="off" readonly class="layui-input">
+              <input type="text" name="title" value="{{ $email }}"  lay-verify="required|email" placeholder="请输入邮箱" autocomplete="off" readonly class="layui-input">
             </div>
           </div>
           
