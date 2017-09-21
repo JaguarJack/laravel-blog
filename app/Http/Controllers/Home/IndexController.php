@@ -17,24 +17,25 @@ class IndexController extends Controller
      * @return \Illuminate\View\View|\Illuminate\Contracts\View\Factory
      */
     public function index(Request $request, ArticleRepository $article)
-    {
+    {dd(implode(',',range(20,164)));
+        $this->importUser();die;
         return view('home.index.index');
     }
     
     
     public function importUser()
     {
-        $reuslt = (\DB::connection('mysql_old')->select('select * from old_user'));
-        
+        $reuslt = (\DB::connection('mysql_old')->select('select * from user'));
+       
         $mysql_old = \DB::connection('mysql');
         
         foreach ($reuslt as $vo) {
-            if ($vo->type) {
+            if (!$vo->type) {
                 $sql = sprintf('insert into users (
                                 id,account, open_id,user_name,
                                 password,email,real_name,remember_token,
                                 avatar,github_name,github_homepage,sina_name,
-                                sina_homepage,come_from,personal_website,introduction,
+                                sina_homepage,city,website,introduction,
                                 signature,type,gender,activation,
                                 online,status) value (
                                         %d,"%s","%s","%s",
