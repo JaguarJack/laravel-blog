@@ -18,17 +18,6 @@ class IndexController extends Controller
      */
     public function index(Request $request, ArticleRepository $article)
     {
-       // $user = $request->user('home');
-        
-        //dd($user);
-       // $data = [
-            //'message' => '注册邮箱激活',
-            //'user_name' => $user->user_name,
-            //'url'       => 'http:www.njphper.com',
-       // ];
-        
-        //Mail::to($user)->send(new Notice($data));die;
-
         return view('home.index.index');
     }
     

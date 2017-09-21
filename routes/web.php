@@ -62,7 +62,7 @@ Route::namespace('Home')->group(function(){
     Route::post('/comment', 'CategoryController@comment')->middleware('checklogin');
     /* 上传头像  */
     Route::post('/uploadAvatar', 'FileController@uploadAvatar')->middleware('checklogin');
-    
+    Route::get('/email/send', 'EmailController@send')->middleware('checklogin');
     Route::get('/mail',function(){
         return new App\Mail\Notice();
     });
