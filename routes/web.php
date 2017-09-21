@@ -46,7 +46,7 @@ Route::namespace('Home')->group(function(){
     /* 用户中心 */
     Route::get('/write', 'UserController@write')->middleware('checklogin');
     Route::post('/publish', 'UserController@publish')->middleware('checklogin');
-    Route::get('/confirm/{type}/{code}', 'UserController@confirm')->middleware('checklogin')->where(['type' => '[a-z]+', 'code' => '[0-9a-zA-Z]+']);
+    Route::get('/confirm/{type}/{code}', 'EmailController@confirm')->middleware('checklogin')->where(['type' => '[a-z]+', 'code' => '[0-9a-zA-Z]+']);
     /* 消息通知  */
     Route::post('/readNotice', 'NoticeController@readNotice')->middleware('checklogin');
     Route::post('/deleteNotice', 'NoticeController@deleteNotice')->middleware('checklogin');

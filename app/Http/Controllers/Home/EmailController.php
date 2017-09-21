@@ -8,9 +8,19 @@ use App\Service\EmailService;
 
 class EmailController extends Controller
 {
-    //
-  
-    
+    protected $request;
+    protected $email;
+    /**
+     * 
+     * @description:
+     * @author wuyanwen(2017年9月21日)
+     * @param
+     */
+    public function __construct(Request $request, EmailService $email)
+    {
+        $this->request = $request;
+        $this->email   = $email;
+    }
     /**
      * @description:发送邮箱验证
      * @author wuyanwen(2017年9月21日)
@@ -18,9 +28,24 @@ class EmailController extends Controller
      * @param UsersRepository $user
      * @return \Illuminate\Http\JsonResponse
      */
-    public function send(Request $request, EmailService $email)
+    public function send()
     {
-       $email->sendEmail($request);
+       $this->email->sendEmail($this->request);
        $this->ajaxSuccess('发送成功');
+    }
+    
+    /**
+     * 
+     * @description:注册邮件激活确认
+     * @author wuyanwen(2017年9月21日)
+     * @param@param unknown $type
+     * @param@param unknown $code
+     */
+    public function confirm($type, $code)
+    {
+        return $this->email->avtive($type, $code, $this->request->user()->id) ?
+        
+        
+        redirect('/') :  redirect('/');
     }
 }

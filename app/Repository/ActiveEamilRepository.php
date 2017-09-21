@@ -26,12 +26,17 @@ class ActiveEamilRepository
     }
     
    /**
-    * @description:根据email查询记录
+    * @description:根据$user_id查询记录
     * @author wuyanwen(2017年9月21日)
     * @param unknown $email
     */
-    public function getRecordByEmail($email)
+    public function getRecordByEmail($user_id)
     {
-        return self::$activeEmail::where('email', '=', $email)->first();
+        $where = [
+            ['user_id', '=', $email],
+            ['expired', '=', 1],
+        ];
+        
+        return self::$activeEmail::where($where)->first();
     }
 }
