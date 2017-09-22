@@ -95,13 +95,18 @@ class ArticleRepository
      * @author wuyanwen(2017年9月14日)
      * @param $id
      */
-    public function getComments($id)
+    public function getComments($id, $offset, $limit = 5)
     {
         $where  = [
             ['status','=', self::$article::PASS_STATUS],
         ];
-        //dd(self::$article::where($where)->find($id));
-        return self::$article::where($where)->find($id)->hasManyComments;
+
+        return self::$article::where($where)
+                             ->find($id)
+                             ->hasManyComments()
+                             ->offset($offset * $limit)
+                             ->limit($limit)
+                             ->get();
     }
     
     /**

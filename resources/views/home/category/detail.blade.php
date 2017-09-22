@@ -69,10 +69,10 @@
 	@endif
 	</div>
 <div class="comment">
-	<div class="reply">已回复评论(<span class="comment_number">{{ $comments->count() }}</span>)</div>
+	<div class="reply">已回复评论(<span class="comment_number">{{ $article_info->comment_number }}</span>)</div>
 	<div class="info">	
-	<ul class="comment_content">
-	@if (!$comments->count())
+	<ul class="comment_content" id="comments">
+	<!--  @if (!$comments->count())
 		<div class="no-comment" >空空如也~快来成为第一个评论的人吧</div>
 	@else
 		@foreach ($comments as $key => $comment)
@@ -97,7 +97,7 @@
 			</li>
 		 @endforeach
 		</ul>
-	 @endif		
+	 @endif	-->	
 	</div>
 	<div style="clear:both;"></div>
 </div>
@@ -144,15 +144,55 @@
 <script>
 var aid = "{{ $article_info->id}}";
 var attend_user_id = "{{ $article_info->user_id }}";
-layui.use(['jquery','layer'], function(){
+layui.use(['jquery','layer', 'flow'], function(){
 	  var $ = layui.jquery
-	  layer = layui.layer;
+	  layer = layui.layer
+	  flow  = layui.flow;
 
 	  /* var eidt = layedit.build('edit', {
 		  		height:190,
 		 	    tool: ['face', 'strong','italic','underline','del','|' ,'left','center','right','link']
 		}); */
+		flow.load({
+		    elem: '#comments'
+		    ,isAuto:false
+		    ,isLazyimg:true	
+		    ,done: function(page, next){
+		      var lis = [];
+		      $.get('/getArticleComment',{page:page, aid: "{{ $article_info->id }}"}, function(res){
+		        layui.each(res.data, function(index, item){
+		        	var str= '';
 
+		        	str += '<li><div class="avatar">'
+					str +='	<img src="'+ item.avatar +'"/>'
+					str +='</div>'
+					str += '<div class="comment-info">'
+					str +=	'<div style="min-height:40px;">'
+					str += '<div><span  class="span-left" data="'+item.user_id+'"><a href="javascript:;">'+item.user_name+'</a></span>'
+					str +=	'<a href="javascript:;"><span class="span-right" data="'+item.user_id +'" name="'+ item.user_name +'"><i class="fa fa-mail-reply"></i> 回复</span>'
+					str +='</a></div><div class="time"><a name="reply'+item.id+'" id="reply'+ item.id +'" href="#reply{{ $comment->id }}">#{{ $key+1 }}</a> {{ $comment->created_at }}
+					str +='</div></div><p>{!! htmlspecialchars_decode($comment->content) !!}</p></div></li>
+		        	/* str += '<div class="main-left-article"><div class="title">';
+		        	str += '<span class="layui-btn layui-btn-danger">' +item.category+ '</span>'
+		        	str += '<span style="font-size:24px;margin-left:10px;"><a href="/detail/'+item.aid+'">' +item.title.substr(0, 25)+ '</a></span>'
+		        	str += '</div><hr>'
+		        	str += '<div class="content"><div class="image">'
+		            str +='<img lay-src="' + item.thumb_img + '"/></div>';
+					str +='<div class="intro">' + item.intro+ '</div></div><hr>'
+		        	str += '<div style="width:95%;margin:0 auto;"><span class="layui-btn layui-btn-warm info">'
+		        	str += '<span ><i class="fa fa-clock-o"></i>&nbsp;' +item.created_at+ '</span>'	
+		        	str += '<span ><i class="fa fa-user-o"></i>&nbsp;' +item.author+ '</span>'
+		        	str += '<span ><i class="fa fa-tags"></i>&nbsp;' +item.pv_number+ '</span>'
+		        	str += '<span ><i class="fa fa-eye"></i>&nbsp;' +getTags(item.tags)+ '</span>'
+		        	str += '<span ><i class="fa fa-comment-o"></i>&nbsp;' +item.comment_number+ '</span>'
+		        	str += '</span><span class="layui-btn layui-btn-warm" style="float:right;">read more</span>'	
+		        	str += '</div></div>' */
+		            lis.push(str);
+		        }); 
+		        next(lis.join(''), page < res.pages);    
+		      });
+		    }
+		  });
 		$('#edit').focus(function(){
 			$(this).css('border','1px solid green')
 		});

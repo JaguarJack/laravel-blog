@@ -43,6 +43,7 @@ Route::namespace('Home')->group(function(){
     /* 文章    */
     Route::get('/getUserArticles', 'ArticleController@getUserArticles');
     Route::get('/getCategory', 'ArticleController@getCategory');
+    Route::get('/getArticleComment', 'CommentController@getArticleComment');
     /* 用户中心 */
     Route::get('/write/{id?}', 'UserController@write')->middleware('checklogin');
     Route::post('/publish', 'UserController@publish')->middleware('checklogin');

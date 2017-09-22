@@ -48,7 +48,7 @@ class CategoryController extends Controller
         return view('home.category.detail',[
             'article_info' => $article_info,
             'preNext'      => $this->article->getPreAndNext($id),
-            'comments'     => $this->article->getComments($id),
+            //'comments'     => $this->article->getComments($id),
             'liked'        => $like->isLiked($user_id, $id),
             'stored'       => $store->isStored($user_id, $id),
             'attented'     => $attend->isAttended($user_id, $article_info->user_id),
