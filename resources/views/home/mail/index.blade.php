@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <title>njphper.com</title>
-    <meta name="keywords" content=""  />
+    <meta name="keywords" content=""/>
     <style>
         .title {margin:0 40px;color:#999;border-bottom:1px dotted #ddd;padding:40px 0 30px;font-size:13px;text-align:center}
         .title a {text-decoration:none;color:#009a61;font-size:18px;}
