@@ -16,12 +16,12 @@
     		<form class="layui-form" action="/doLogin" method="post">
               <div class="layui-form-item">
                 <div class="layui-input-block">
-                  <input type="text" name="email" lay-verify="required|email" placeholder="请输入邮箱" autocomplete="off" class="layui-input">
+                  <input type="text" name="email" id="email" lay-verify="required|email" placeholder="请输入邮箱" autocomplete="off" value="{{ old('email') }}" class="layui-input">
                 </div>
               </div>
               <div class="layui-form-item">
                 <div class="layui-input-block">
-                  <input type="password" name="password" lay-verify="required" placeholder="请输入密码" autocomplete="off" class="layui-input">
+                  <input type="password" name="password" id="password" lay-verify="required" placeholder="请输入密码" autocomplete="off" class="layui-input">
                 </div>
             </div>
             <div class="layui-form-item" pane="">

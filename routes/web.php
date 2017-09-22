@@ -44,7 +44,7 @@ Route::namespace('Home')->group(function(){
     Route::get('/getUserArticles', 'ArticleController@getUserArticles');
     Route::get('/getCategory', 'ArticleController@getCategory');
     /* 用户中心 */
-    Route::get('/write', 'UserController@write')->middleware('checklogin');
+    Route::get('/write/{id?}', 'UserController@write')->middleware('checklogin');
     Route::post('/publish', 'UserController@publish')->middleware('checklogin');
     Route::get('/confirm/{type}/{code}', 'EmailController@confirm')->middleware('checklogin')->where(['type' => '[a-z]+', 'code' => '[0-9a-zA-Z]+']);
     /* 消息通知  */
@@ -63,6 +63,7 @@ Route::namespace('Home')->group(function(){
     /* 上传头像  */
     Route::post('/uploadAvatar', 'FileController@uploadAvatar')->middleware('checklogin');
     Route::get('/email/send', 'EmailController@send')->middleware('checklogin');
+    //邮件页面
     Route::get('/mail',function(){
         return new App\Mail\Notice();
     });

@@ -55,10 +55,10 @@
 .blog_detail .comment .no-comment {width:98%;height:150px;line-height:150px;text-align:center;opacity:0.6;}
 .blog_detail .comment ul {width:98%;min-height:150px;}
 .blog_detail .comment ul li {width:100%;float:left;min-height:70px;margin:5px 10px;border-bottom:1px solid #e2e2e2;}
-.blog_detail .comment ul li .avatar{width:12%;height:85px;float:left;border-radius:50%;}
-.blog_detail .comment ul li .avatar img{width:90%;height:90%;}
+.blog_detail .comment ul li .avatar{width:6%;height:85px;float:left;border-radius:50%;}
+.blog_detail .comment ul li .avatar img{width:70px;height:70px;border-radius:50%;margin:0 6px;}
 
-.blog_detail .comment ul li .comment-info{width:88%;min-height:80px;float:right;}
+.blog_detail .comment ul li .comment-info{width:93%;min-height:80px;float:right;}
 
 .blog_detail .comment ul li .comment-info div {height:20px;}
 .blog_detail .comment ul li .comment-info div .span-left{float:left;margin-left:10px;}
