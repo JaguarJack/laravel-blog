@@ -16,9 +16,7 @@
             <div class="layui-logo">NJPHPER BLOG</div>
             <ul class="layui-nav layui-layout-right kit-nav">
                 <li class="layui-nav-item">
-                    <a href="javascript:;">
                         <img src="http://m.zhengjinfan.cn/images/0.jpg" class="layui-nav-img"> {{ Auth::user()->name }}
-                    </a>
                     <!--<dl class="layui-nav-child">
                          <dd><a href="javascript:;">基本资料</a></dd>
                         < dd><a href="{{ url('/user')}}">安全设置</a></dd> 
@@ -34,23 +32,17 @@
                 <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
                 <ul class="layui-nav layui-nav-tree" lay-filter="kitNavbar" kit-navbar>
                     <li class="layui-nav-item">
-                        <a class="" href="javascript:;"><i class="fa fa-plug" aria-hidden="true"></i><span> 基本元素</span></a>
+                        <a class="" href="javascript:;"><i class="fa fa-plug" aria-hidden="true"></i><span> 基本信息</span></a>
                         <dl class="layui-nav-child">
                             <dd>
-                                <a href="javascript:;" kit-target data-options="{url:'test.html',icon:'&#xe6c6;',title:'表格',id:'1'}">
-                                    <i class="layui-icon">&#xe6c6;</i><span> 表格</span></a>
+                                <a href="javascript:;" kit-target data-options="{url:'/main',icon:'&#xe6c6;',title:'日志更新',id:'1'}">
+                                    <i class="layui-icon">&#xe6c6;</i><span> 日志更新</span></a>
                             </dd>
                             <dd>
-                                <a href="javascript:;" data-url="{{ url('user') }}" data-icon="fa-user" data-title="表单" kit-target data-id='2'><i class="fa fa-user" aria-hidden="true"></i><span> 用户管理</span></a>
+                                <a href="javascript:;" data-url="{{ url('user') }}" data-icon="fa-user" data-title="用户管理" kit-target data-id='2'><i class="fa fa-user" aria-hidden="true"></i><span> 用户管理</span></a>
                             </dd>
                             <dd>
-                                <a href="javascript:;" data-url="{{ url('links') }}" data-icon="&#xe628;" data-title="导航栏" kit-target data-id='3'><i class="layui-icon">&#xe628;</i><span> 友情链接管理</span></a>
-                            </dd>
-                            <dd>
-                                <a href="javascript:;" data-url="list4.html" data-icon="&#xe614;" data-title="列表四" kit-target data-id='4'><i class="layui-icon">&#xe614;</i><span> 列表四</span></a>
-                            </dd>
-                            <dd>
-                                <a href="javascript:;" kit-target data-options="{url:'https://www.baidu.com',icon:'&#xe658;',title:'百度一下',id:'5'}"><i class="layui-icon">&#xe658;</i><span> 百度一下</span></a>
+                                <a href="javascript:;" data-url="{{ url('links') }}" data-icon="&#xe628;" data-title="友情链接管理" kit-target data-id='3'><i class="layui-icon">&#xe628;</i><span> 友情链接管理</span></a>
                             </dd>
                         </dl>
                     </li>
@@ -58,16 +50,9 @@
                         <a href="javascript:;"><i class="fa fa-plug" aria-hidden="true"></i><span> BLOG管理</span></a>
                         <dl class="layui-nav-child">
                             <dd><a href="javascript:;" kit-target data-options="{url:'/fmenu',icon:'&#xe658;',title:'菜单管理',id:'6'}"><i class="layui-icon">&#xe658;</i><span> 菜单管理</span></a></dd>
-                            <dd><a href="javascript:;" kit-target data-options="{url:'/user/index',icon:'&#xe658;',title:'TAB',id:'7'}"><i class="layui-icon">&#xe658;</i><span> 用户管理</span></a></dd>
-                            <dd><a href="javascript:;" kit-target data-options="{url:'onelevel.html',icon:'&#xe658;',title:'OneLevel',id:'50'}"><i class="layui-icon">&#xe658;</i><span> OneLevel</span></a></dd>
-                            <dd><a href="javascript:;" kit-target data-options="{url:'app.html',icon:'&#xe658;',title:'App',id:'8'}"><i class="layui-icon">&#xe658;</i><span> app.js主入口</span></a></dd>
+                            <dd><a href="javascript:;" kit-target data-options="{url:'/user/index',icon:'&#xe658;',title:'用户管理',id:'7'}"><i class="layui-icon">&#xe658;</i><span> 用户管理</span></a></dd>
+                            <dd><a href="javascript:;" kit-target data-options="{url:'article/index',icon:'&#xe658;',title:'文章管理',id:'50'}"><i class="layui-icon">&#xe658;</i><span> 文章管理</span></a></dd>
                         </dl>
-                    </li>
-                    <li class="layui-nav-item">
-                        <a href="javascript:;" data-url="/components/table/table.html" data-name="table" kit-loader><i class="fa fa-plug" aria-hidden="true"></i><span> 表格(page)</span></a>
-                    </li>
-                    <li class="layui-nav-item">
-                        <a href="javascript:;" data-url="/views/form.html" data-name="form" kit-loader><i class="fa fa-plug" aria-hidden="true"></i><span> 表单(page)</span></a>
                     </li>
                 </ul>
             </div>

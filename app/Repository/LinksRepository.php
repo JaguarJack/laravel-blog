@@ -13,6 +13,17 @@ class LinksRepository
     {
         self::$links = $links;
     }
+    
+    /**
+     * 
+     * @description:获取友情链接
+     * @author wuyanwen(2017年9月24日)
+     * @param
+     */
+    public function getLinks()
+    {
+        return self::$links::where('show', '=', 1)->get();                        
+    }
     /**
      *
      * @author:wuyanwen

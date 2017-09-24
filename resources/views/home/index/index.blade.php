@@ -38,13 +38,15 @@ layui.use(['carousel','flow'], function(){
 		        	str += '<div class="content"><div class="image">'
 		            str +='<img lay-src="' + item.thumb_img + '"/></div>';
 					str +='<div class="intro">' + item.intro+ '</div></div><hr>'
-		        	str += '<div style="width:95%;margin:0 auto;"><span class="layui-btn layui-btn-warm info">'
+		        	str += '<div style="width:100%;margin:0 auto;"><span class="layui-btn layui-btn-warm info">'
 		        	str += '<span ><i class="fa fa-clock-o"></i>&nbsp;' +item.created_at+ '</span>'	
 		        	str += '<span ><i class="fa fa-user-o"></i>&nbsp;' +item.author+ '</span>'
-		        	str += '<span ><i class="fa fa-tags"></i>&nbsp;' +item.pv_number+ '</span>'
-		        	str += '<span ><i class="fa fa-eye"></i>&nbsp;' +getTags(item.tags)+ '</span>'
+		        	str += '<span ><i class="fa fa-eye"></i>&nbsp;' +item.pv_number+ '</span>'
+		        	str += '<span ><i class="fa fa-tags"></i>&nbsp;' +getTags(item.tags)+ '</span>'
 		        	str += '<span ><i class="fa fa-comment-o"></i>&nbsp;' +item.comment_number+ '</span>'
-		        	str += '</span><span class="layui-btn layui-btn-warm" style="float:right;">read more</span>'	
+		        	str += '</span>'
+					str += '<a href="/detail/'+item.aid+'">'
+			       	str +='<span class="layui-btn layui-btn-warm" style="float:right;">read more</span></a>'	
 		        	str += '</div></div>'
 		            lis.push(str);
 		        }); 

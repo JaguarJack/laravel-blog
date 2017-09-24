@@ -26,11 +26,11 @@ class Users
         $params = $request->all();
         $offset = $params['page'] - 1;
         $limit  = $params['limit'];
-        
+       
         $where = [];
         
         if (isset($params['name']) && $params['name']) {
-            $where[] = ['name', '=', $params['name']];
+            $where[] = ['user_name', '=', $params['name']];
         }
         if (isset($params['email']) && $params['email']) {
             $where[] = ['email', '=', $params['email']];
@@ -39,15 +39,15 @@ class Users
             $where[] = ['type', '=', $params['type']];
         }
         
-        $data = $this->users->page($offset, $limit, $where);
+        $data = $this->users->page($offset * $limit, $limit, $where);
         
         $_data = $data['data']->toArray();
         
         foreach ($_data as $key => $vo) {
             $_data[$key]['type'] = $service->getReigsterType($vo['type']);
-            $_data[$key]['sex']  = $vo['sex'] == 1 ? '男' : '女';
+            $_data[$key]['gender']  = $vo['gender'] == 1 ? '男' : '女';
             $_data[$key]['activation'] = $vo['activation'] == 1 ? '未激活' : '激活';
-            $_data[$key]['status'] =$vo['activation'] == 1 ? '正常' : '禁止';
+            $_data[$key]['status'] = $vo['status'] == 1 ? '正常' : '禁止';
         }
         
         return [

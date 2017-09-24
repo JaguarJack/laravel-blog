@@ -25,7 +25,7 @@ class UsersRepository
 	public function page($offset=0, $limit = 15, $where = [])
 	{
 	    $data = self::$users::where($where)
-            	    ->select('user_name', 'email', 'avatar', 'come_from', 'type','sex', 'activation', 'status')
+            	    ->select('id','user_name', 'email', 'avatar', 'city', 'type','gender', 'activation', 'status','created_at')
             	    ->offset($offset)
             	    ->limit($limit)
             	    ->get();
@@ -57,8 +57,9 @@ class UsersRepository
 	{
 	    return self::$users::create([
 	        'user_name' => $data['name'],
-	        'email' => $data['email'],
-	        'password' => bcrypt($data['password']),
+	        'email'     => $data['email'],
+	        'password'  => bcrypt($data['password']),
+	        'api_token' => substr(encrypt(str_random(rand(30,40))),1,40),
 	    ]);
 	}
 	

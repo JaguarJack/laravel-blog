@@ -15,7 +15,7 @@
           
           <div class="layui-form-item">
             <div class="layui-input-block">
-              <button class="layui-btn" lay-submit lay-filter="active">点击激活</button>
+              <button class="layui-btn sendMail" lay-submit lay-filter="active">点击激活</button>
             </div>
           </div>
        </form>
@@ -27,7 +27,7 @@ layui.use(['element','jquery','form'], function(){
   			$ = layui.jquery
   		form  = layui.form;
 
-  $('.layui-btn').click(function(){
+  $('.sendMail').click(function(){
 		$.get("{{ url('email/send') }}",function(response){
 
 

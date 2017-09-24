@@ -29,8 +29,8 @@ class Operation
     public function like(Request $request, LikeRepository $like)
     {
         $aid     = $request->input('aid');
-        $user_id = $request->input('user_id');
-        
+        $user_id = $request->user('api')->id;
+
         if ($like->isLiked($user_id, $aid)) {
             DB::beginTransaction();
             
@@ -65,7 +65,7 @@ class Operation
     public function store(Request $request, StoreRepository $store)
     {
         $aid     = $request->input('aid');
-        $user_id = $request->input('user_id');
+        $user_id = $request->user('api')->id;
         
         if ($store->isStored($user_id, $aid)) {
             DB::beginTransaction();
@@ -101,7 +101,7 @@ class Operation
     public function attend(Request $request, AttendRepository $attend)
     {
         $attend_user_id = $request->input('attend_user_id');
-        $user_id = $request->input('user_id');
+        $user_id = $request->user('api')->id;
 
         return $attend->isAttended($user_id, $attend_user_id) ?
         

@@ -71,6 +71,12 @@ class UsersService
         $category = $this->category->find('id', $request->input('category'));
 
         $user = $request->user('home');
+        
+        //是否有草稿或者未审核的文章
+        if ($this->getNotPassArticles($user)) {
+            return '还有草稿或者未审核文章~';
+        }
+        
         $data = [
             'cid'      => $category->id,
             'fid'      => $category->fid,
@@ -181,5 +187,16 @@ class UsersService
         } else{
             Cookie::queue($key, time() + Config::get('home.comment.limit_time'), 60);
         } 
+    }
+    
+    /**
+     * 
+     * @description:查询用户是否有草稿或者等待审核文章
+     * @author wuyanwen(2017年9月24日)
+     * @param
+     */
+    protected function getNotPassArticles($user)
+    {
+        return  $this->article->getNotPassByUserId($user->id) > 1 ? true : false;
     }
 }

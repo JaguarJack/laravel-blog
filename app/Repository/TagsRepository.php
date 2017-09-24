@@ -15,6 +15,17 @@ class TagsRepository
 	}
 	
 	/**
+	 * 
+	 * @description:获取所有标签
+	 * @author wuyanwen(2017年9月24日)
+	 * @param
+	 */
+	public function getTags()
+	{
+	    return self::$tags->get();
+	}
+	
+	/**
 	 * @description:获取标签文章
 	 * @author wuyanwen(2017年9月19日)
 	 * @param unknown $tag_name
@@ -60,10 +71,34 @@ class TagsRepository
                     	    ->leftjoin('tags_relate', 'tags.id', '=','tags_relate.tag_id')
                     	    ->leftjoin('articles', 'articles.id', '=', 'tags_relate.aid')
                     	    ->leftjoin('article_relate', 'articles.id', '=', 'article_relate.aid')
-                    	    ->select('articles.title','articles.intro','articles.id','articles.author','articles.category','article_relate.*')
+                    	    ->select('articles.title','articles.intro','articles.id','articles.author','articles.thumb_img','articles.category','article_relate.*')
                     	    ->offset($offset * $limit)
                     	    ->limit($limit)
                     	    ->orderBy('articles.created_at', 'DESC')
                     	    ->get();
+	}
+	
+	/**
+	 * 
+	 * @description:根据tag name获取
+	 * @author wuyanwen(2017年9月24日)
+	 * @param@param unknown $name
+	 */
+	public function getTagByName($name)
+	{
+	    return self::$tags::where('name', '=', $name)->first();
+	}
+	
+	/**
+	 * 
+	 * @description:存储
+	 * @author wuyanwen(2017年9月24日)
+	 * @param@param unknown $name
+	 */
+	public function store($name)
+	{
+	    return self::$tags::create([
+	        'name' => $name,
+	    ]);
 	}
 }

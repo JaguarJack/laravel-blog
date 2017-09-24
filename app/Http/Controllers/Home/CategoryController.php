@@ -42,13 +42,10 @@ class CategoryController extends Controller
     public function detail($id,LikeRepository $like, AttendRepository $attend, StoreRepository $store)
     {
         $article_info = $this->article->find(intval($id));
-       
         $user_id = $this->request->user('home') ? $this->request->user('home')->id : 0;
-        //dd($attend->isAttended($user_id, $article_info->user_id));
         return view('home.category.detail',[
             'article_info' => $article_info,
             'preNext'      => $this->article->getPreAndNext($id),
-            //'comments'     => $this->article->getComments($id),
             'liked'        => $like->isLiked($user_id, $id),
             'stored'       => $store->isStored($user_id, $id),
             'attented'     => $attend->isAttended($user_id, $article_info->user_id),

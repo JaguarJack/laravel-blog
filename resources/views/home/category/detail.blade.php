@@ -11,7 +11,7 @@
 	<span>{{ $article_info->title }}</span>
 	<div style="margin-left:2em;height:55px;">
 		<div>
-			<img src="http://t.cn/RCzsdCq">
+			<img src="{{ $article_info->avatar }}">
 		
 		<div style="width:400px;height:50px;float:left;">
 			<button class="layui-btn-primary layui-btn-mini" style="margin-left:-10px;">作者</button> 
@@ -28,13 +28,6 @@
 				评论 {{$article_info->comment_number}}  喜欢{{$article_info->like_number}}  阅读{{$article_info->pv_number }}
 			</p>
 		</div>
-		<!--  <i class="fa fa-user-o"></i>{{ $article_info->author }} 发布与
-		<i class="fa fa-clock-o"></i>{{ $article_info->created_at }}
-		<i class="fa fa-tags"></i>
-		@foreach (explode(',', $article_info->tags) as $tag)
-			<a href="{{ url('tag', ['tagname' => $tag]) }}">{{ $tag }}</a>
-		@endforeach
-		<i class="fa fa-eye"></i>{{ $article_info->pv_number }}-->
 	</div>
 	</div>
 	</div>
@@ -72,32 +65,9 @@
 	<div class="reply">已回复评论(<span class="comment_number">{{ $article_info->comment_number }}</span>)</div>
 	<div class="info">	
 	<ul class="comment_content" id="comments">
-	<!--  @if (!$comments->count())
-		<div class="no-comment" >空空如也~快来成为第一个评论的人吧</div>
-	@else
-		@foreach ($comments as $key => $comment)
-			<li>
-				<div class="avatar">
-					<img src="{{ $comment->avatar }}"/>
-				</div>
-				<div class="comment-info">
-					<div style="min-height:40px;">
-					<div>
-						<span  class="span-left" data="{{$comment->user_id}}"><a href="javascript:;">{{ $comment->user_name }}</a></span>
-						<a href="javascript:;">
-							<span class="span-right" data="{{ $comment->user_id }}" name="{{ $comment->user_name }}"><i class="fa fa-mail-reply"></i> 回复</span>
-						</a>
-						</div>
-						<div class="time">
-							<a name="reply{{ $comment->id }}" id="reply{{ $comment->id }}" href="#reply{{ $comment->id }}">#{{ $key+1 }}</a> {{ $comment->created_at }}
-						</div>
-					</div>
-					<p>{!! htmlspecialchars_decode($comment->content) !!}</p>
-				</div>
-			</li>
-		 @endforeach
+
 		</ul>
-	 @endif	-->	
+	
 	</div>
 	<div style="clear:both;"></div>
 </div>
@@ -107,27 +77,6 @@
 </div>
 <input type="hidden" name="reply_user" value="0">
 </div>        		
-<!--
-<div class="tab">
-  <div class="title">{{ $article_info->uname }}</div>
-  <div class="layui-tab-content" style="min-height:100px;background-color:white;">
-    <div class="layui-tab-item layui-show" style="min-height:200px;">
-    
-    	<div class="avatar">
-    		<img src="{{ $article_info->head_img }}">
-    	</div>
-    	<div class="sign">
-    	个人简介个人简介个人简介个人简介个人简介个人简介个人简介个人简介个人简介个人简介个人简介个人简介个人简介个人简介
-    	</div>
-    	<hr/>
-    	@if ($attented)
-    		<a href="javascript:;"><div class="btn attend" style="background-color: #009688;">已关注</div></a>
-    	@else
-    		<a href="javascript:;"><div class="btn attend">关注</div></a>
-    	@endif
-    </div>
-  </div>
-</div>  -->
 <script src="{{ asset('/assets/markdown/js/jquery.min.js') }}"></script>
 <link rel="stylesheet" href="{{ asset('/assets/markdown/css/editormd.preview.css') }}" />	
 <script src="{{ asset('/assets/markdown/lib/marked.min.js') }}"></script>
@@ -149,44 +98,27 @@ layui.use(['jquery','layer', 'flow'], function(){
 	  layer = layui.layer
 	  flow  = layui.flow;
 
-	  /* var eidt = layedit.build('edit', {
-		  		height:190,
-		 	    tool: ['face', 'strong','italic','underline','del','|' ,'left','center','right','link']
-		}); */
 		flow.load({
 		    elem: '#comments'
-		    ,isAuto:false
-		    ,isLazyimg:true	
+			,scrollElem:'#comments'
+		    ,isAuto:true
+		    ,isLazyimg:true
+		    ,end:'空 空 如 也 ~'
 		    ,done: function(page, next){
 		      var lis = [];
 		      $.get('/getArticleComment',{page:page, aid: "{{ $article_info->id }}"}, function(res){
 		        layui.each(res.data, function(index, item){
 		        	var str= '';
-
 		        	str += '<li><div class="avatar">'
 					str +='	<img src="'+ item.avatar +'"/>'
 					str +='</div>'
 					str += '<div class="comment-info">'
 					str +=	'<div style="min-height:40px;">'
-					str += '<div><span  class="span-left" data="'+item.user_id+'"><a href="javascript:;">'+item.user_name+'</a></span>'
+					str += '<div><span  class="span-left" data="'+item.user_id+'"><a href="/user/'+item.user_id+'">'+item.user_name+'</a></span>'
 					str +=	'<a href="javascript:;"><span class="span-right" data="'+item.user_id +'" name="'+ item.user_name +'"><i class="fa fa-mail-reply"></i> 回复</span>'
-					str +='</a></div><div class="time"><a name="reply'+item.id+'" id="reply'+ item.id +'" href="#reply{{ $comment->id }}">#{{ $key+1 }}</a> {{ $comment->created_at }}
-					str +='</div></div><p>{!! htmlspecialchars_decode($comment->content) !!}</p></div></li>
-		        	/* str += '<div class="main-left-article"><div class="title">';
-		        	str += '<span class="layui-btn layui-btn-danger">' +item.category+ '</span>'
-		        	str += '<span style="font-size:24px;margin-left:10px;"><a href="/detail/'+item.aid+'">' +item.title.substr(0, 25)+ '</a></span>'
-		        	str += '</div><hr>'
-		        	str += '<div class="content"><div class="image">'
-		            str +='<img lay-src="' + item.thumb_img + '"/></div>';
-					str +='<div class="intro">' + item.intro+ '</div></div><hr>'
-		        	str += '<div style="width:95%;margin:0 auto;"><span class="layui-btn layui-btn-warm info">'
-		        	str += '<span ><i class="fa fa-clock-o"></i>&nbsp;' +item.created_at+ '</span>'	
-		        	str += '<span ><i class="fa fa-user-o"></i>&nbsp;' +item.author+ '</span>'
-		        	str += '<span ><i class="fa fa-tags"></i>&nbsp;' +item.pv_number+ '</span>'
-		        	str += '<span ><i class="fa fa-eye"></i>&nbsp;' +getTags(item.tags)+ '</span>'
-		        	str += '<span ><i class="fa fa-comment-o"></i>&nbsp;' +item.comment_number+ '</span>'
-		        	str += '</span><span class="layui-btn layui-btn-warm" style="float:right;">read more</span>'	
-		        	str += '</div></div>' */
+					str +='</a></div><div class="time"><a name="reply'+item.id+'" id="reply'+ item.id +'" href="#reply'+ item.id+ '"></a>'+ item.created_at
+					str +='</div></div><p>' +item.content +'</p></div></li>'
+		        	
 		            lis.push(str);
 		        }); 
 		        next(lis.join(''), page < res.pages);    
@@ -232,7 +164,7 @@ layui.use(['jquery','layer', 'flow'], function(){
 						str += '</div></div>'
 						str += '<p>'+response.data.content+'</p>'
 						str += '</div></li>'
-						$('.comment_content').append(str);
+						$('.layui-flow-more').before(str);
 						$('.comment_number').html(parseInt($('.comment_number').html()) + 1);
 						$('#edit').val('');
 					} else {
@@ -248,7 +180,7 @@ layui.use(['jquery','layer', 'flow'], function(){
 		//});
 
 	    $('.like').click(function(){
-			$.post("{{ url('api/like')}}",{aid:aid,user_id:"{{ $user_id }}"}, function(response){
+			$.post("{{ url('api/like')}}",{aid:aid,api_token:"{{ Auth::guard('home')->user()->api_token ?? '' }}"}, function(response){
 					if (response.code == 10000) {
 						var number = $('.like span').html();
 						if ($('.like').hasClass('layui-btn-primary')) {
@@ -263,7 +195,7 @@ layui.use(['jquery','layer', 'flow'], function(){
 		})
 
 		$('.store').click(function(){
-			$.post("{{ url('api/store')}}",{aid:aid,user_id:"{{ $user_id }}"}, function(response){
+			$.post("{{ url('api/store')}}",{aid:aid,api_token:"{{ Auth::guard('home')->user()->api_token ?? '' }}"}, function(response){
     				var number = $('.store span').html();
     				if ($('.store').hasClass('layui-btn-primary')) {
     					$('.store').removeClass('layui-btn-primary');
@@ -276,7 +208,7 @@ layui.use(['jquery','layer', 'flow'], function(){
 		})
 		
 		$('.attend').click(function(){
-			$.post("{{ url('api/attend')}}",{attend_user_id:attend_user_id,user_id:"{{ $user_id }}"}, function(response){
+			$.post("{{ url('api/attend')}}",{attend_user_id:attend_user_id,api_token:"{{ Auth::guard('home')->user()->api_token ?? '' }}"}, function(response){
 					if (response.code == 10000) {
 						//为关注状态
 						if ($('.attend').hasClass('layui-btn')) {

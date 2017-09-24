@@ -14,6 +14,13 @@ class User
         $this->user = $user;
     }
     
+    /**
+     * 
+     * @description:用户分页列表
+     * @author wuyanwen(2017年9月24日)
+     * @param@param Request $request
+     * @param@return number[]|string[]|NULL[]|unknown[]
+     */
     public function page(Request $request)
     {
         
@@ -29,14 +36,14 @@ class User
         if (isset($params['email']) && $params['email']) {
             $where[] = ['email', '=', $params['email']];
         }
-        
-        $data = $this->user->page($offset, $limit, $where);
+       
+        $data = $this->user->page($offset * $limit, $limit, $where);
 
         return [
             'code' => 0,
             'msg'  => '',
             'count' => $data['total'],
-            'data'  => $data['data']->toArray(),
+            'data'  => $data['data'],
         ];
     }
 }

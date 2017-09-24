@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Requests\Request;
 use App\Repository\LinksRepository;
+use Cache;
 
 class Links
 {
@@ -46,5 +47,25 @@ class Links
             'count' => $data['total'],
             'data'  => $_data,
         ];
+    }
+    
+    /**
+     * 
+     * @description:获取所有链接
+     * @author wuyanwen(2017年9月24日)
+     * @param
+     */
+    public function getAllLinks()
+    {
+        if (Cache::has('links') && Cache::get('links')) {
+            $links = Cache::get('links');
+        } else {
+            $links = $this->links->getLinks();
+            Cache::put('links', $links, 60 * 24);
+        }
+        
+        return [
+            'data' => $links,
+        ];  
     }
 }

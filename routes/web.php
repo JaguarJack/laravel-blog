@@ -10,7 +10,7 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::namespace('Home')->group(function(){
+Route::domain('blog.com')->namespace('Home')->group(function(){
     Route::get('/', 'IndexController@index');
     Route::get('/signin', 'LoginController@signin');
     Route::get('/signup', 'RegisterController@signup');
@@ -70,8 +70,8 @@ Route::namespace('Home')->group(function(){
     });
 });
 
-Route::domain('admin.blog.com')->middleware('auth')->namespace('Admin')->group(function(){    
-    Route::get('admin/index','IndexController@index');
+Route::middleware('auth')->namespace('Admin')->group(function(){    
+    Route::get('/','IndexController@index');
     Route::get('/main','IndexController@main');
     Route::get('/user/index','UsersController@index');
     Route::resource('user', 'UserController');
@@ -80,8 +80,9 @@ Route::domain('admin.blog.com')->middleware('auth')->namespace('Admin')->group(f
     Route::resource('fmenu', 'FrontMenuController');
     Route::resource('seo', 'SeoController');
     Route::resource('links', 'LinksController');
+    Route::get('article/index', 'ArticleController@index');
 });
-Route::domain('admin.blog.com')->group(function(){
+Route::domain(config('home.admindomain'))->group(function(){
     Auth::routes();
 });
 

@@ -16,17 +16,17 @@
     		<form action="/doRegister" method="post" class="layui-form">
     		  <div class="layui-form-item">
                 <div class="layui-input-block">
-                  <input type="text" id="name" name="name" placeholder="请输入你的昵称" autocomplete="off" class="layui-input">
+                  <input type="text" id="name" name="name" placeholder="请输入你的昵称" autocomplete="off" value="{{ old('name') }}" class="layui-input">
                 </div>
               </div>
               <div class="layui-form-item">
                 <div class="layui-input-block">
-                  <input type="text" id="email" name="email" placeholder="请输入邮箱" autocomplete="off" class="layui-input">
+                  <input type="text" id="email" name="email" placeholder="请输入邮箱" autocomplete="off" value="{{ old('email') }}" class="layui-input">
                 </div>
               </div>
               <div class="layui-form-item">
                 <div class="layui-input-block">
-                  <input type="password" name="password"  placeholder="请输入密码" autocomplete="off" class="layui-input">
+                  <input type="password" id="password" name="password"  placeholder="请输入密码" autocomplete="off" class="layui-input">
                 </div>
             </div>
           <div class="layui-form-item">

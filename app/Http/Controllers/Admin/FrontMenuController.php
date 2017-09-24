@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Service\BuildMenuService;
 use App\Http\Requests\StoreFmenuRequest;
-use App\Repository\FrontMenuRepository;
+use App\Repository\CategoryRepository;
 
 class FrontMenuController extends BaseController
 {
@@ -43,7 +43,7 @@ class FrontMenuController extends BaseController
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreFmenuRequest $request,FrontMenuRepository $menu)
+    public function store(StoreFmenuRequest $request,CategoryRepository $menu)
     {
         //
         
@@ -70,7 +70,7 @@ class FrontMenuController extends BaseController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id, FrontMenuRepository $menu, BuildMenuService $menuService)
+    public function edit($id, CategoryRepository $menu, BuildMenuService $menuService)
     {
         //
         $menu = $menu->find('id', $id);
@@ -89,7 +89,7 @@ class FrontMenuController extends BaseController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(StoreFmenuRequest $request, $id, FrontMenuRepository $menu)
+    public function update(StoreFmenuRequest $request, $id, CategoryRepository $menu)
     {
         return $menu->update($request->all()) ? $this->ajaxSuccess('修改成功')
         
@@ -102,7 +102,7 @@ class FrontMenuController extends BaseController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id, FrontMenuRepository $menu)
+    public function destroy($id, CategoryRepository $menu)
     {
         //是否有子菜单
         if ($menu->find('fid', $id)) {

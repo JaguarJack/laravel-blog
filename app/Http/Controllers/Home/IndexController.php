@@ -20,11 +20,27 @@ class IndexController extends Controller
     {
         return view('home.index.index');
     }
-    
-    
-   
+
     public function importComment()
     {
+        
+        
+        
+        $results = $mysql_old->select('select * from articles');
+        
+        foreach ($results as $vo) {
+            
+            
+            if ($vo->id > 80) {
+                $avatar = str_replace('img','images', $vo->thumb_img);
+                $intro = mb_substr(str_replace('&nbsp;','',strip_tags(html_entity_decode($vo->content))),0,200,'utf8');
+                $intro = str_replace('"','',$intro);
+                $sql = sprintf('update `articles` set `intro`="%s",`thumb_img`="%s" where id = %d',$intro, $avatar,$vo->id);
+                echo $mysql_old->update($sql);
+            }
+            
+        }
+        die;
         $reuslt = (\DB::connection('mysql_old')->select('select * from comment'));
         //dd($reuslt);
         $mysql_old = \DB::connection('mysql');

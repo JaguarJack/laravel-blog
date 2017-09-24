@@ -26,8 +26,8 @@ class UserRepository
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
+            'api_token' => substr(encrypt(str_random(rand(35,45))),1,40),
         ]);
-        
     }
     
     /**

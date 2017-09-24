@@ -17,7 +17,7 @@ class Users extends Authenticatable
     
     protected $fillable = [
         'open_id', 'user_name', 'password', 'email', 'avatar', 'signature', 'come_from', 'type',
-        'sex', 'activation', 'status', 'online',
+        'api_token','sex', 'activation', 'status', 'online',
     ];
     
     /**

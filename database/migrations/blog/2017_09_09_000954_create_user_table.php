@@ -22,6 +22,7 @@ class CreateUserTable extends Migration
             $table->string('email', 100)->comment('邮箱')->default('');
             $table->string('real_name', 10)->comment('用户真实姓名')->default('');
             $table->string('remember_token')->default('');
+            $table->char('api_token', 40)->unique()->comment('api认证token');
             $table->string('avatar', 255)->comment('头像')->default('');
             $table->string('github_name', 10)->comment('github 昵称')->default('');
             $table->string('github_homepage', 100)->comment('github 主页')->default('');
@@ -34,7 +35,7 @@ class CreateUserTable extends Migration
             $table->string('signature', 255)->comment('个人署名')->default('');
             $table->tinyInteger('type')->comment('1:注册用户,2:qq用户,3:微博用户,4:github,5:其他')->default(1);
             $table->tinyInteger('gender')->comment('1:男 2:女')->default(1);
-            $table->tinyInteger('activation')->comment('1:激活 2:未激活')->default(2);
+            $table->tinyInteger('activation')->comment('1:未激活 2:激活')->default(1);
             $table->tinyInteger('online')->comment('1:在线  2：未在线')->default(1);
             $table->tinyInteger('status')->comment('1:正常  2：删除')->default(1);
             $table->timestamps();

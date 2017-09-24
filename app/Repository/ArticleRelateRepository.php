@@ -96,5 +96,38 @@ class ArticleRelateRepository
     {
         return self::$article_relate::where('aid', '=', $aid)->increment('pv_number');
     }
+    
+    /**
+     * 
+     * @description:获取热门文章
+     * @author wuyanwen(2017年9月24日)
+     * @param@param number $limit
+     */
+    public function getHotArticles($limit = 0)
+    {
+        return self::$article_relate::where('articles.status', '=', 3)
+                    ->select('articles.id', 'articles.title')
+                    ->leftjoin('articles', 'article_relate.aid', '=', 'articles.id')
+                    ->orderBy('pv_number', 'DESC')
+                    ->limit($limit ? : self::$article_relate::LIMIT)
+                    ->get();
+                    
+    }
+    
+    /**
+     * 
+     * @description:存储一条信息
+     * @author wuyanwen(2017年9月24日)
+     * @param@param unknown $aid
+     * @param@param unknown $user_id
+     * @param@return unknown
+     */
+    public function store($aid, $user_id)
+    {
+        return self::$article_relate::create([
+            'user_id' => $user_id,
+            'aid'     => $aid,
+        ]);
+    }
 
 }

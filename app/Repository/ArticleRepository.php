@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Model\Article;
+use DB;
 
 class ArticleRepository
 {
@@ -61,6 +62,32 @@ class ArticleRepository
                 
     }
     
+    /**
+     * 
+     * @description:后台文章管理
+     * @author wuyanwen(2017年9月24日)
+     * @param@param number $offset
+     * @param@param number $limit
+     */
+    public function getArticlePages($offset = 0, $limit = 10 , array $condition = [])
+    {
+        $where = [
+            ['articles.status', '=' , self::$article::PASS_STATUS],
+        ];
+        
+        $where = array_merge($where,$condition);
+        
+        $data = self::$article::where($where)
+                    ->select('articles.*')
+                    ->offset($offset * ($limit ? : self::$article::LIMIT))
+                    ->limit($limit ? : self::$article::LIMIT)
+                    ->orderBy('articles.id', 'DESC')
+                    ->get();
+        
+         $total = self::$article::where($where)->count();
+         
+         return ['data' => $data, 'total' => $total];
+    }
     
     /**
      * @description:总页码
@@ -69,9 +96,18 @@ class ArticleRepository
      */
     public function total($limit = 0)
     {
-        return self::$article::where('status', '=', self::$article::PASS_STATUS)->count()        
-        
-                            / ($limit ? : self::$article::LIMIT);
+        return ceil($this->getTotalArticles() / ($limit ? : self::$article::LIMIT));
+    }
+    
+    /**
+     * 
+     * @description:获取文章总数
+     * @author wuyanwen(2017年9月24日)
+     * @param@return unknown
+     */
+    public function getTotalArticles()
+    {
+        return self::$article::where('status', '=', self::$article::PASS_STATUS)->count();
     }
     
     /**
@@ -95,7 +131,7 @@ class ArticleRepository
      * @author wuyanwen(2017年9月14日)
      * @param $id
      */
-    public function getComments($id, $offset, $limit = 5)
+    public function getComments($id, $offset, $limit = 10)
     {
         $where  = [
             ['status','=', self::$article::PASS_STATUS],
@@ -109,6 +145,26 @@ class ArticleRepository
                              ->get();
     }
     
+    /**
+     * 
+     * @description:获取文章总评论数
+     * @author wuyanwen(2017年9月23日)
+     * @param
+     */
+    public function getTotalOfComment($id, $limit = 10)
+    {
+        
+        $where  = [
+            ['status','=', self::$article::PASS_STATUS],
+        ];
+        
+        $total =  self::$article::where($where)
+                            ->find($id)
+                            ->hasManyComments()
+                            ->count();
+        
+       return ceil($total / $limit);
+    }
     /**
      * 
      * @description:查询上一篇 &&下一篇
@@ -180,5 +236,40 @@ class ArticleRepository
     public function store($data)
     {
         return self::$article::create($data);
+    }
+    
+    /**
+     * 
+     * @description:获取用户未通过或者草稿文章
+     * @author wuyanwen(2017年9月24日)
+     * @param@param unknown $user_id
+     */
+    public function getNotPassByUserId($user_id)
+    {
+        $where = [
+            ['user_id', '=', $user_id],
+            ['status', '<', self::$article::PASS_STATUS],
+        ];
+        
+        return self::$article::where($where)->count();
+    }
+    
+    /**
+     * 
+     * @description:更新
+     * @author wuyanwen(2017年9月24日)
+     * @param@param unknown $data
+     */
+    public function update($data)
+    {
+        $article = $this->find($data['id']);
+        unset($data['id']);
+        
+        foreach ($data as $field => $value)
+        {
+            $article->{$field} = $value;
+        }
+        
+        return $article->save();
     }
 }

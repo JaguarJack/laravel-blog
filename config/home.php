@@ -1,6 +1,7 @@
 <?php
 
 return [
+    'version' => '1.0',
     
     /*
      * 限制评论发送
@@ -16,7 +17,6 @@ return [
         'size' => 500,
     ],
     
-    'site' => 'https://www.njphper.com/'
-    
-    
+    'site' => 'https://www.njphper.com/',
+    'admindomain' => 'blog.com',
 ];

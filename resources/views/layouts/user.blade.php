@@ -19,7 +19,7 @@
         		</a>
         	</div>
         	<div class="user-relate">
-        	    <a href="{{ route('user.like',[ $id ]) }}">
+        	    <a href="{{ route('user.share',[ $id ]) }}">
         			<span class="layui-btn layui-btn-primary"><i class="fa fa-pencil"></i> Ta 发布的文章</span>
         		</a>
         		<a href="{{ route('user.comment',[ $id ]) }}">

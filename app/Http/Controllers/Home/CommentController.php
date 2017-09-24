@@ -34,7 +34,9 @@ class CommentController extends Controller
         $page = intval($request->input('page'));
         $aid  = intval($request->input('aid'));
         
-        return $this->ajaxSuccess('' , $article->getComments($aid,($page-1))->toArray());
+        return ['data' =>  $article->getComments($aid,($page-1))->toArray(),
+                'pages' => $article->getTotalOfComment($aid),
+        ];
         
     }
 }
