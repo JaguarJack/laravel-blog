@@ -51,7 +51,7 @@
                         <dl class="layui-nav-child">
                             <dd><a href="javascript:;" kit-target data-options="{url:'/fmenu',icon:'&#xe658;',title:'菜单管理',id:'6'}"><i class="layui-icon">&#xe658;</i><span> 菜单管理</span></a></dd>
                             <dd><a href="javascript:;" kit-target data-options="{url:'/user/index',icon:'&#xe658;',title:'用户管理',id:'7'}"><i class="layui-icon">&#xe658;</i><span> 用户管理</span></a></dd>
-                            <dd><a href="javascript:;" kit-target data-options="{url:'article/index',icon:'&#xe658;',title:'文章管理',id:'50'}"><i class="layui-icon">&#xe658;</i><span> 文章管理</span></a></dd>
+                            <dd><a href="javascript:;" kit-target data-options="{url:'/article/index',icon:'&#xe658;',title:'文章管理',id:'50'}"><i class="layui-icon">&#xe658;</i><span> 文章管理</span></a></dd>
                         </dl>
                     </li>
                 </ul>

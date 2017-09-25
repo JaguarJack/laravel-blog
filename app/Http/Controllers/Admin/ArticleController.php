@@ -25,16 +25,13 @@ class ArticleController extends BaseController
      * @author wuyanwen(2017年9月24日)
      * @param
      */
-    public function aduit(Request $request, ArticleService $article)
+    public function pass(Request $request, ArticleService $article)
     {
-        $data = [
-            'id'     => intval($request->input('aid')),
-            'status' => 3,
-        ];
-        
-        return $article->pass($data) ? $this->ajaxSuccess('审核通过') : 
-        
-                                $this->ajaxError('审核失败');
+        return $this->ajaxSuccess($article->pass([
+                'id'     => intval($request->input('id')),
+                'status' => 3,
+        ]));
+
     }
     
     /**
@@ -45,7 +42,7 @@ class ArticleController extends BaseController
      */
     public function notPass(Request $request, ArticleRepository $article)
     {
-        $aid  = $request->input('aid');
+        $aid  = $request->input('id');
         
         $data = [
             'id'     => intval($aid),

@@ -81,6 +81,8 @@ Route::domain(config('home.admindomain'))->middleware('auth')->namespace('Admin'
     Route::resource('seo', 'SeoController');
     Route::resource('links', 'LinksController');
     Route::get('article/index', 'ArticleController@index');
+    Route::post('article/notPass', 'ArticleController@notPass');
+    Route::post('article/pass', 'ArticleController@pass');
 });
 Route::domain(config('home.admindomain'))->group(function(){
     Auth::routes();

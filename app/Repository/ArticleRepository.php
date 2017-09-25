@@ -16,6 +16,16 @@ class ArticleRepository
     }
     
     /**
+     * @description:根据ID查找
+     * @author wuyanwen(2017年9月25日)
+     * @param unknown $id
+     */
+    public function findById($id)
+    {
+        return self::$article::find($id);    
+    }
+    
+    /**
      * 
      * @description:查找一条记录
      * @author wuyanwen(2017年9月12日)
@@ -71,11 +81,9 @@ class ArticleRepository
      */
     public function getArticlePages($offset = 0, $limit = 10 , array $condition = [])
     {
-        $where = [
-            ['articles.status', '=' , self::$article::PASS_STATUS],
-        ];
+        $where = [];
         
-        $where = array_merge($where,$condition);
+        $where = array_merge($where, $condition);
         
         $data = self::$article::where($where)
                     ->select('articles.*')
@@ -262,9 +270,8 @@ class ArticleRepository
      */
     public function update($data)
     {
-        $article = $this->find($data['id']);
+        $article = $this->findById($data['id']);
         unset($data['id']);
-        
         foreach ($data as $field => $value)
         {
             $article->{$field} = $value;

@@ -1,4 +1,8 @@
 @extends('layouts.main')
+@section('title', config('home.site.title'))
+@section('keywords', config('home.site.keywords'))
+@section('description', config('home.site.description'))
+@section('class', 'main')
 @section('main')
     <div class=@yield("class")>
         @yield('carousel')
@@ -25,7 +29,6 @@
               <div class="title">标签列表</div>
               <div class="layui-tab-content" style="min-height: 100px;background-color:white;">
                 <div class="layui-tab-item layui-show tags">
-					
 				</div>
               </div>
             </div>

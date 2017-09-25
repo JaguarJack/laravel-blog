@@ -39,7 +39,6 @@ ______________________________________  Base On Laravel 5.5  ___________________
      <li class="layui-nav-item"><a href="/">首页</a>
       @foreach($menus as $menu)
       	<li class="layui-nav-item"><a href="{{ url('category',['id' => $menu['id']]) }}">{{ $menu['name']}}</a>
-      	
       	@if (count($menu[$menu['id']]))
           	<dl class="layui-nav-child"> <!-- 二级菜单 -->
           	@foreach($menu[$menu['id']] as $_menu)

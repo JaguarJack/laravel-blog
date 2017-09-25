@@ -21,18 +21,17 @@
     <button class="layui-btn reload" onclick="return false;"><i class="layui-icon">&#xe615;</i>搜素</button>
 </form>
 </blockquote>
-<table class="layui-table" lay-data="{height:405,width:1100, method:'post', url:'/api/getArticlesList', page:true,limit: 10, id:'table'}" lay-filter="table">
+<table class="layui-table" lay-data="{height:600,width:1220, method:'post', url:'/api/getArticlesList', page:true,limit: 10, id:'table'}" lay-filter="table">
   <thead>
     <tr>
       <th lay-data="{field:'id', align:'center',width:80, sort: true}">ID</th>
-      <th lay-data="{field:'title', align:'center',width:200}">标题</th>
+      <th lay-data="{field:'title', align:'center',width:300}">标题</th>
       <th lay-data="{field:'category', align:'center',width:100}">分类</th>
       <th lay-data="{field:'author', align:'center',width:80}">作者</th>
-      <th lay-data="{field:'tags', align:'center',width:100}">标签</th>
+      <th lay-data="{field:'tags', align:'center',width:150}">标签</th>
       <th lay-data="{field:'status', align:'center',width:100}">状态</th>
       <th lay-data="{field:'created_at', align:'center',width:200}">创建时间</th>
-            <th lay-data="{fixed: 'right', width:200, align:'center', toolbar: '#option'}"></th>
-      
+      <th lay-data="{fixed: 'right', width:200, align:'center', toolbar: '#option'}">操作</th>
     </tr>
   </thead>
 </table>
@@ -40,14 +39,22 @@
 <script src="{{ asset('/assets/layui/layui.js') }}"></script>
 <script type="text/html" id="option">
 <a class="layui-btn layui-btn-mini" lay-event="pass">审核</a>
-<a class="layui-btn layui-btn-danger layui-btn-mini" lay-event="notpass">删除</a>
+<a class="layui-btn layui-btn-danger layui-btn-mini" lay-event="notpass">不通过</a>
+
+<%#  if (d.status > 2) { %>
+    <a class="layui-btn layui-btn-mini" lay-event="check">审核</a>
+<%#  } %>
 </script>
 <script>
-layui.use('table', function(){
+layui.use(['laytpl', 'table'], function(){
   var table = layui.table
-  	  form  = layui.form
+  	   form  = layui.form
+  	 laytpl = layui.laytpl
 	   $    = layui.jquery;
-
+   laytpl.config({
+	   open: '<%',
+	   close: '%>'
+	 });
   table.render({ //其它参数在此省略
 	  skin: 'line' //行边框风格
 	  ,size: 'sm' //小尺寸的表格
@@ -60,23 +67,19 @@ layui.use('table', function(){
 	  var tr = obj.tr; //获得当前行 tr 的DOM对象
 	    //do somehing
 	  if(layEvent === 'notpass'){ //删除
-	    layer.confirm('确认删除吗', function(index){
-
+	    layer.confirm('确 定 ?', function(index){
 		var token = "{{ csrf_token() }}"
-	      $.post('/user/' + data.id,{_method:'DELETE', _token:token}, 
-	    	      function(response){
-
-				if (response.status == 10000) {
-					  obj.del(); //删除对应行（tr）的DOM结构
-				      layer.close(index);
-				} else {
+	      $.post("{{ url('article/notPass') }}", {id:data.id, _token:token}, function(response){
 					layer.msg(response.msg)
-			    }
-
 		  })
 	    })
-	  } else if(layEvent === 'pass'){ //编辑
-	    window.location.href = '/user/' +data.id+ '/edit';
+	  } else if(layEvent === 'pass') { //编辑
+		  layer.confirm('确 定 ?', function(index) {
+			var token = "{{ csrf_token() }}"
+		      $.post("{{ url('article/pass') }}", {id:data.id , _token:token}, function(response){
+						layer.msg(response.msg)
+			  })
+		    })
 	  }
    });
  //表格重载，搜索功能
@@ -84,7 +87,6 @@ layui.use('table', function(){
 	 var author = $("input[name=author]").val();
 	 var title = $("input[name=title]").val();
 	 var status = $("select[name=status]").val();
-	 
 	 table.reload('table', {
 		  where: { 
 			  author: author
@@ -97,5 +99,4 @@ layui.use('table', function(){
  })
   
 });
-
 </script>
