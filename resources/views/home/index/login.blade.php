@@ -73,9 +73,11 @@ layui.use(['form', 'jquery'], function(){
   form.on('submit(login)',function(data){});
   @if ($errors->has('email'))
 	  layer.tips("{{ $errors->first('email') }}", '#email');
+  	  return false;
   @endif
   @if ($errors->has('password'))
 	  layer.tips("{{ $errors->first('password') }}", '#password');
+      return false;
   @endif
 });
 </script>

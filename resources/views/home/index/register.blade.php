@@ -59,12 +59,15 @@ layui.use(['form', 'jquery'], function(){
   });
   @if ($errors->has('name'))
 	  layer.tips("{{ $errors->first('name') }}", '#name');
+  	  return false;
   @endif
   @if ($errors->has('email'))
 	  layer.tips("{{ $errors->first('email') }}", '#email');
+  	  return false;
   @endif
   @if ($errors->has('password'))
 	  layer.tips("{{ $errors->first('password') }}", '#password');
+      return false;
   @endif
 });
 </script>
