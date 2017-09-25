@@ -8,7 +8,7 @@
         	<div class="user-card">
         		<div class="name">{{ $user->user_name }}</div>
         		<div class="avatar">
-        			<img src="https://dn-phphub.qbox.me/uploads/avatars/18206_1502242007.png?imageView2/1/w/200/h/200">
+        			<img src="{{ $user->avatar }}">
         		</div>
         		<hr/>
         		<div class="intro">
@@ -36,7 +36,6 @@
         		<a href="{{ route('user.stores',[ $id ]) }}">
         			<span class="layui-btn layui-btn-primary"><i class="fa fa-plus-square-o"></i> Ta 收藏的文章</span>
         		</a>
-        		
         	</div>
         </div>
         <div class="user-right">
