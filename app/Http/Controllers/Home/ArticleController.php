@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Home;
 use App\Http\Requests\Request;
 use App\Http\Controllers\Controller;
 use App\Repository\ArticleRepository;
+use App\Repository\CategoryRepository;
 
 class ArticleController extends Controller
 {
@@ -33,11 +34,15 @@ class ArticleController extends Controller
      * @param@param Request $request
      * @param@param ArticleRepository $article
      */
-    public function getCategory(Request $request, ArticleRepository $article)
+    public function getCategory(Request $request, ArticleRepository $article, CategoryRepository $category)
     {
-        $category = intval($request->input('category_id'));
-        $page     = intval($request->input('page'));
+        $category_id = intval($request->input('category_id'));
+        $page        = intval($request->input('page'));
         
-        return $this->ajaxSuccess('', $article->getArticles($page - 1, 10, $category)->toArray());
+        $category_info = $category->find('id', $category_id);
+        //是否是子类
+        $type = $category_info->fid ? true : false;
+        
+        return $this->ajaxSuccess('', $article->getArticles($page - 1, 10, $category_id, $type)->toArray());
     }
 }
