@@ -13,6 +13,7 @@ class Notice extends Mailable
     protected $message;
     protected $title;
     protected $user_name;
+    
     /**
      * Create a new message instance.
      *
@@ -32,7 +33,8 @@ class Notice extends Mailable
      */
     public function build()
     {
-        return $this->view('home.mail.index')
+        return $this->subject($this->message)
+                    ->view('home.mail.index')
                     ->with([
                         '_message'  => $this->message,
                         '_url'      => $this->url,

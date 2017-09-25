@@ -30,8 +30,15 @@ class EmailController extends Controller
      */
     public function send()
     {
-       $this->email->sendEmail($this->request);
-       $this->ajaxSuccess('发送成功');
+        $user = $this->request->user('home');
+        
+        if ($user->activation == 2) {
+            return $this->ajaxError('邮箱已经激活');
+        }
+        
+        return $this->email->sendEmail($user) ? $this->ajaxSuccess('邮件发送成功,可能稍有延迟请耐心等待') : 
+        
+                                $this->ajaxError('邮件已经发送，请于二十四小时内激活');
     }
     
     /**
@@ -43,9 +50,8 @@ class EmailController extends Controller
      */
     public function confirm($type, $code)
     {
-        return $this->email->avtive($type, $code, $this->request->user()->id) ?
+        return $this->email->avtive($this->request->user('home')->id, $code, $type) ?
         
-        
-        redirect('/') :  redirect('/');
+                redirect('/user/activation') :  abort('code', '邮箱激活失败');
     }
 }

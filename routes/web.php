@@ -45,7 +45,7 @@ Route::domain('blog.com')->namespace('Home')->group(function(){
     Route::get('/getCategory', 'ArticleController@getCategory');
     Route::get('/getArticleComment', 'CommentController@getArticleComment');
     /* 用户中心 */
-    Route::get('/write/{id?}', 'UserController@write')->middleware('checklogin');
+    Route::get('/write/{id?}', 'UserController@write')->middleware(['checklogin', 'checkactivate']);
     Route::post('/publish', 'UserController@publish')->middleware('checklogin');
     Route::get('/confirm/{type}/{code}', 'EmailController@confirm')->middleware('checklogin')->where(['type' => '[a-z]+', 'code' => '[0-9a-zA-Z]+']);
     /* 消息通知  */

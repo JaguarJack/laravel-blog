@@ -33,10 +33,19 @@ class ActiveEamilRepository
     public function getRecordByEmail($user_id)
     {
         $where = [
-            ['user_id', '=', $email],
+            ['user_id', '=', $user_id],
             ['expired', '=', 1],
         ];
         
         return self::$activeEmail::where($where)->first();
+    }
+    
+    /**
+     * @description:过期
+     * @author wuyanwen(2017年9月25日)
+     */
+    public function expired($user_id)
+    {
+        
     }
 }

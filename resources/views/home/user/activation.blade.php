@@ -5,6 +5,9 @@
 @section('content')
 <div class="form">
 	<div class="title">邮箱激活</div>
+	@if ($activation == 1)
+		<blockquote class="layui-elem-quote">目前使用的邮箱还未激活,请尽快激活</blockquote>
+	@endif
 	<form class="layui-form">
           <div class="layui-form-item">
             <label class="layui-form-label">邮箱</label>
@@ -29,8 +32,7 @@ layui.use(['element','jquery','form'], function(){
 
   $('.sendMail').click(function(){
 		$.get("{{ url('email/send') }}",function(response){
-
-
+				layer.msg(response.msg);
 	    })
 
 		return false;

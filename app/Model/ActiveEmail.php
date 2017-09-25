@@ -8,6 +8,6 @@ class ActiveEmail extends BaseModel
     protected $table = 'active_email';
     
     protected $fillable = [
-        'email', 'code',
+        'email', 'code','user_id',
     ];
 }

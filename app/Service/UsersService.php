@@ -163,10 +163,20 @@ class UsersService
     public function updateInfo($request)
     {
         $data = $request->all();
+        $user = $request->user('home');
+        //如果修改了邮箱信息则需要重置激活状态
+        if ($data['email'] != $user->email) {
+            $data['activation'] = 1;
+        }
+        $data['id'] = $user->id;
         
-        $data['id'] = $request->user('home')->id;
+        if ($this->user->update($data)) {
+            $user->email = $data['email'];
+            $user->activation = 1;
+            return true;
+        }
         
-        return $this->user->update($data);
+        return false;
     }
     
     /**
