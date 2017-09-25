@@ -8,7 +8,7 @@ use App\Repository\ArticleRepository;
 use App\Repository\LikeRepository;
 use App\Repository\AttendRepository;
 use App\Repository\StoreRepository;
-use App\Repository\CommentRepository;
+use App\Repository\SeoRepository;
 use App\Service\UsersService;
 
 class CategoryController extends Controller
@@ -26,11 +26,12 @@ class CategoryController extends Controller
      * @description:分类页面
      * @author wuyanwen(2017年9月14日)
      */
-    public function index($id)
+    public function index($id, SeoRepository $seo)
     {
         return view('home.category.index',[
             'total' => $this->article->getCategotyTotal($id),
             'id'    => $id,
+            'seo'   => $seo->find('cid', $id),
         ]);
     }
     

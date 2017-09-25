@@ -1,7 +1,5 @@
 @extends('layouts.user')
-@section('title','首页')
-@section('keywords', '首页')
-@section('description', '首页')
+@section('title','Ta的收藏')
 @section('content')
 <div class="user-nav">
 	<a href="{{ url('user/center') }}"> 个人中心 </a>  <span style="opacity:0.5;">\ 个人收藏</span>

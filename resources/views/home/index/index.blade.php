@@ -1,7 +1,7 @@
 @extends('layouts.home')
-@section('title','首页')
-@section('keywords', '首页')
-@section('description', '首页')
+@section('title', config('home.site.title'))
+@section('keywords', config('home.site.keywords'))
+@section('description', config('home.site.description'))
 @section('class', 'main')
 @section('carousel')
 <div class="layui-carousel" id="carousel">

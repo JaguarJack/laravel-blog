@@ -1,7 +1,5 @@
 @extends('layouts.main')
-@section('title','首页')
-@section('keywords', '首页')
-@section('description', '首页')
+@section('title','分享写作')
 @section('main')
 <link rel="stylesheet" href="{{ asset('/assets/markdown/css/style.css') }}" />
 <link rel="stylesheet" href="{{ asset('/assets/markdown/css/editormd.css') }}" />    

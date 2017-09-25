@@ -1,12 +1,10 @@
 @extends('layouts.home')
-@section('title','首页')
-@section('keywords', '首页')
-@section('description', '首页')
+@section('title', $seo->title ?? '')
+@section('keywords', $seo->keywords ?? '')
+@section('description', $seo->description ?? '')
 @section('class', 'main')
 @section('content')
-<div id="article">
-
-</div>
+<div id="article"></div>
 @endsection
 @section('page')
 @if ($total)

@@ -10,7 +10,7 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::domain('blog.com')->namespace('Home')->group(function(){
+Route::domain(config('home.homedomain'))->namespace('Home')->group(function(){
     Route::get('/', 'IndexController@index');
     Route::get('/signin', 'LoginController@signin');
     Route::get('/signup', 'RegisterController@signup');
@@ -70,8 +70,8 @@ Route::domain('blog.com')->namespace('Home')->group(function(){
     });
 });
 
-Route::middleware('auth')->namespace('Admin')->group(function(){    
-    Route::get('/','IndexController@index');
+Route::domain(config('home.admindomain'))->middleware('auth')->namespace('Admin')->group(function(){    
+    Route::get('/admin/index','IndexController@index');
     Route::get('/main','IndexController@main');
     Route::get('/user/index','UsersController@index');
     Route::resource('user', 'UserController');

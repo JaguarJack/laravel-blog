@@ -1,10 +1,9 @@
 <!DOCTYPE html>
 <html>
-
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <title>登录-凝聚博客</title>
+    <title>登录-NJPHPER BLOG</title>
     <link rel="stylesheet" href="{{ asset('/assets/layui/css/layui.css') }}">
     <link rel="stylesheet" href="{{ asset('/assets/font-awesome/css/font-awesome.min.css') }}">
     <link rel="stylesheet" href="{{ asset('/assets/css/public.css') }}">

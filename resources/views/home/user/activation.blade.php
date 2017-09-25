@@ -1,7 +1,5 @@
 @extends('layouts.userEdit')
-@section('title','首页')
-@section('keywords', '首页')
-@section('description', '首页')
+@section('title','邮箱激活')
 @section('content')
 <div class="form">
 	<div class="title">邮箱激活</div>

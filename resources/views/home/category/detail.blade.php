@@ -1,7 +1,7 @@
 @extends('layouts.main')
-@section('title','首页')
-@section('keywords', '首页')
-@section('description', '首页')
+@section('title', $article_info->title)
+@section('keywords', config('home.site.keywords'))
+@section('description', config('home.site.description'))
 @section('class', 'detail')
 @section('main')
 
@@ -73,7 +73,7 @@
 </div>
 <div class="editor">
 <textarea id="edit" name="comment" style="width:99%;border:1px solid #e6e6e6;border-radius:5px;min-height:100px;padding:5px 5px;"></textarea>
-<button class="layui-btn submit_comment">提交评论</button>
+<button class="layui-btn submit_comment">回复</button>
 </div>
 <input type="hidden" name="reply_user" value="0">
 </div>        		

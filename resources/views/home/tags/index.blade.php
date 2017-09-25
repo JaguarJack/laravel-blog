@@ -1,7 +1,7 @@
 @extends('layouts.home')
-@section('title','首页')
-@section('keywords', '首页')
-@section('description', '首页')
+@section('title', $tagname)
+@section('keywords', config('home.site.keywords'))
+@section('description', config('home.site.description'))
 @section('class', 'main')
 @section('content')
 <blockquote class="layui-elem-quote layui-quote-nm" style="margin-top:10px;">{{ $tagname }}</blockquote>

@@ -16,9 +16,9 @@ ______________________________________  Base On Laravel 5.5  ___________________
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <title>@yield('title')-凝聚博客</title>
-    <meta name="keywords" content= @yield("keywords") />
-    <meta name="description" content= @yield("description") />
+    <title>@yield('title')-NJPHPER BLOG</title>
+    <meta name="keywords" content= '@yield("keywords")' />
+    <meta name="description" content= '@yield("description")' />
     <link rel="stylesheet" href="{{ asset('/assets/layui/css/layui.css') }}">
     <link rel="stylesheet" href="{{ asset('/assets/font-awesome/css/font-awesome.min.css') }}">
     <link rel="stylesheet" href="{{ asset('/assets/css/public.css') }}">

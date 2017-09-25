@@ -1,4 +1,6 @@
 @extends('layouts.main')
+@section('keywords', config('home.site.keywords'))
+@section('description', config('home.site.description'))
 @section('main')
     <div class="user-edit">
         <div class="user-edit-left">

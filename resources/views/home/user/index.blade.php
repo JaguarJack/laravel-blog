@@ -1,7 +1,5 @@
 @extends('layouts.user')
-@section('title','首页')
-@section('keywords', '首页')
-@section('description', '首页')
+@section('title','分享')
 @section('content')
 <div class="share">
 	<div class="title">分享发布</div>
