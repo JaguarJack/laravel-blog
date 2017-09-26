@@ -16,10 +16,12 @@ return [
         'type' => ['jpg', 'png', 'gif', 'jpeg'],
         'size' => 500,
     ],
-    
+    //站点网址
+    'website'    => 'https://www.njphper.com/',
+    //后台
     'admindomain' => 'admin.blog.com',
+    //前台
     'homeadomain' => 'blog.com',
-    
     //网站基本信息
     'site'        => [
         'title'       => 'NJphper Blog',

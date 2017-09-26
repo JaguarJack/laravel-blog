@@ -14,9 +14,9 @@
 <body>
 <div class="body">
     <div class='title' style="">
-        <a href="{{ config('home.site') }}" target="_blank">Willing To Share At Njphper</a><br>乐于分享  社区博客</div>
+        <a href="{{ config('home.website') }}" target="_blank">Willing To Share At Njphper</a><br>乐于分享  社区博客</div>
     <div style="padding:30px 40px 40px">
-	{{ $user_name }} 您好，请在 24 小时内点击此链接以完成{{ $_message }}
+	{{ $user_name }} 您好，请在 24 小时内点击此链接以完成 {{ $_message }}
 	<a style="color:#009a61;text-decoration:none" href="{{ $_url }}">
     {{ $_url }}
 	</a>
