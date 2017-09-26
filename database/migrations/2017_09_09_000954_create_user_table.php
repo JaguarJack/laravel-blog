@@ -23,11 +23,11 @@ class CreateUserTable extends Migration
             $table->string('remember_token')->default('');
             $table->string('avatar', 255)->comment('头像');
             $table->string('github_name', 10)->comment('github 昵称');
-            $table->string('github_homepage', 100)->comment('github 主页');
+            $table->string('github_homepage', 255)->comment('github 主页');
             $table->string('sina_name', 10)->comment('新浪微博昵称');
-            $table->string('sina_homepage', 250)->comment('新浪微博主页地址');
+            $table->string('sina_homepage', 255)->comment('新浪微博主页地址');
             $table->string('come_from', 10)->comment('用户所在城市');
-            $table->string('personal_website', 10)->comment('用户个人主页');
+            $table->string('personal_website', 255)->comment('用户个人主页');
             $table->string('introduction', 255)->comment('个人签名')->default('');
             $table->string('signature', 255)->comment('个人署名')->default('');
             $table->tinyInteger('type')->comment('1:注册用户,2:qq用户,3:微博用户,4:github,5:其他')->default(1);
