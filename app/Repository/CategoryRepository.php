@@ -22,7 +22,10 @@ class CategoryRepository
      */
     public function getCates($where = null)
     {
-        return self::$category::where($where ? : [])->select('id','fid','name','code')->get();
+        return self::$category::where($where ? : [])
+                            ->select('id','fid','name','code')
+                            ->orderBy('weight','DESC')
+                            ->get();
     }
 
     /**
@@ -34,9 +37,10 @@ class CategoryRepository
     public function store($data)
     {
         return self::$category::create([
-            'fid'   => intval($data['fid']),
-            'name'  => $data['name'],
-            'code'  => $data['code'],
+            'fid'    => intval($data['fid']),
+            'name'   => $data['name'],
+            'code'   => $data['code'],
+            'weight' => $data['weight'],
         ]);    
     
     }
@@ -62,9 +66,10 @@ class CategoryRepository
     {
         $menu = self::$category::find($data['id']);
 
-        $menu->fid   = $data['fid'];
-        $menu->name = $data['name'];
-        $menu->code  = $data['code'];
+        $menu->fid    = $data['fid'];
+        $menu->name   = $data['name'];
+        $menu->code   = $data['code'];
+        $menu->weight = $data['weight'];
         
         return $menu->save();
     }

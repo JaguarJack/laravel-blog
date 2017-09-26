@@ -31,6 +31,12 @@
     </div>
   </div>
   <div class="layui-form-item">
+    <label class="layui-form-label">权重</label>
+    <div class="layui-input-inline">
+      <input type="text" name="weight" lay-verify="number" value="{{ $menu->weight }}"  class="layui-input">
+    </div>
+  </div>
+  <div class="layui-form-item">
     <div class="layui-input-block">
       <button class="layui-btn layui-btn-big layui-btn-normal" lay-submit lay-filter="edit">更新</button>
     </div>

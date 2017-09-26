@@ -10,9 +10,9 @@ class Category extends BaseModel
     
     //填充字段
     protected $fillable = [
-        'fid', 'name', 'code',
+        'fid', 'name', 'code','weight',
     ];
 
     //是否自动更新时间字段
-    public $timestamps = false;
+    public $timestamps = true;
 }
