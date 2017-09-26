@@ -112,5 +112,18 @@ class Operation
                 
                 ['code' => 10000] : ['code' => 10001];
     }
+    
+    /**
+     * @description:
+     * @author wuyanwen(2017年9月26日)
+     */
+    public function increasePv(Request $request)
+    {
+        $aid = $request->input('aid');
+        
+        $this->article_relate->incrementPvNum($aid);
+        
+        return ['code' => 10000];
+    }
 
 }

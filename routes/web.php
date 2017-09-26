@@ -71,7 +71,7 @@ Route::domain(config('home.homedomain'))->namespace('Home')->group(function(){
 });
 
 Route::domain(config('home.admindomain'))->middleware('auth')->namespace('Admin')->group(function(){    
-    Route::get('/admin/index','IndexController@index');
+    Route::get('/admin','IndexController@index');
     Route::get('/main','IndexController@main');
     Route::get('/user/index','UsersController@index');
     Route::resource('user', 'UserController');

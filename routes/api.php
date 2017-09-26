@@ -27,8 +27,7 @@ Route::namespace('Api')->group(function(){
     Route::get('/getTags','Tags@getTags')->middleware('checkapirequest');
     Route::get('/getHotArticles','Article@getHotArticles')->middleware('checkapirequest');
     Route::get('/getAllLinks','Links@getAllLinks')->middleware('checkapirequest');
-    
-    
+    Route::get('/increasePv','Operation@increasePv');
     Route::post('/like','Operation@like')->middleware('auth:api');
     Route::post('/store','Operation@store')->middleware('auth:api');
     Route::post('/attend','Operation@attend')->middleware('auth:api');

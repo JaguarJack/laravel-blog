@@ -17,7 +17,7 @@
 			<a href="{{ url('user', ['id' => $article_info->user_id])}}" style="color:green;font-size:16px;">{{ $article_info->author }}</a>&nbsp;&nbsp;<span style="font-size:12px; opacity:0.5;">{{ $article_info->introduction }}</span>
 			<p>			
 				*{{ $article_info->created_at }}  收藏 {{$article_info->store_number}}  
-				评论 {{$article_info->comment_number}}  喜欢{{$article_info->like_number}}  阅读{{$article_info->pv_number }}
+				评论 {{$article_info->comment_number}}  喜欢 {{$article_info->like_number}}  阅读<span class="pv" style="font-size:13px;"> {{$article_info->pv_number }}</span>
 			</p>
 		</div>
 	</div>
@@ -136,6 +136,13 @@ layui.use(['jquery','layer', 'flow'], function(){
 	  layer = layui.layer
 	  flow  = layui.flow;
 
+	    $(function() {
+    		  $.get("{{url('api/increasePv')}}", {aid:aid}, function(response){
+    				if (response.code == 10000) {
+						$('.pv').html(parseInt($('.pv').html()) + 1)	
+        			}
+    		  })
+	    })
 		flow.load({
 		    elem: '#comments'
 			,scrollElem:'#comments'
@@ -263,7 +270,8 @@ layui.use(['jquery','layer', 'flow'], function(){
 			if(typeof($(this).attr("data"))!= "undefined") {
 				layer.tips($(this).attr('data'),$(this),{tips:1});
 			}
-  		})	
+  		});
+	
 	});
 //markdown解析
  $(function() {
