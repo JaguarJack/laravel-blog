@@ -16,16 +16,6 @@ class ArticleRepository
     }
     
     /**
-     * @description:根据ID查找
-     * @author wuyanwen(2017年9月25日)
-     * @param unknown $id
-     */
-    public function findById($id)
-    {
-        return self::$article::find($id);    
-    }
-    
-    /**
      * 
      * @description:查找一条记录
      * @author wuyanwen(2017年9月12日)
@@ -52,14 +42,14 @@ class ArticleRepository
      * @param number $limit
      * @param number $category_id 获取分类文章
      */
-    public function getArticles($offset = 0, $limit = 0, $category_id = 0)
+    public function getArticles($offset = 0, $limit = 0, $category_id = 0, $type = true)
     {
         $where = [
             ['articles.status', '=' , self::$article::PASS_STATUS],
         ];
         
         if ($category_id) {
-            $where[] = ['cid', '=', $category_id];
+            $where[] = [ $type ? 'cid' : 'fid', '=', $category_id];
         }
         
         return self::$article::where($where)
@@ -81,9 +71,11 @@ class ArticleRepository
      */
     public function getArticlePages($offset = 0, $limit = 10 , array $condition = [])
     {
-        $where = [];
+        $where = [
+            ['articles.status', '=' , self::$article::PASS_STATUS],
+        ];
         
-        $where = array_merge($where, $condition);
+        $where = array_merge($where,$condition);
         
         $data = self::$article::where($where)
                     ->select('articles.*')
@@ -124,10 +116,10 @@ class ArticleRepository
      * @author wuyanwen(2017年9月20日)
      * @param@param unknown $category_id
      */
-    public function getCategotyTotal($category_id)
+    public function getCategotyTotal($category_id, $type = true)
     {
         $where = [
-            ['cid', '=', $category_id],
+            [$type ? 'cid' : 'fid', '=', $category_id],
             ['status', '=', self::$article::PASS_STATUS],
         ];
         
@@ -270,8 +262,9 @@ class ArticleRepository
      */
     public function update($data)
     {
-        $article = $this->findById($data['id']);
+        $article = $this->find($data['id']);
         unset($data['id']);
+        
         foreach ($data as $field => $value)
         {
             $article->{$field} = $value;

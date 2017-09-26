@@ -39,13 +39,4 @@ class ActiveEamilRepository
         
         return self::$activeEmail::where($where)->first();
     }
-    
-    /**
-     * @description:过期
-     * @author wuyanwen(2017年9月25日)
-     */
-    public function expired($user_id)
-    {
-        
-    }
 }
