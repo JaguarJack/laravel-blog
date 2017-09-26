@@ -33,7 +33,7 @@ class ActiveEamilRepository
     public function getRecordByEmail($user_id)
     {
         $where = [
-            ['user_id', '=', $email],
+            ['user_id', '=', $user_id],
             ['expired', '=', 1],
         ];
         
