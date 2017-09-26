@@ -61,7 +61,7 @@ layui.use('jquery', function(){
 			var str  = '';
 			for(var i = 0; i < data.length; i++) {
 				str += '<span class="layui-badge-dot layui-bg-orange"></span>&nbsp;&nbsp;'
-				str += '<a href="/detail/'+data[i].id+'" target="_blank">'+data[i].title
+				str += '<a href="/detail/'+data[i].id+'.html" target="_blank">'+data[i].title
 				str += '<hr></a>'
 			}
 			$('.hotArticles').html(str);

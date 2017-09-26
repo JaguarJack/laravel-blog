@@ -27,7 +27,7 @@
                 for (var i=0; i < data.length; i++) {
     	        	str += '<div class="main-left-article"><div class="title">';
     	        	str += '<span class="layui-btn layui-btn-danger">' +data[i].category+ '</span>'
-    	        	str += '<span style="font-size:24px;margin-left:10px;"><a href="/detail/'+data[i].aid+'">' +data[i].title.substr(0, 25)+ '</a></span>'
+    	        	str += '<span style="font-size:24px;margin-left:10px;"><a href="/detail/'+data[i].aid+'.html">' +data[i].title.substr(0, 25)+ '</a></span>'
     	        	str += '</div><hr>'
     	        	str += '<div class="content"><div class="image">'
     	            str +='<img src="' + data[i].thumb_img + '"/></div>';
@@ -39,7 +39,7 @@
     	        	str += '<span ><i class="fa fa-eye"></i>&nbsp;' +getTags(data[i].tags)+ '</span>'
     	        	str += '<span ><i class="fa fa-comment-o"></i>&nbsp;' +data[i].comment_number+ '</span>'
     	        	str += '</span>'
-        	        str += '<a href="/detail/'+data[i].aid+'">'
+        	        str += '<a href="/detail/'+data[i].aid+'.html">'
         	        str += '<span class="layui-btn layui-btn-warm" style="float:right;">read more</span>'
             	    str += '</a>'	
     	        	str += '</div></div>'

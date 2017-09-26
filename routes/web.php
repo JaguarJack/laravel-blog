@@ -20,7 +20,7 @@ Route::domain(config('home.homedomain'))->namespace('Home')->group(function(){
     /* 分类页面  */
     Route::get('/category/{id}', 'CategoryController@index')->where(['id' => '[0-9]+']);
     /* 详情 页面  */
-    Route::get('/detail/{id}', 'CategoryController@detail')->where(['id' => '[0-9]+']);
+    Route::get('/detail/{id}.html', 'CategoryController@detail')->where(['id' => '[0-9]+']);
     /* 用户中心 */
     Route::prefix('user')->group(function () {
         Route::get('like','UserController@like')->middleware('checklogin');

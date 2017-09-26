@@ -27,7 +27,7 @@
 				for (i=0;i < data.length;i++) {
 					str += '<li>';
 					str += '<span><span class="layui-badge-dot layui-bg-orange"></span>&nbsp;&nbsp;'
-    			    str += '<a href="/detail/'+data[i].aid+'">'+data[i].title+'</a>&nbsp;&nbsp;--&nbsp;&nbsp;'
+    			    str += '<a href="/detail/'+data[i].aid+'.html">'+data[i].title+'</a>&nbsp;&nbsp;--&nbsp;&nbsp;'
     				str += '<span class="info">·<a href="/category/'+data[i].cid+'"> '+data[i].category+' · <a href="/user/'+data[i].aid+'">'+data[i].author+'</a></span>'
     				str += '</li>';
 				}

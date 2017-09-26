@@ -33,7 +33,7 @@ layui.use(['carousel','flow'], function(){
 		        	var str= '';
 		        	str += '<div class="main-left-article"><div class="title">';
 		        	str += '<span class="layui-btn layui-btn-danger">' +item.category+ '</span>'
-		        	str += '<span style="font-size:24px;margin-left:10px;"><a href="/detail/'+item.aid+'">' +item.title.substr(0, 25)+ '</a></span>'
+		        	str += '<span style="font-size:24px;margin-left:10px;"><a href="/detail/'+item.aid+'.html">' +item.title.substr(0, 25)+ '</a></span>'
 		        	str += '</div><hr>'
 		        	str += '<div class="content"><div class="image">'
 		            str +='<img lay-src="' + item.thumb_img + '"/></div>';
@@ -45,7 +45,7 @@ layui.use(['carousel','flow'], function(){
 		        	str += '<span ><i class="fa fa-tags"></i>&nbsp;' +getTags(item.tags)+ '</span>'
 		        	str += '<span ><i class="fa fa-comment-o"></i>&nbsp;' +item.comment_number+ '</span>'
 		        	str += '</span>'
-					str += '<a href="/detail/'+item.aid+'">'
+					str += '<a href="/detail/'+item.aid+'.html">'
 			       	str +='<span class="layui-btn layui-btn-warm" style="float:right;">read more</span></a>'	
 		        	str += '</div></div>'
 		            lis.push(str);

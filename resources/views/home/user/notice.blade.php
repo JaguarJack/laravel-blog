@@ -17,7 +17,7 @@
                	   	发布新文章  <a href="javascript:;">{{ $vo->title }}</a>
                	 @endif
                 @if ($vo->is_read == 1)
-                <a href="{{ url('detail',['id' => $vo->aid]) }}#reply{{ $vo->comment_id }}">
+                <a href="{{ url('detail',['id' => $vo->aid]) }}.html#reply{{ $vo->comment_id }}">
                     <span onclick='read("{{ $vo->id }}")'>
                     	点击查看
                     </span>
