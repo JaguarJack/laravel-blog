@@ -53,7 +53,6 @@ class EmailController extends Controller
     {
         return $this->email->avtive($this->request->user('home')->id, $code, $type) ?
         
-        
         redirect('/user/activation') :  abort(404, '邮箱激活失败');
     }
 }

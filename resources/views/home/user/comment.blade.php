@@ -33,7 +33,7 @@
     			    str += '<div class="layui-timeline-content layui-text">'
     				str += '<h3 class="layui-timeline-title">'+data[i].title+'中</h3>'
     				str += '<p>at '+data[i].created_at+' 评论<br>'+data[i].content
-    				str += '<br><a href="/detail/'+data[i].aid+'#reply'+data[i].id+'">查看详情</a></p>'
+    				str += '<br><a href="/detail/'+data[i].aid+'.html#reply'+data[i].aid+'">查看详情</a></p>'
     				str += '</div></li>';
 				}
 				$('#user_comment').html(str);

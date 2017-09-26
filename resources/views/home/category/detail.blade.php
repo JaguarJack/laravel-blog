@@ -62,7 +62,7 @@
 	@endif
 	</div>
 <div class="comment">
-	<div class="reply">已回复评论(<span class="comment_number">{{ $article_info->comment_number }}</span>)</div>
+	<div class="reply">已回复评论(<span class="comment_number">{{ $article_info->comment_number }}</span>)<a name="reply{{ $article_info->id }}" id="reply{{ $article_info->id }}" href="#reply{{ $article_info->id }}"></a></div>
 	<div class="info">	
 	<ul class="comment_content" id="comments">
 

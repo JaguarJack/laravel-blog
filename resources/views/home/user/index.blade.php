@@ -29,7 +29,7 @@
     	    @foreach ($comments as $comment)
     			<li>
         			<span style="font-size:13px;opacity:0.6;">在</span>&nbsp;
-        			<a href="{{url('detail',['id' => $comment->aid])}}.html#reply{{$comment->id}}">{{ $comment->title }}</a>&nbsp;
+        			<a href="{{url('detail',['id' => $comment->aid])}}.html#reply{{$comment->aid}}">{{ $comment->title }}</a>&nbsp;
         			<span class="info">at {{ $comment->created_at }} · 评论</span>
     				<div class="reply-info">{!! $comment->content !!}</div>
         		</li>
