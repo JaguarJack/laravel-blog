@@ -25,6 +25,13 @@
     </div>
   </div>
   <div class="layui-form-item">
+    <label class="layui-form-label">类型</label>
+    <div class="layui-input-block">
+      <input type="radio" name="type" value="1" title="友情链接" checked>
+      <input type="radio" name="type" value="2" title="技术站点">
+    </div>
+  </div>
+  <div class="layui-form-item">
     <label class="layui-form-label">权重</label>
     <div class="layui-input-inline">
       <input type="text" name="weight" lay-verify="number" value='1'  class="layui-input">

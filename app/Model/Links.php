@@ -8,6 +8,6 @@ class Links extends BaseModel
     protected $table = 'links';
     
     protected $fillable = [
-        'title', 'url', 'show', 'weight',
+        'title', 'url', 'show', 'weight','type',
     ];
 }

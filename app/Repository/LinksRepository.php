@@ -38,6 +38,7 @@ class LinksRepository
             'title'  => $data['title'],
             'url'    => $data['url'],
             'show'   => $data['show'],
+            'type'   => $data['type'],
             'weight' => $data['weight'],
         ]);
         
@@ -46,7 +47,7 @@ class LinksRepository
     /**
      *
      * @author:wuyanwen
-     * @description:用户分页
+     * @description:外链
      * @date:2017年9月3日
      * @param unknown $page
      */
@@ -97,6 +98,7 @@ class LinksRepository
         $links->show    = $data['show'];
         $links->url     = $data['url'];
         $links->weight  = $data['weight'];
+        $links->type    = $data['type'];
         
         return $links->save();
     }
