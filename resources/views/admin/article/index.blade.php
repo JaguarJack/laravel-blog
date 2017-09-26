@@ -40,10 +40,6 @@
 <script type="text/html" id="option">
 <a class="layui-btn layui-btn-mini" lay-event="pass">审核</a>
 <a class="layui-btn layui-btn-danger layui-btn-mini" lay-event="notpass">不通过</a>
-
-<%#  if (d.status > 2) { %>
-    <a class="layui-btn layui-btn-mini" lay-event="check">审核</a>
-<%#  } %>
 </script>
 <script>
 layui.use(['laytpl', 'table'], function(){
@@ -51,10 +47,6 @@ layui.use(['laytpl', 'table'], function(){
   	   form  = layui.form
   	 laytpl = layui.laytpl
 	   $    = layui.jquery;
-   laytpl.config({
-	   open: '<%',
-	   close: '%>'
-	 });
   table.render({ //其它参数在此省略
 	  skin: 'line' //行边框风格
 	  ,size: 'sm' //小尺寸的表格

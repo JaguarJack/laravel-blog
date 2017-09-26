@@ -41,13 +41,17 @@
 .register .reset{width:86%;margin:10px auto;text-align:center;font-size:14px;height:50px;color:#10a3a3;line-height:50px;background-color:#e9ffff;}
 /* detail */
 .blog_detail {width:75%;margin:10px auto;min-height:500px;}
-.blog_detail  .content {width:100%;min-height:300px;background-color:#fff;}
+.blog_detail  .content {width:100%;min-height:300px;background-color:#fff;padding-bottom:20px;}
 .blog_detail  .content .title{width:100%;min-height:50px;border-bottom:1px solid #e2e2e2;line-height:30px;padding-top:15px;text-indent:2em;}
 .blog_detail  .content .title span{font-size:22px;}
 .blog_detail  .content .title div{font-size:14px;}
 .blog_detail  .content .title div img{width:50px;height:50px;border-radius:50%;float:left;}
-
-.blog_detail  .content .article-content{width:95%;padding-top:15px;min-height:200px;margin:0 auto;padding-bottom:40px;word-wrap: break-word; word-break: normal;}
+.blog_detail  .content .article-author {width:50%;min-height:100px;margin:0px auto;padding-bottom:10px;background-color:hsla(0,0%,71%,.1);}
+.blog_detail  .content .article-author .author-intro {width: 99%;border-bottom:1px solid #e2e2e2;min-height:50px;float:right;}
+.blog_detail  .content .article-author .author-intro .author-avatar{width:7%;height:50px;border-radius:50%;float:left;}
+.blog_detail  .content .article-author .author-intro .author-avatar img{border-radius:50%;width:100%;height:50px;}
+.blog_detail  .content .article-author .shuming {width:20%;font-size:16px;text-align:center;line-height:50px;cursor:pointer;margin-left:5px;float:left;height:50px;}
+.blog_detail  .content .article-content{width:95%;padding-top:15px;min-height:200px;margin:0 auto;padding-bottom:10px;word-wrap: break-word; word-break: normal;}
 /* comment */
 .blog_detail .comment{width:100%;min-height:200px;background-color:white;margin:15px auto;}
 .blog_detail .comment .reply{width:100%;height:50px;line-height:50px;text-indent:2em;font-size:16px;opacity:0.7;border-bottom:1px solid #e2e2e2;}
@@ -82,13 +86,13 @@
 /* user center */
 .user {width:74%;min-height:500px;margin:10px auto;}
 .user .user-left {width:29%;height:800px;float:left;}
-.user .user-left .user-card {width:100%;height:380px;background-color:#fff;}
+.user .user-left .user-card {width:100%;min-height:380px;background-color:#fff;}
 .user .user-left .user-relate {width:100%;height:250px;margin-top:15px;background-color:#fff;}
 .user .user-right {width:69%;min-height:800px;float:right;}
 .user .user-left .user-card .name {width:100%;height:40px;line-height:40px;text-align:center;font-size:20px;border-bottom:1px solid #e2e2e2;}
 .user .user-left .user-card .avatar {width:140px;height:140px;margin:0 auto;border-radius:50%;}
 .user .user-left .user-card .avatar img {width:100%;height:100%;border-radius:50%;}
-.user .user-left .user-card .layui-btn {width:98%;margin:0 auto;}
+.user .user-left .user-card .edit_btn {width:98%;margin:0 auto;margin-bottom:10px;}
 .user .user-left .user-card .intro {width:100%;min-height:100px;margin-bottom:10px;border-bottom:1px solid #e2e2e2;}
 .user .user-left .user-card .intro div{width:100%;height:30px;line-height:30px;text-align:center;font-size:16px;}
 

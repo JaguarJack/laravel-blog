@@ -68,13 +68,13 @@ layui.use(['carousel','flow'], function(){
 	     return tag_str;
 	  }
 	  
-	  //轮播图
+	  /* //轮播图
 	  carousel.render({
 	    elem: '#carousel'
 	    ,width: '100%' //设置容器宽度
 	    ,arrow: 'always' //始终显示箭头
 	    ,anim: 'fade' //切换动画方式
-	  });
+	  }); */
 	  	
 	});
 </script>

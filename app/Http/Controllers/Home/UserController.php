@@ -229,7 +229,7 @@ class UserController extends Controller
      */
     public function publish(StoreArticleRequest $request, UsersService $userService)
     {
-        return $userService->publish($request) ? $this->ajaxSuccess('发布成功') : $this->ajaxError('发布失败,请检查~');
+        return $userService->publish($request) ? $this->ajaxSuccess('发布成功,等待审核~') : $this->ajaxError('发布失败,请检查~');
         
     }
     

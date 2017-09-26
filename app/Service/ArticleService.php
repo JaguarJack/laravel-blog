@@ -38,7 +38,6 @@ class ArticleService
         $tags    = $this->getNotExistTag($tags);
         //开启事务
         DB::beginTransaction();
-        
         //业务处理
         try {
             if (!$this->article->update($data)) {

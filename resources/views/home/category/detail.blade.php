@@ -12,17 +12,9 @@
 	<div style="margin-left:2em;height:55px;">
 		<div>
 			<img src="{{ $article_info->avatar }}">
-		
 		<div style="width:400px;height:50px;float:left;">
 			<button class="layui-btn-primary layui-btn-mini" style="margin-left:-10px;">作者</button> 
-			{{ $article_info->author }}
-			<a href="javascript:;">
-    			@if (!$attented)   
-    				<button class="layui-btn layui-btn-mini attend">关注</button>
-    			@else
-    				<button class="layui-btn-primary layui-btn-mini attend">已关注</button>
-    			@endif
-			</a>
+			<a href="{{ url('user', ['id' => $article_info->user_id])}}" style="color:green;font-size:16px;">{{ $article_info->author }}</a>&nbsp;&nbsp;<span style="font-size:12px; opacity:0.5;">{{ $article_info->introduction }}</span>
 			<p>			
 				*{{ $article_info->created_at }}  收藏 {{$article_info->store_number}}  
 				评论 {{$article_info->comment_number}}  喜欢{{$article_info->like_number}}  阅读{{$article_info->pv_number }}
@@ -33,6 +25,52 @@
 	</div>
 	<div class="article-content">
 		{!! htmlspecialchars_decode($article_info->content) !!}
+	</div>
+	<div class="article-author">
+		<div class="author-intro">
+			<div class="author-avatar">
+				<img src="{{ $article_info->avatar }}">
+			</div>
+			<div style="width:70%;margin-left:5px;float:left;">
+				<p style="margin-bottom: 0px;">
+					<span style="font-weight: 500;"><a href="{{ url('user', ['id' => $article_info->user_id])}}" style="color:green;font-size:16px;">{{ $article_info->author }}</a></span>
+					<span style="font-size:12px; opacity:0.5;">{{ $article_info->introduction }}</span>
+				</p>
+				<p style="margin-bottom: 0px;">
+				@if ($article_info->github_homepage)
+        			<a href="{{ $article_info->github_homepage }}" target="_blank">
+        				<span class="layui-btn layui-btn-radius layui-btn-mini layui-btn-primary" data="{{ $article_info->github_name ? : $article_info->github_homepage }}" ><i class="fa fa-github" aria-hidden="true"></i> github</span>
+        			</a>
+    			@endif
+    			@if ($article_info->sina_homepage)
+        			<a href="{{ $article_info->sina_homepage }}" target="_blank">
+        				<span class="layui-btn layui-btn-radius layui-btn-mini layui-btn-primary" data="{{ $article_info->sina_name ? : $article_info->sina_homepage }}" ><i class="fa fa-weibo" aria-hidden="true"></i> 微博</span>
+        			</a>
+    			@endif
+    			@if ($article_info->website)
+        			<a href="{{ $article_info->website }}" target="_blank">
+        				<span class="layui-btn layui-btn-radius layui-btn-mini layui-btn-primary" data="{{ $article_info->website }}" ><i class="fa fa-globe" aria-hidden="true"></i> 个人网站</span>
+        			</a>
+    			@endif
+    			@if ($article_info->city)
+        			<a href="javascript:;">
+        				<span class="layui-btn layui-btn-radius layui-btn-mini layui-btn-primary" data="{{ $article_info->city }}" ><i class="fa fa-map-marker" aria-hidden="true"></i> {{ $article_info->city }}</span>
+        			</a>
+    			@endif
+				</p>
+			</div>
+			<div class="shuming">
+					@if (!$attented)   
+    					<button class="layui-btn attend">关注</button>
+    				@else
+    					<button class="layui-btn layui-btn-primary attend">已关注</button>
+    				@endif
+				
+			</div>
+			
+		</div>
+		<div style="clear:both;"></div>
+		<div style="min-height:50px;padding-top:10px;text-indent:1em;opacity:0.5;">{{ $article_info->signature }}</div>
 	</div>
 </div>
 	<div style="width:100%;height:50px;background-color:#fff;">
@@ -103,7 +141,7 @@ layui.use(['jquery','layer', 'flow'], function(){
 			,scrollElem:'#comments'
 		    ,isAuto:true
 		    ,isLazyimg:true
-		    ,end:'空 空 如 也 ~'
+		    ,end:'没有啦~'
 		    ,done: function(page, next){
 		      var lis = [];
 		      $.get('/getArticleComment',{page:page, aid: "{{ $article_info->id }}"}, function(res){
@@ -131,7 +169,7 @@ layui.use(['jquery','layer', 'flow'], function(){
 		$('#edit').blur(function(){
 			$(this).css('border','1px solid #e6e6e6')
 		});
-
+		
 		$('.comment_content').on('click', '.span-right' ,function(){
 			var user_id = $(this).attr('data');
 			var name    = $(this).attr('name');
@@ -211,15 +249,21 @@ layui.use(['jquery','layer', 'flow'], function(){
 			$.post("{{ url('api/attend')}}",{attend_user_id:attend_user_id,api_token:"{{ Auth::guard('home')->user()->api_token ?? '' }}"}, function(response){
 					if (response.code == 10000) {
 						//为关注状态
-						if ($('.attend').hasClass('layui-btn')) {
-							$('.attend').removeClass('layui-btn').addClass('layui-btn-primary').html('已关注');							
-						} else {
-							$('.attend').removeClass('layui-btn-primary').addClass('layui-btn').html('关注');
-
-						}
+							if($('.attend').hasClass('layui-btn-primary')){
+								$('.attend').removeClass('layui-btn-primary').html('关注');
+							} else {
+								$('.attend').addClass('layui-btn-primary').html('已关注');	
+							}
 					}
+													
+					
 		    })
-		})		
+		})
+		$('.layui-btn-mini').hover(function(){
+			if(typeof($(this).attr("data"))!= "undefined") {
+				layer.tips($(this).attr('data'),$(this),{tips:1});
+			}
+  		})	
 	});
 //markdown解析
  $(function() {

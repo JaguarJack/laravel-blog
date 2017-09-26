@@ -38,8 +38,8 @@ class Users extends Authenticatable
      */
     public function hasManyUserArticles()
     {
-        return $this->hasManyThrough(Article::class, ArticleRelate::class, 'aid', 'user_id')
-                    ->select('article_relate.*', 'articles.*')
+        return $this->hasManyThrough(ArticleRelate::class, Article::class, 'user_id', 'aid')
+                    ->select('article_relate.*', 'articles.title', 'articles.id', 'articles.created_at')
                     ->orderBy('articles.created_at', 'DESC')
                     ->limit(5);
     }

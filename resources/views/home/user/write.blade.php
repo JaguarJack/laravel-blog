@@ -197,6 +197,7 @@
 						if (response.status == 10001) {
 							layer.msg(response.msg);
 					    } else{
+					    	layer.msg(response.msg);
 						}
                 })
           	    

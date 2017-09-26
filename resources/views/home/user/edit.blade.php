@@ -89,7 +89,7 @@
            </div>
           <div class="layui-form-item">
             <div class="layui-input-block">
-              <button class="layui-btn" lay-submit lay-filter="edit">立即修改</button>
+              <button class="layui-btn edit" lay-submit lay-filter="edit">立即修改</button>
             </div>
           </div>
        </form>
@@ -102,7 +102,7 @@ layui.use(['element','jquery','form'], function(){
   		form  = layui.form;
 
   		form.on('submit(edit)', function(data){
-  	  		$('.layui-btn').remove();
+  	  		$('.edit').remove();
 	    	$.post("{{ url('user/updateUserInfo')}}",data.field,function(response){
 					layer.msg(response.msg, {
 						  time: 2000 
