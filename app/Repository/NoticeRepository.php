@@ -71,4 +71,19 @@ class NoticeRepository
  
         return $notice->delete();
     }
+    
+    /**
+     * @description:获取通知
+     * @author wuyanwen(2017年9月27日)
+     * @param unknown $user_id
+     * @return unknown
+     */
+    public function getNotice($user_id)
+    {
+        return self::$notice::where('notice.user_id', '=', $user_id)
+                            ->leftjoin('articles', 'articles.id', '=', 'notice.aid')
+                            ->select('articles.title', 'notice.*')
+                            ->orderBy('notice.created_at')
+                            ->get();
+    }
 }

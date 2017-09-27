@@ -13,6 +13,7 @@ use App\Repository\CommentRepository;
 use App\Repository\StoreRepository;
 use App\Repository\AttendRepository;
 use App\Repository\LikeRepository;
+use App\Repository\NoticeRepository;
 
 class UserController extends Controller
 {
@@ -179,13 +180,13 @@ class UserController extends Controller
      * 
      * @description:消息通知
      * @author wuyanwen(2017年9月19日)
-     * @param@param UsersRepository $users
+     * @param@param NoticeRepository $notice
      * @param@return \Illuminate\View\View|\Illuminate\Contracts\View\Factory
      */
-    public function notice(UsersRepository $users)
+    public function notice(NoticeRepository $notice)
     {
         return view('home.user.notice',[   
-            'notice' => $users->getUserNotice($this->request->user('home')->id),
+            'notice' => $notice->getNotice($this->request->user('home')->id),
         ]);
     }
     
