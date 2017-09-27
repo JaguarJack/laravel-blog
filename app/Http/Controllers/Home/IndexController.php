@@ -7,8 +7,9 @@ use App\Repository\ArticleRepository;
 use App\Mail\Notice;
 use App\Http\Requests\Request;
 use Mail;
+use Socialite;
 
-class IndexController extends Controller
+class IndexController extends Controller 
 {
     /**
      * @description:博客首页

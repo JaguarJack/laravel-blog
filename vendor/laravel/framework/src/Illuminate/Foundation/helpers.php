@@ -30,7 +30,7 @@ if (! function_exists('abort')) {
      * @throws \Symfony\Component\HttpKernel\Exception\HttpException
      * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
      */
-    function abort($code, $message = '', array $headers = [])
+    function activation($code, $message = '', array $headers = [])
     {
         app()->abort($code, $message, $headers);
     }

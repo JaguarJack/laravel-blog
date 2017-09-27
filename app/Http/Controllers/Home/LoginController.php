@@ -6,6 +6,7 @@ use App\Http\Requests\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Support\Facades\Auth;
+use Socialite;
 
 class LoginController extends Controller
 {
@@ -19,7 +20,7 @@ class LoginController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('guest')->except('signout');
+        $this->middleware('guest')->except(['signout', 'redirectToProvider','handleProviderCallback']);
     }
     
     /**
@@ -79,6 +80,23 @@ class LoginController extends Controller
     protected function guard()
     {
         return Auth::guard('home');
+    }
+    
+    public function redirectToProvider()
+    {
+        return Socialite::driver('qq')->redirect();
+    }
+    
+    /**
+     * Obtain the user information from GitHub.
+     *
+     * @return Response
+     */
+    public function handleProviderCallback()
+    {
+        $user = Socialite::driver('qq')->user();
+        dd($user);
+        // $user->token;
     }
 }
 

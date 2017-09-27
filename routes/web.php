@@ -14,6 +14,10 @@ Route::domain(config('home.homedomain'))->namespace('Home')->group(function(){
     Route::get('/', 'IndexController@index');
     Route::get('/signin', 'LoginController@signin');
     Route::get('/signup', 'RegisterController@signup');
+    
+    Route::get('/github', 'LoginController@redirectToProvider');
+    //Route::get('/githubLogin', 'LoginController@handleProviderCallback');
+    Route::get('/qqLogin', 'LoginController@handleProviderCallback');
     Route::post('/doRegister', 'RegisterController@doRegister');
     Route::post('/doLogin', 'LoginController@doLogin');
     Route::get('/signout', 'LoginController@signout');
@@ -64,6 +68,8 @@ Route::domain(config('home.homedomain'))->namespace('Home')->group(function(){
     /* 上传头像  */
     Route::post('/uploadAvatar', 'FileController@uploadAvatar')->middleware('checklogin');
     Route::get('/email/send', 'EmailController@send')->middleware('checklogin');
+
+    
     //邮件页面
     Route::get('/mail',function(){
         return new App\Mail\Notice();
