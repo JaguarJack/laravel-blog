@@ -8,10 +8,6 @@ use Auth;
 
 class AssignVarToLayoutServiceProvider extends ServiceProvider
 {
-    /**
-     * 延迟绑定
-     * @var string
-     */
     protected $defer = false;
     
     /**
@@ -26,7 +22,6 @@ class AssignVarToLayoutServiceProvider extends ServiceProvider
             $view->with([
                 'menus' => $menu,
                 'user'  => Auth::guard('home')->user(),
-                
             ]);
         });
     }
