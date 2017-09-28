@@ -37,17 +37,23 @@
           <div class="reset">还可以选择一下方式登录or注册~<a href="">忘记密码?</a></div>
           <div class="layui-form-item">
             <div class="layui-input-block">
-              <span class="layui-btn  layui-btn-primary">Github登录</span>
+                <a href="{{ url('/oauth/github') }}">
+                  <span class="layui-btn  layui-btn-primary">Github登录</span>
+                 </a>
             </div>
           </div>
           <div class="layui-form-item">
             <div class="layui-input-block">
+            <a href="{{ url('/oauth/qq') }}">
               <span class="layui-btn  layui-btn-primary">QQ登录</span>
+            </a>
             </div>
           </div>
           <div class="layui-form-item">
             <div class="layui-input-block">
-              <span class="layui-btn  layui-btn-primary">微博登录</span>
+               <a href="{{ url('/oauth/sina') }}">
+              	<span class="layui-btn  layui-btn-primary">微博登录</span>
+              </a>
             </div>
           </div>
           <div class="layui-form-item">

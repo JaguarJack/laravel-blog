@@ -64,6 +64,15 @@ class UsersRepository
 	}
 	
 	/**
+	 * @description:注册oauth用户
+	 * @author wuyanwen(2017年9月28日)
+	 */
+	public function storeOauthUser($data)
+	{
+	    return self::$users::create($data);
+	}
+	
+	/**
 	 * 
 	 * @description:禁止/解禁用户
 	 * @author wuyanwen(2017年9月10日)
@@ -121,5 +130,15 @@ class UsersRepository
 	    }
 	    
 	    return $user->save();
+	}
+	
+	/**
+	 * @description:根据用户field查找
+	 * @author wuyanwen(2017年9月28日)
+	 * @param unknown $open_id
+	 */
+	public function findUserByField($field, $value) 
+	{
+	    return self::$users::where($field, '=', $value)->first();
 	}
 }

@@ -35,4 +35,15 @@ Trait Response
             'data'   => $data,
         ]);
     }
+    
+    /**
+     * @description:http 响应错误
+     * @author wuyanwen(2017年9月28日)
+     * @param unknown $code
+     * @param unknown $message
+     */
+    protected function error($code, $message)
+    {
+        return abort($code, $message);
+    }
 }

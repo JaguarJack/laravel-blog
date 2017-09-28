@@ -12,12 +12,11 @@
 */
 Route::domain(config('home.homedomain'))->namespace('Home')->group(function(){
     Route::get('/', 'IndexController@index');
+    Route::get('/test', 'IndexController@test');
     Route::get('/signin', 'LoginController@signin');
     Route::get('/signup', 'RegisterController@signup');
-    
-    Route::get('/github', 'LoginController@redirectToProvider');
-    //Route::get('/githubLogin', 'LoginController@handleProviderCallback');
-    Route::get('/qqLogin', 'LoginController@handleProviderCallback');
+    Route::get('/oauth/{driver}', 'LoginController@oauth');
+    Route::get('/callback/{driver}', 'LoginController@callback');
     Route::post('/doRegister', 'RegisterController@doRegister');
     Route::post('/doLogin', 'LoginController@doLogin');
     Route::get('/signout', 'LoginController@signout');

@@ -16,8 +16,8 @@ class Users extends Authenticatable
     
     
     protected $fillable = [
-        'open_id', 'user_name', 'password', 'email', 'avatar', 'signature', 'come_from', 'type',
-        'api_token','sex', 'activation', 'status', 'online',
+        'open_id', 'user_name', 'password', 'email', 'avatar', 'signature', 'city', 'type',
+        'api_token','sex', 'activation', 'status', 'online', 'github_name', 'github_homepage', 'website', 'introduction',
     ];
     
     /**

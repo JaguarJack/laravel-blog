@@ -18,15 +18,35 @@ class IndexController extends Controller
      * @return \Illuminate\View\View|\Illuminate\Contracts\View\Factory
      */
     public function index(Request $request, ArticleRepository $article)
-    {
+    {//;
+       // $this->importComment();
         return view('home.index.index');
     }
-
+    
+    public function test()
+    {
+        $this->importComment();
+    }
     public function importComment()
     {
         
+        $users = (\DB::connection('mysql_old')->select('select * from user'));
+        //dd($reuslt);
+        $_users = \DB::connection('mysql')->select('select * from users');
         
-        
+        foreach ($_users as $vo) {
+            foreach ($users as $user) {
+
+                if ($user->open_id == $vo->open_id) {
+                    $sql = sprintf('update users set `type` = "%d" where id = %d',$user->type + 1, $vo->id);
+                    
+                    \DB::connection('mysql')->update($sql);
+                }
+            }
+           
+            
+        }
+        die;
         $results = $mysql_old->select('select * from articles');
         
         foreach ($results as $vo) {
@@ -42,21 +62,6 @@ class IndexController extends Controller
             
         }
         die;
-        $reuslt = (\DB::connection('mysql_old')->select('select * from comment'));
-        //dd($reuslt);
-        $mysql_old = \DB::connection('mysql');
         
-        foreach ($reuslt as $vo) {
-            $sql = sprintf('insert into comments (`id`,`user_id`,`user_name`,`avatar`
-                
-            ,`aid`,`content`,`created_at`)
-                
-value (%d,%d,"%s","%s",%d,"%s","%s")',
-                $vo->id, $vo->uid, $vo->comment_user_name, $vo->avatar,$vo->aid,$vo->comment,
-                date('Y-m-d H:i:s', $vo->create_time)
-                );
-            $mysql_old->insert($sql);
-            
-        }
     }
 }

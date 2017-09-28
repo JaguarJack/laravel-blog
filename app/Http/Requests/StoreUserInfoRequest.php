@@ -2,6 +2,8 @@
 
 namespace App\Http\Requests;
 
+use Illuminate\Validation\Rule;
+
 class StoreUserInfoRequest extends Request
 {
 
@@ -12,9 +14,15 @@ class StoreUserInfoRequest extends Request
      */
     public function rules()
     {
+        $data = $this->all('id');
+        
         return [
             'user_name'       => 'required|min:2|max:15',
-            'email'           => 'required|email',
+            'email'           => [
+                                'required',
+                                 Rule::unique('users')->ignore(isset($data['id']) ? $data['id'] : null),
+                                'email',
+            ],
             'real_name'       => 'nullable|max:10',
             'gender'          => 'nullable|numeric',
             'github_name'     => 'nullable|max:20',
@@ -40,6 +48,7 @@ class StoreUserInfoRequest extends Request
             'user_name.min'       => '昵称最少两个字符',
             'user_name.max'       => '昵称最多十五个字符',
             'email.required'      => '请填写邮箱',
+            'email.unique'        => '邮箱已被注册，请填写其他邮箱',
             'email.email'         => '不支持该邮箱格式',
             'real_name.max'       => '真实姓名长度不超过十个字符',
             'gender.max'          => '性别选择错误',

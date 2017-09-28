@@ -38,19 +38,24 @@ return [
     'github' => [
         'client_id' => '2a52ea44836b4a61c299',
         'client_secret' => 'c36ad61371c2310841697bc8291428f7b5907e5a',
-        'redirect' => 'https://www.njphper.com/githubLogin',
+        'redirect' => 'https://www.njphper.com/callback/github',
     ],
     
     'sina'    => [
         'client_id' => '2644609239',
         'client_secret' => 'facd89924c04df05b9706de512c8583c',
-        'redirect'  => 'https://www.njphper.com/sinaLogin',
+        'redirect'  => 'https://www.njphper.com/callback/sina',
     ],
     
     'qq'  => [
         'client_id' => '101266314',
         'client_secret' => '9ed76763891e5cab36f992d4239a5cab',
-        'redirect'  => 'https://www.njphper.com/qqLogin',
+        'redirect'  => 'https://www.njphper.com/callback/qq',
     ],
+    
+    'oauth' => [
+        'driver'   => ['qq', 'sina', 'github',],
+        'password' => 'njphper.com',
+    ]
 
 ];
