@@ -20,7 +20,8 @@ class UsersService
         1 => '注册用户',
         2 => 'QQ用户',
         3 => '微博用户',
-        4 => '其他',
+        4 => 'github用户',
+        5 => '其他',
     ];
     
     protected $category;
