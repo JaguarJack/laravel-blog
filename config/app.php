@@ -177,7 +177,7 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         App\Providers\SocialServiceProvider::class,
-        App\Providers\AssignVarToLayoutServiceProvider::class
+        App\Providers\AssignVarToLayoutServiceProvider::class,
 
     ],
 
