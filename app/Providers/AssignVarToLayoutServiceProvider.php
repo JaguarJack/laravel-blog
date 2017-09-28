@@ -6,7 +6,7 @@ use Illuminate\Support\ServiceProvider;
 use App\Service\BuildMenuService;
 use Auth;
 
-class assignVarToLayoutServiceProvider extends ServiceProvider
+class AssignVarToLayoutServiceProvider extends ServiceProvider
 {
     /**
      * 延迟绑定
