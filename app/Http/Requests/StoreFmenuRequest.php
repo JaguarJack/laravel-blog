@@ -21,7 +21,7 @@ class StoreFmenuRequest extends Request
                 'min:2','max:10'
             ],
             'code' => [
-                'required',
+               'nullable',
                 Rule::unique('category')->ignore(isset($data['id']) ? $this->all()['id'] : null),
                 'alpha',
             ],

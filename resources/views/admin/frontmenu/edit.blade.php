@@ -27,7 +27,7 @@
   <div class="layui-form-item">
     <label class="layui-form-label">菜单code</label>
     <div class="layui-input-inline">
-      <input type="text" name="code" lay-verify="required" value="{{ $menu->code }}"  class="layui-input">
+      <input type="text" name="code" value="{{ $menu->code }}"  class="layui-input">
     </div>
   </div>
   <div class="layui-form-item">
