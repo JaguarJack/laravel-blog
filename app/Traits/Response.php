@@ -42,7 +42,7 @@ Trait Response
      * @param unknown $code
      * @param unknown $message
      */
-    protected function error($code, $message)
+    protected function error($code, $message = 'Page Not Found')
     {
         return abort($code, $message);
     }

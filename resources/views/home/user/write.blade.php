@@ -5,6 +5,9 @@
 <link rel="stylesheet" href="{{ asset('/assets/markdown/css/editormd.css') }}" />    
 <script src="{{ asset('/assets/markdown/js/jquery.min.js') }}"></script>
 <script src="{{ asset('/assets/markdown/js/editormd.js') }}"></script>
+<style>
+    .editormd-code-toolbar select {display:inline-block;}
+</style>
 <div style="width:74%;min-height:500px;background:#fff;margin:10px auto;">
 <div id="layout">
             <!--  <header>
@@ -45,7 +48,9 @@
               <select name="category" lay-verify="required">
                 <option value="">请选择</option>
                 @foreach ($category as $v)
-                	<option value="{{ $v->id }}">{{ $v->name }}</option>
+                	@if (!$v->code)
+                		<option value="{{ $v->id }}">{{ str_replace('-', $v->level)}}{{ $v->name }}</option>
+                	@endif 
                 @endforeach
               </select>
             </div>

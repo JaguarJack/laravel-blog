@@ -4,6 +4,20 @@
 <div class="user-nav">
 	<a href="{{ url('user/center') }}"> 个人中心 </a>  <span style="opacity:0.5;">\ 个人分享</span>
 </div>
+@if ($draft && Auth::guard('home')->user() && Auth::guard('home')->user()->id == $id)
+<div class="draft">
+	<div class="title">未发布({{ count($draft) }})</div>
+	<ul>
+		@foreach ($draft as $article) 
+			<li>
+    			<span class="layui-badge-dot layui-bg-orange"></span>&nbsp;&nbsp;
+    			<a href="{{ url('draft',['id' => $article->id])}}"> {{ $article->title }}</a>&nbsp;&nbsp;
+    			<span class="info"><a href="javascript:;">{{ $article->category }}</a> · 发表于 {{ $article->created_at }}</span>
+    		</li>
+    	@endforeach
+    	</ul>
+</div>
+@endif
 <div class="share">
 	<div class="title">已分享({{ $total }})</div>
 	@if($total)

@@ -40,6 +40,7 @@ class Users extends Authenticatable
     {
         return $this->hasManyThrough(ArticleRelate::class, Article::class, 'user_id', 'aid')
                     ->select('article_relate.*', 'articles.title', 'articles.id', 'articles.created_at')
+                    ->where('articles.status', '=', Article::PASS_STATUS)
                     ->orderBy('articles.created_at', 'DESC')
                     ->limit(5);
     }

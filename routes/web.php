@@ -48,8 +48,9 @@ Route::domain(config('home.homedomain'))->namespace('Home')->group(function(){
     Route::get('/getCategory', 'ArticleController@getCategory');
     Route::get('/getArticleComment', 'CommentController@getArticleComment');
     /* 用户中心 */
-    Route::get('/write/{id?}', 'UserController@write')->middleware(['checklogin', 'checkactivate']);
-    Route::post('/publish', 'UserController@publish')->middleware('checklogin');
+    Route::get('/write', 'UserController@write')->middleware(['checklogin', 'checkactivate']);
+    Route::get('/draft/{id}', 'UserController@draft')->middleware(['checklogin', 'checkactivate'])->where(['id' => '[0-9]+']);
+    Route::post('/publish', 'UserController@publish')->middleware(['checklogin', 'checkactivate']);
     Route::get('/confirm/{type}/{code}', 'EmailController@confirm')->middleware('checklogin')->where(['type' => '[a-z]+', 'code' => '[0-9a-zA-Z]+']);
     /* 消息通知  */
     Route::post('/readNotice', 'NoticeController@readNotice')->middleware('checklogin');

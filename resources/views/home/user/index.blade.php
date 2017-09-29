@@ -14,8 +14,8 @@
 		@foreach ($articles as $article) 
 			<li>
     			<span class="layui-badge-dot layui-bg-orange"></span>&nbsp;&nbsp;
-    			<a href="{{ url('detail',['id' => $article->id])}}.html"> {{ $article->title }}</a>&nbsp;&nbsp;
-    			<span class="info"><a href="javascript:;">{{ $article->category }}</a> · 点赞   0 · 收藏  0 · 评论  0 · 发表于 2017-09-26</span>
+    			<a href="{{ url('detail',['id' => $article->id]) }}"> {{ $article->title }}</a>&nbsp;&nbsp;
+    			<span class="info"><a href="javascript:;">{{ $article->category }}</a> · 点赞   {{ $article->like_number }} · 收藏 {{ $article->store_number }} · 评论  {{ $article->comment_number }} · 发表于 {{ $article->created_at }}</span>
     		</li>
     	@endforeach
     	</ul>

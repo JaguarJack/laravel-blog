@@ -62,7 +62,7 @@ class ArticleRepository
         }
         
         return self::$article::where($where)
-                              ->select('articles.*', 'article_relate.*')
+                              ->select('article_relate.*', 'articles.*')
                               ->leftjoin('article_relate', 'articles.id', '=', 'article_relate.aid')
                               ->offset($offset * ($limit ? : self::$article::LIMIT))
                               ->limit($limit ? : self::$article::LIMIT)
@@ -243,18 +243,39 @@ class ArticleRepository
     
     /**
      * 
-     * @description:获取用户未通过或者草稿文章
+     * @description:获取用户未通过或者草稿文章数量
      * @author wuyanwen(2017年9月24日)
      * @param@param unknown $user_id
      */
-    public function getNotPassByUserId($user_id)
+    public function getNotPassByUserId($user_id, $id)
     {
         $where = [
             ['user_id', '=', $user_id],
             ['status', '<', self::$article::PASS_STATUS],
         ];
         
+        //编辑时
+        if ($id) {
+            $where[] = ['id', '<>', $id];
+        }
+
         return self::$article::where($where)->count();
+    }
+    
+    /**
+     *
+     * @description:获取用户未通过或者草稿文章
+     * @author wuyanwen(2017年9月24日)
+     * @param@param unknown $user_id
+     */
+    public function getNotPassArticleByUserId($user_id)
+    {
+        $where = [
+            ['user_id', '=', $user_id],
+            ['status', '<', self::$article::PASS_STATUS],
+        ];
+        
+        return self::$article::where($where)->get();
     }
     
     /**
@@ -274,5 +295,20 @@ class ArticleRepository
         }
         
         return $article->save();
+    }
+    
+    /**
+     * @description:获取未审核或者草稿文章
+     * @author wuyanwen(2017年9月29日)
+     * @param unknown $id
+     */
+    public function getDraftArticle($id)
+    {
+        $where = [
+            ['id', '=', $id],
+            ['status', '<', self::$article::PASS_STATUS],
+        ];
+
+        return self::$article::where($where)->first();
     }
 }

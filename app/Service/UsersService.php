@@ -67,23 +67,24 @@ class UsersService
      * @param CategoryRepository $category
      * @param ArticleRepository $article
      */
-    public function publish($request)
+    public function publish($request, $id = 0)
     {
         $category = $this->category->find('id', $request->input('category'));
 
         $user = $request->user('home');
         
         //是否有草稿或者未审核的文章
-        if ($this->getNotPassArticles($user)) {
-            return '还有草稿或者未审核文章~';
+        if ($this->getNotPassArticles($user, $id)) {
+            return '还有草稿或者未审核文章, 请于个人分享查看~';
         }
-        
+       
         $data = [
             'cid'      => $category->id,
             'fid'      => $category->fid,
             'title'    => $request->input('title'),
             'tags'     => strpos($request->input('tags'), '，') ? str_replace('，', ',', $request->input('tags')) : $request->input('tags'),
             'content'  => $request->input('content'),
+    'markdown_content' => trim($request->input('content-markdown-doc')),
             'intro'    => $request->input('intro'),
             'user_id'  => $user->id,
             'author'   => $user->user_name,
@@ -91,7 +92,21 @@ class UsersService
             'status'   => $request->input('status'),
         ];
         
-        return $this->article->store($data);
+        //限制标签数量
+        if ($this->checkTagsNumber($data['tags'])) {
+            return '最多添加' .config('home.tagsnumber') . '个标签';    
+        }
+        
+        //编辑文章
+        if ($id) {
+            $data['id'] = $id;
+        }
+        
+        $msg = $data['status'] == 1 ? '草稿发布成功,请尽快修改发布审核' : '已经提交审核，等待审核发布';
+        
+        return $id ? $this->article->update($data) ? [$msg] : '发布失败,请检查后重新发布~' :
+        
+                    $this->article->store($data) ? [$msg] : '发布失败,请检查后重新发布~'; 
     }
     
     /**
@@ -156,6 +171,14 @@ class UsersService
     }
     
     /**
+     * @description:验证标签
+     * @author wuyanwen(2017年9月18日)
+     */
+    protected function checkTagsNumber($tags)
+    {
+       return count(explode(',', $tags)) > config('home.tagsnumber') ? true : false;
+    }
+    /**
      * 
      * @description:修改用户信息
      * @author wuyanwen(2017年9月19日)
@@ -206,8 +229,8 @@ class UsersService
      * @author wuyanwen(2017年9月24日)
      * @param
      */
-    protected function getNotPassArticles($user)
+    protected function getNotPassArticles($user, $id = 0)
     {
-        return  $this->article->getNotPassByUserId($user->id) > 1 ? true : false;
+        return  $this->article->getNotPassByUserId($user->id, $id) > config('home.articlelimit') ? true : false;
     }
 }

@@ -28,4 +28,9 @@ return [
         'keywords'    => '',
         'description' => '',
     ],
+    
+    //每篇文章的tagsnumber
+    'tagsnumber' => 2,
+    //限制用户当前未审核通过或者草稿文章
+    'articlelimit' => 2,
 ];

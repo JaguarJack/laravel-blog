@@ -97,7 +97,7 @@
 .user .user-left .user-card .intro div{width:100%;height:30px;line-height:30px;text-align:center;font-size:16px;}
 
 .user .user-left .user-relate .layui-btn {width:98%;margin:5px auto;}
-.user .user-right .share{width:100%;min-height:150px;background-color:#fff;}
+.user .user-right .share {width:100%;min-height:150px;background-color:#fff;margin:10px 0px;}
 .user .user-right .share .title {width:100%;height:40px;border-bottom:1px solid #e2e2e2;background-color:#fff;line-height:40px;font-size:18px;text-indent:1em;opacity:0.5;}
 .user .user-right .share .btn {width:20%;height:50px;margin:24px auto;line-height:50px;font-size:16px;border-radius:5px;text-align:center;background-color:#05a1a2;color:#fff;}
 .user .user-right .write{width:100%;margin:15px auto;min-height:150px;background-color:#fff;}
@@ -110,6 +110,15 @@
 .user .user-right .write ul li a {color:#05a1a2;font-size:15px;}
 .user .user-right .write ul li .info a {color:#0a0a0a;font-size:10px;}
 .user .user-right .write ul li .info {opacity:0.6;}
+
+/* draft */
+.user .user-right .draft{width:100%;margin:15px auto;min-height:100px;background-color:#fff;}
+.user .user-right .draft .title {width:100%;height:40px;border-bottom:1px solid #e2e2e2;background-color:#fff;line-height:40px;font-size:18px;text-indent:1em;opacity:0.5;}
+.user .user-right .draft ul{width:100%;min-height:100px;}
+.user .user-right .draft ul li {width:100%;line-height:50px;height:50px;text-indent: 2em;border-bottom: 1px solid #e2e2e2;}
+.user .user-right .draft ul li a {color:#05a1a2;font-size:15px;}
+.user .user-right .draft ul li .info a {color:#0a0a0a;font-size:10px;}
+.user .user-right .draft ul li .info {opacity:0.6;}
 /* 回复*/
 .user .user-right .reply{width:100%;margin:15px auto;min-height:150px;background-color:#fff;}
 .user .user-right .reply .title {width:100%;height:40px;border-bottom:1px solid #e2e2e2;background-color:#fff;line-height:40px;font-size:18px;text-indent:1em;opacity:0.5;}

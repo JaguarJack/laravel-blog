@@ -18,6 +18,7 @@ class StoreArticleRequest extends Request
             'tags'     => 'required|string|max:20',
             'category' => 'required|numeric',    
             'intro'    => 'required|min:10|max:200',
+            'status'   => 'required|regex:/^[1-2]$/',
         ];
     }
     
@@ -37,34 +38,9 @@ class StoreArticleRequest extends Request
             'category.numeric'  => '出错啦3~',
             'intro.required'    => '文章简介必须填写',
             'intro.min'         => '文章简介最少要十个字符长度',
-            'intro.max'         => '文章标题最大不得超过二百个字符',
+            'intro.max'         => '文章简介最大不得超过二百个字符',
+            'status.required'   => '请选择提交文章的状态',
+            'status.regex'      => '不符合的状态值',
         ];
-    }
-    
-    /**
-     * 配置验证器实例。
-     *
-     * @param  \Illuminate\Validation\Validator  $validator
-     * @return void
-     */
-    public function withValidator($validator)
-    {
-        $validator->after(function ($validator) {
-            if ($this->checkTagsNumber()) {
-                $validator->errors()->add('tags', '标签数量不能超过两个');
-            }
-        });
-    }
-    
-    /**
-     * @description:验证标签
-     * @author wuyanwen(2017年9月18日)
-     */
-    protected function checkTagsNumber()
-    {
-        $tags = $this->input('tgas');
-        if (strpos(',', $tags)) {
-            return count(explode(',', $tags)) > 2 ? true : false;
-        }
     }
 }

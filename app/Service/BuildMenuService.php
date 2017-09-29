@@ -10,7 +10,7 @@ class BuildMenuService
     
     public function __construct(CategoryRepository $menuRepository)
     {
-        $this->menu = $menuRepository->getCates()->toArray();
+        $this->menu = $menuRepository->getCates();
     }
     /**
      * 
@@ -21,10 +21,10 @@ class BuildMenuService
     public function treeMenu($fid = 0, $level = 0, &$tree_menu = [])
     {
         foreach ($this->menu as $key => $menu) {
-            if ($menu['fid'] == $fid) {
-                $menu['level'] = $level;                
+            if ($menu->fid == $fid) {
+                $menu->level = $level;                
                 $tree_menu[] = $menu;
-                $tree_menu = array_merge($tree_menu, $this->treeMenu($menu['id'], $level+1));
+                $tree_menu = array_merge($tree_menu, $this->treeMenu($menu->id, $level+1));
                 unset($this->menu[$key]);
             }
         }
@@ -42,9 +42,9 @@ class BuildMenuService
     public function sortMenu($fid = 0, &$sort_menu = [])
     {
         foreach ($this->menu as $key => $menu) {
-            if ($menu['fid'] == $fid) {
+            if ($menu->fid == $fid) {
                 $sort_menu[$key] = $menu;
-                $sort_menu[$key][$menu['id']] = $this->sortMenu($menu['id']);
+                $sort_menu[$key][$menu->id] = $this->sortMenu($menu->id);
                 unset($this->menu[$key]);
             }
         }

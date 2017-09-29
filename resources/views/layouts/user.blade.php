@@ -38,7 +38,7 @@
         			</a>
     			@endif
     			</div>
-    			@if (Auth::guard('home')->user()->id == $id)
+    			@if (Auth::guard('home')->user() && Auth::guard('home')->user()->id == $id)
             		<a href="{{ url('/user/edit') }}">
             			<span class="layui-btn layui-btn-primary edit_btn"><i class="fa fa-pencil-square-o"></i> 编 辑 资 料</span>
             		</a>

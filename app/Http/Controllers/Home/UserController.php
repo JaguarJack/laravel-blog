@@ -14,6 +14,7 @@ use App\Repository\StoreRepository;
 use App\Repository\AttendRepository;
 use App\Repository\LikeRepository;
 use App\Repository\NoticeRepository;
+use App\Service\BuildMenuService;
 
 class UserController extends Controller
 {
@@ -60,7 +61,8 @@ class UserController extends Controller
                 'id' => $id,
             'pages'  => $total['pages'],
             'total'  => $total['total'],
-            'user'     => $this->user->find('id', intval($id)),
+            'user'   => $this->user->find('id', intval($id)),
+            'draft'  => $article->getNotPassArticleByUserId($id),
         ]);
     }
     
@@ -213,10 +215,33 @@ class UserController extends Controller
      * @param@param UsersService $userService
      * @param@return \Illuminate\View\View|\Illuminate\Contracts\View\Factory
      */
-    public function write(UsersService $userService)
+    public function write(Request $request, BuildMenuService $categoty)
     {
         return view('home.user.write',[
-            'category' => $userService->getCategory(),
+            'category' => $categoty->treeMenu(),
+            'user'     => $request->user('home'),
+        ]);
+    }
+    
+    /**
+     *
+     * @description:写作页面
+     * @author wuyanwen(2017年9月19日)
+     * @param@param UsersService $userService
+     * @param@return \Illuminate\View\View|\Illuminate\Contracts\View\Factory
+     */
+    public function draft($id, Request $request, BuildMenuService $categoty, ArticleRepository $article)
+    {
+        $draft = $article->getDraftArticle(intval($id));
+        
+        if ($request->user('home')->id != $draft->user_id || !$draft) {
+            $this->error(404);
+        }
+        
+        return view('home.user.draft',[
+            'category' => $categoty->treeMenu(),
+            'user'     => $request->user('home'),
+            'draft'    => $draft,
         ]);
     }
     
@@ -230,17 +255,9 @@ class UserController extends Controller
      */
     public function publish(StoreArticleRequest $request, UsersService $userService)
     {
-        return $userService->publish($request) ? $this->ajaxSuccess('发布成功,等待审核~') : $this->ajaxError('发布失败,请检查~');
-        
-    }
-    
-    /**
-     * @description:邮箱确认
-     * @author wuyanwen(2017年9月21日)
-     */
-    public function confirm($type, $code)
-    {
-        dd($code);
+        $result = $userService->publish($request, $request->input('id'));
+ 
+        return  is_array($result) ? $this->ajaxSuccess($result[0]) : $this->ajaxError($result);
     }
    
 }
