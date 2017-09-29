@@ -49,7 +49,7 @@
                 <option value="">请选择</option>
                 @foreach ($category as $v)
                 	@if (!$v->code)
-                		<option value="{{ $v->id }}">{{ str_replace('-', $v->level)}}{{ $v->name }}</option>
+                		<option value="{{ $v->id }}">{{ str_repeat('-', $v->level)}}{{ $v->name }}</option>
                 	@endif 
                 @endforeach
               </select>
@@ -199,11 +199,13 @@
           	  //监听提交
           	  form.on('submit(publish)', function(data){
               	$.post('/publish',data.field,function(response){
-						if (response.status == 10001) {
-							layer.msg(response.msg);
-					    } else{
-					    	layer.msg(response.msg);
-						}
+              		if (response.status == 10001) {
+						layer.msg(response.msg, {icon: 5}); 
+				    } else{
+				    	layer.msg(response.msg, {icon: 6},function(){
+							window.location.href= "{{ route('user.share',[ $user->id ]) }}"
+					    }); 
+					}
                 })
           	    
           	    return false;

@@ -101,7 +101,7 @@
 							layer.msg(response.msg, {icon: 5}); 
 					    } else{
 					    	layer.msg(response.msg, {icon: 6},function(){
-								//window.location.href= "{{ route('user.share',[ $user->id ]) }}"
+								window.location.href= "{{ route('user.share',[ $user->id ]) }}"
 						    }); 
 						}
                 })
