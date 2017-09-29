@@ -39,17 +39,17 @@ class BuildMenuService
      * @param number $level
      * @param array $tree_menu
      */
-    public function sortMenu($fid = 0, &$tree_menu = [])
+    public function sortMenu($fid = 0, &$sort_menu = [])
     {
         foreach ($this->menu as $key => $menu) {
             if ($menu['fid'] == $fid) {
-                $tree_menu[$key] = $menu;
-                $tree_menu[$key][$menu['id']] = $this->treeMenu($menu['id']);
+                $sort_menu[$key] = $menu;
+                $sort_menu[$key][$menu['id']] = $this->sortMenu($menu['id']);
                 unset($this->menu[$key]);
             }
         }
         
-        return $tree_menu;
+        return $sort_menu;
     }
 
 }
