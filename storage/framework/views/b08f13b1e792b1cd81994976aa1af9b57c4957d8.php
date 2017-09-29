@@ -1,6 +1,4 @@
-<?php $__env->startSection('title','首页'); ?>
-<?php $__env->startSection('keywords', '首页'); ?>
-<?php $__env->startSection('description', '首页'); ?>
+<?php $__env->startSection('title','分享写作'); ?>
 <?php $__env->startSection('main'); ?>
 <link rel="stylesheet" href="<?php echo e(asset('/assets/markdown/css/style.css')); ?>" />
 <link rel="stylesheet" href="<?php echo e(asset('/assets/markdown/css/editormd.css')); ?>" />    
@@ -46,7 +44,9 @@
               <select name="category" lay-verify="required">
                 <option value="">请选择</option>
                 <?php $__currentLoopData = $category; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $v): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                	<option value="<?php echo e($v->id); ?>"><?php echo e($v->name); ?></option>
+                	<?php if(!$v->code): ?>
+                		<option value="<?php echo e($v->id); ?>"><?php echo e(str_repeat('-', $v->level)); ?> <?php echo e($v->name); ?></option>
+                	<?php endif; ?>
                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
               </select>
             </div>
@@ -197,8 +197,11 @@
           	  form.on('submit(publish)', function(data){
               	$.post('/publish',data.field,function(response){
 						if (response.status == 10001) {
-							layer.msg(response.msg);
+							layer.msg(response.msg, {icon: 5}); 
 					    } else{
+					    	layer.msg(response.msg, {icon: 6},function(){
+								window.location.href= "<?php echo e(route('user.share',[ $user->id ])); ?>"
+						    }); 
 						}
                 })
           	    

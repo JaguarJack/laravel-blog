@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <title>注册-凝聚博客</title>
+    <title>注册-NJPHPER BLOG</title>
     <link rel="stylesheet" href="<?php echo e(asset('/assets/layui/css/layui.css')); ?>">
     <link rel="stylesheet" href="<?php echo e(asset('/assets/font-awesome/css/font-awesome.min.css')); ?>">
     <link rel="stylesheet" href="<?php echo e(asset('/assets/css/public.css')); ?>">
@@ -16,17 +16,17 @@
     		<form action="/doRegister" method="post" class="layui-form">
     		  <div class="layui-form-item">
                 <div class="layui-input-block">
-                  <input type="text" id="name" name="name" placeholder="请输入你的昵称" autocomplete="off" class="layui-input">
+                  <input type="text" id="name" name="name" placeholder="请输入你的昵称" autocomplete="off" value="<?php echo e(old('name')); ?>" class="layui-input">
                 </div>
               </div>
               <div class="layui-form-item">
                 <div class="layui-input-block">
-                  <input type="text" id="email" name="email" placeholder="请输入邮箱" autocomplete="off" class="layui-input">
+                  <input type="text" id="email" name="email" placeholder="请输入邮箱" autocomplete="off" value="<?php echo e(old('email')); ?>" class="layui-input">
                 </div>
               </div>
               <div class="layui-form-item">
                 <div class="layui-input-block">
-                  <input type="password" name="password"  placeholder="请输入密码" autocomplete="off" class="layui-input">
+                  <input type="password" id="password" name="password"  placeholder="请输入密码" autocomplete="off" class="layui-input">
                 </div>
             </div>
           <div class="layui-form-item">
@@ -60,12 +60,15 @@ layui.use(['form', 'jquery'], function(){
   });
   <?php if($errors->has('name')): ?>
 	  layer.tips("<?php echo e($errors->first('name')); ?>", '#name');
+  	  return false;
   <?php endif; ?>
   <?php if($errors->has('email')): ?>
 	  layer.tips("<?php echo e($errors->first('email')); ?>", '#email');
+  	  return false;
   <?php endif; ?>
   <?php if($errors->has('password')): ?>
 	  layer.tips("<?php echo e($errors->first('password')); ?>", '#password');
+      return false;
   <?php endif; ?>
 });
 </script>
