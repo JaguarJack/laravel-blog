@@ -89,12 +89,12 @@
 	</div>
 	<div style="width:100%;min-height:50px;background-color:#fff;">
 	@if ($preNext[1])
-	<a href="{{ url('detail', ['id' => $preNext[1]->id])}}">
+	<a href="{{ url('detail', ['id' => $preNext[1]->id])}}.html">
 		<button class="layui-btn layui-btn-small layui-btn-danger"><i class="fa fa-arrow-left"></i>&nbsp;{{ $preNext[1]->title }}</button>
 	</a>
 	@endif
 	@if ($preNext[0])
-	<a href="{{ url('detail', ['id' => $preNext[0]->id])}}">	
+	<a href="{{ url('detail', ['id' => $preNext[0]->id])}}.html">	
 		<button class="layui-btn layui-btn-small layui-btn-danger" style="float:right;">{{ $preNext[0]->title }}&nbsp;<i class="fa fa-arrow-right"></i></button>
 	</a>
 	@endif
