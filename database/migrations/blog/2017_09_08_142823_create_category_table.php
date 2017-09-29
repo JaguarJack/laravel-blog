@@ -17,7 +17,7 @@ class CreateCategoryTable extends Migration
             $table->smallIncrements('id');
             $table->smallInteger('fid')->comment('父分类ID');
             $table->string('name', 20)->comment('分类名称');
-            $table->string('code', 10)->comment('分类编码');
+            $table->string('code', 10)->default('')->comment('分类编码');
             $table->tinyInteger('weight')->comment('权重排序 倒序');
             $table->timestamps();
         });
