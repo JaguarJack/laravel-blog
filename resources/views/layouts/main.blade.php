@@ -38,11 +38,11 @@ ______________________________________  Base On Laravel 5.5  ___________________
      <div class="nav-right">
      <li class="layui-nav-item"><a href="/">首页</a>
       @foreach($menus as $menu)
-      	<li class="layui-nav-item"><a href="{{ url('category',['id' => $menu['id']]) }}">{{ $menu['name']}}</a>
+      	<li class="layui-nav-item"><a href="{{ $menu['name'] ? $menu['code'] : url('category',['id' => $menu['id']]) }}">{{ $menu['name']}}</a>
       	@if (count($menu[$menu['id']]))
           	<dl class="layui-nav-child"> <!-- 二级菜单 -->
           	@foreach($menu[$menu['id']] as $_menu)
-              <dd><a href="{{ url('category',['id' => $_menu['id']]) }}">{{ $_menu['name']}}</a></dd>
+              <dd><a href="{{ $_menu['name'] ? $_menu['code'] : url('category',['id' => $_menu['id']]) }}">{{ $_menu['name']}}</a></dd>
     		@endforeach
 		@endif
         </dl>
