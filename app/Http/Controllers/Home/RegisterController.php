@@ -69,7 +69,7 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         $validator = Validator::make($data, [
-            'name' => 'required|string|max:15',
+            'name' => 'required|string|min:2|max:12',
             'email' => 'required|string|email|max:100|unique:users',
             'password' => 'required|string|min:6|max:100',
         ], $this->messages());
@@ -109,6 +109,7 @@ class RegisterController extends Controller
         return [
             'name.required' => '请填写昵称',
             'name.string'   => '昵称必须为字符串',
+            'name.min'      => '昵称长度必须大于二个字符',
             'name.max'      => '昵称不得超过十五个字符',
             'email.required'=> '邮箱必须填写',
             'email.string'  => '邮箱必须为字符串类型',
