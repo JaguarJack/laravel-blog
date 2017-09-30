@@ -26,10 +26,6 @@ class RegisterIpListener
      */
     public function handle(RegisterIpEvent $event)
     {
-        if ($event->ips->findByIp($this->request->ip())) {
-            return false;
-        }
-        
         return $event->ips->store($this->request->ip());
     }
 }

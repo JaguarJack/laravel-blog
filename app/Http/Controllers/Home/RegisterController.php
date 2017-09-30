@@ -25,16 +25,18 @@ class RegisterController extends Controller
     protected $redirectTo = '/';
     protected $user;
     protected $ips;
+    protected $request;
     /**
      * Create a new controller instance.
      *
      * @return void
      */
-    public function __construct(UsersRepository $user, IpsRepository $ips)
+    public function __construct(UsersRepository $user, IpsRepository $ips, Request $request)
     {
         $this->middleware('guest');
         $this->user = $user;
         $this->ips  = $ips;
+        $this->request = $request;
     }
     
     /**
@@ -53,9 +55,9 @@ class RegisterController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function doRegister(Request $request)
+    public function doRegister()
     {
-        return $this->register($request);
+        return $this->register($this->request);
     }
     
     /**
@@ -71,7 +73,6 @@ class RegisterController extends Controller
             'email' => 'required|string|email|max:100|unique:users',
             'password' => 'required|string|min:6|max:100',
         ], $this->messages());
-        
         
         $validator->after(function ($validator) {
             if (!$this->ipIsRegister()) {
@@ -90,7 +91,8 @@ class RegisterController extends Controller
      */
     protected function ipIsRegister()
     {
-        if (empty(Event::fire(new RegisterIpEvent($this->ips)))) {
+        if ($this->ips->findByIp($this->request->ip())) {
+            
             return false;
         }
         
@@ -129,6 +131,7 @@ class RegisterController extends Controller
     {
         return url('user/activation');
     }
+    
     /**
      * Create a new user instance after a valid registration.
      *
@@ -137,7 +140,11 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return $this->user->store($data);   
+        if ($user = $this->user->store($data)) {
+            Event::fire(new RegisterIpEvent($this->ips));
+            
+            return $user;
+        }   
     }
     
     
