@@ -16,7 +16,7 @@ class CreateIpsTable extends Migration
         Schema::create('ips', function (Blueprint $table) {
             $table->increments('id');
             $table->ipAddress('address');
-            $table->tinyInteger('ban');
+            $table->tinyInteger('ban'); 
             $table->timestamps();
         });
     }
