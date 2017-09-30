@@ -30,7 +30,7 @@ class CategoryController extends Controller
     public function index($id, CategoryRepository $category, SeoRepository $seo)
     {
         $type = ($category->find('id', $id)->fid) ? true : false;
-        
+
         return view('home.category.index',[
             'total' => $this->article->getCategotyTotal($id, $type),
             'id'    => $id,

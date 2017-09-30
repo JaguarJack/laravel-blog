@@ -44,6 +44,6 @@ Trait Response
      */
     protected function error($code, $message = 'Page Not Found')
     {
-        return abort($code, $message);
+       return abort($code, $message);
     }
 }

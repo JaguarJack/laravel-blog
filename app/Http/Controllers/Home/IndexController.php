@@ -17,9 +17,8 @@ class IndexController extends Controller
      * @param ArticleRepository $article
      * @return \Illuminate\View\View|\Illuminate\Contracts\View\Factory
      */
-    public function index(Request $request, ArticleRepository $article)
-    {//;
-       // $this->importComment();
+    public function index()
+    {
         return view('home.index.index');
     }
     
@@ -43,8 +42,6 @@ class IndexController extends Controller
                     \DB::connection('mysql')->update($sql);
                 }
             }
-           
-            
         }
         die;
         $results = $mysql_old->select('select * from articles');

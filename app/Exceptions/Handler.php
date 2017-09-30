@@ -5,8 +5,6 @@ namespace App\Exceptions;
 use Exception;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Illuminate\Foundation\Testing\HttpException;
-use Symfony\Component\Debug\Exception\FatalErrorException;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class Handler extends ExceptionHandler
 {
@@ -50,13 +48,7 @@ class Handler extends ExceptionHandler
      * @return \Illuminate\Http\Response
      */
     public function render($request, Exception $exception)
-    {
-        if ($exception instanceof FatalErrorException && !config('app.debug')) {
-            abort(500);
-        } elseif ($exception instanceof NotFoundHttpException && !config('app.debug')) {
-            abort(404);
-        }
-        
+    {   
         return parent::render($request, $exception);
     }
 }

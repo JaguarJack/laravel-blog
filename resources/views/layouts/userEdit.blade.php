@@ -11,9 +11,11 @@
         		<a href="{{ url('user/setAvatar') }}">
         			<span class="layui-btn layui-btn-primary"><i class="fa fa-github-alt"></i> 头像修改</span>
         		</a>
-        		<a href="{{ url('user/setPassword') }}">
-        			<span class="layui-btn layui-btn-primary"><i class="fa fa-key fa-fw"></i> 重置密码</span>
-        		</a>
+        		@if (Auth::guard('home')->user()->type == 1)
+            		<a href="{{ url('user/setPassword') }}">
+            			<span class="layui-btn layui-btn-primary"><i class="fa fa-key fa-fw"></i> 重置密码</span>
+            		</a>
+            	@endif
         		<a href="{{ url('user/activation') }}">
         			<span class="layui-btn layui-btn-primary"><i class="fa fa-envelope-o fa-fw"></i> 邮箱激活</span>
         		</a>

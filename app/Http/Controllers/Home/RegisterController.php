@@ -2,11 +2,15 @@
 
 namespace App\Http\Controllers\Home;
 
+use Event;
+use Auth;
 use App\Http\Requests\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use App\Repository\UsersRepository;
+use App\Events\RegisterIpEvent;
+use App\Repository\IpsRepository;
 
 class RegisterController extends Controller
 {
@@ -20,16 +24,17 @@ class RegisterController extends Controller
      */
     protected $redirectTo = '/';
     protected $user;
-    
+    protected $ips;
     /**
      * Create a new controller instance.
      *
      * @return void
      */
-    public function __construct(UsersRepository $user)
+    public function __construct(UsersRepository $user, IpsRepository $ips)
     {
         $this->middleware('guest');
         $this->user = $user;
+        $this->ips  = $ips;
     }
     
     /**
@@ -61,11 +66,35 @@ class RegisterController extends Controller
      */
     protected function validator(array $data)
     {
-        return Validator::make($data, [
+        $validator = Validator::make($data, [
             'name' => 'required|string|max:15',
             'email' => 'required|string|email|max:100|unique:users',
             'password' => 'required|string|min:6|max:100',
         ], $this->messages());
+        
+        
+        $validator->after(function ($validator) {
+            if (!$this->ipIsRegister()) {
+                $validator->errors()->add('name', '一个IP只能注册一次~');
+           }
+        });
+        
+        return $validator;
+    }
+    
+    /**
+     * @description:是否注册过了
+     * @author wuyanwen(2017年9月30日)
+     * @param IpsRepository $ips
+     * @return string
+     */
+    protected function ipIsRegister()
+    {
+        if (empty(Event::fire(new RegisterIpEvent($this->ips)))) {
+            return false;
+        }
+        
+        return true;
     }
     
     /**
@@ -109,5 +138,16 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
         return $this->user->store($data);   
+    }
+    
+    
+    /**
+     * Get the guard to be used during registration.
+     *
+     * @return \Illuminate\Contracts\Auth\StatefulGuard
+     */
+    protected function guard()
+    {
+        return Auth::guard('home');
     }
 }
