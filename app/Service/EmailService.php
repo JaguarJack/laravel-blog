@@ -6,6 +6,7 @@ use App\Mail\Notice;
 use App\Repository\UsersRepository;
 use App\Repository\ActiveEamilRepository;
 use Mail;
+use Log;
 
 class EmailService
 {
@@ -43,12 +44,15 @@ class EmailService
         //邮件发送
         Mail::to($user_info)->send(new Notice($message));
         
+        Log::info('邮箱激活,邮件已发送', ['user' => $user_info->user_name,'time' => date('Y-m-d H:i:s')]);
+        
         //添加激活记录
         $data = [
             'user_id' => $user_info->id,
             'code'    => $code,
             'email'   => $user_info->email,
         ];
+        
         $this->activeEmail->store($data);
         
         return true;

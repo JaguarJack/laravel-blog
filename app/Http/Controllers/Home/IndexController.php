@@ -3,11 +3,6 @@
 namespace App\Http\Controllers\Home;
 
 use App\Http\Controllers\Controller;
-use App\Repository\ArticleRepository;
-use App\Mail\Notice;
-use App\Http\Requests\Request;
-use Mail;
-use Socialite;
 
 class IndexController extends Controller 
 {

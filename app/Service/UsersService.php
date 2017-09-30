@@ -104,6 +104,8 @@ class UsersService
         
         $msg = $data['status'] == 1 ? '草稿发布成功,请尽快修改发布审核' : '已经提交审核，等待审核发布';
         
+        Log::info('发布文章', ['user' => $user->user_name,'title' => $data['title'], 'time' => date('Y-m-d H:i:s')]);
+        
         return $id ? $this->article->update($data) ? [$msg] : '发布失败,请检查后重新发布~' :
         
                     $this->article->store($data) ? [$msg] : '发布失败,请检查后重新发布~'; 

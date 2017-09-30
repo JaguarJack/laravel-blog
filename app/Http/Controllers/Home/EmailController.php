@@ -51,8 +51,16 @@ class EmailController extends Controller
      */
     public function confirm($type, $code)
     {
-        return $this->email->avtive($this->request->user('home')->id, $code, $type) ?
+        $user = $this->request->user('home');
         
-        redirect('/user/activation') :  abort(404, '邮箱激活失败');
+        $result = $this->email->avtive($user->id, $code, $type);
+        
+        if ($result) {
+            Log::info('邮箱激活成功~', ['user' => $user->user_name,'time' => date('Y-m-d H:i:s')]);
+            redirect('/user/activation');
+        } else {
+            Log::info('邮箱激活失败~', ['user' => $user->user_name,'time' => date('Y-m-d H:i:s')]);
+            $this->error(404, '邮箱激活失败');
+        }
     }
 }

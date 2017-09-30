@@ -92,7 +92,7 @@ class RegisterController extends Controller
     protected function ipIsRegister()
     {
         if ($this->ips->findByIp($this->request->ip())) {
-            
+            Log::info('ip频繁注册', ['ip' => $this->request->ip(), 'time' => date('Y-m-d H:i:s')]);
             return false;
         }
         
