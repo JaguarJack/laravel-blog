@@ -14,13 +14,11 @@ class StoreUserInfoRequest extends Request
      */
     public function rules()
     {
-        $data = $this->all('id');
-        
         return [
             'user_name'       => 'required|min:2|max:15',
             'email'           => [
                                 'required',
-                                 Rule::unique('users')->ignore(isset($data['id']) ? $data['id'] : null),
+                                 Rule::unique('users')->ignore($this->user('home')->id),
                                 'email',
             ],
             'real_name'       => 'nullable|max:10',
