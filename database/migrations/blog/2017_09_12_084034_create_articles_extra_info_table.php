@@ -13,7 +13,7 @@ class CreateArticlesExtraInfoTable extends Migration
      */
     public function up()
     {
-        Schema::create('articles_relate', function (Blueprint $table) {
+        Schema::create('article_relate', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('aid')->comment('文章ID');
             $table->integer('user_id')->comment('用户ID');
