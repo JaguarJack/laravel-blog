@@ -42,7 +42,7 @@ ______________________________________  Base On Laravel 5.5  ___________________
       	@if (count($menu[$menu->id]))
           	<dl class="layui-nav-child"> <!-- 二级菜单 -->
           	@foreach($menu[$menu->id] as $_menu)
-              <dd><a href="{{ $_menu->code ? url($menu->code) : url('category',['id' => $_menu->id]) }}">{{ $_menu->name}}</a></dd>
+              <dd><a href="{{ $_menu->code ? url($_menu->code) : url('category',['id' => $_menu->id]) }}">{{ $_menu->name}}</a></dd>
     		@endforeach
 		@endif
         </dl>
