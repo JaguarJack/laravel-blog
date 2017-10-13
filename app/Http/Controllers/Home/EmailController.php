@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Home;
 use App\Http\Requests\Request;
 use App\Http\Controllers\Controller;
 use App\Service\EmailService;
+use Log;
 
 class EmailController extends Controller
 {
@@ -53,6 +54,10 @@ class EmailController extends Controller
     {
         $user = $this->request->user('home');
         
+        if ($user->activation == 2) {
+            $this->error(404, '邮箱激活失败');
+        }
+        
         $result = $this->email->avtive($user->id, $code, $type);
         
         if ($result) {
@@ -60,7 +65,7 @@ class EmailController extends Controller
             redirect('/user/activation');
         } else {
             Log::info('邮箱激活失败~', ['user' => $user->user_name,'time' => date('Y-m-d H:i:s')]);
-            $this->error(404, '邮箱激活失败');
+           
         }
     }
 }
