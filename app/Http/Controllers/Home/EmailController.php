@@ -55,7 +55,7 @@ class EmailController extends Controller
         $user = $this->request->user('home');
         
         if ($user->activation == 2) {
-            $this->error(404, '邮箱激活失败');
+            $this->error(404, '邮箱已经激活成功~');
         }
         
         $result = $this->email->avtive($user->id, $code, $type);
