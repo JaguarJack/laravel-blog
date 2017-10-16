@@ -15,7 +15,7 @@ class CreateQuestionsTable extends Migration
     {
         Schema::create('questions', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('user_id', 100);
+            $table->integer('user_id');
             $table->string('title', 100);
             $table->longText('subject');
             $table->integer('pv')->default(1)->comment('pv');
