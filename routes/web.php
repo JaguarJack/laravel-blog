@@ -69,6 +69,12 @@ Route::domain(config('home.homedomain'))->namespace('Home')->group(function(){
     Route::post('/uploadAvatar', 'FileController@uploadAvatar')->middleware('checklogin');
     Route::get('/email/send', 'EmailController@send')->middleware('checklogin');
 
+    /* 问答 */
+    Route::get('questions/{status?}', 'QuestionsController@index');
+    Route::get('question/{id}', 'QuestionsController@question')->where(['id' => '[0-9]+']);
+    Route::post('answer', 'QuestionsController@answter')->middleware('checklogin');
+    Route::match(['get', 'post'], 'submit', 'QuestionsController@submit')->middleware('checklogin');
+    
     
     //邮件页面
     Route::get('/mail',function(){
